@@ -110,7 +110,7 @@ export type User = {
   username: Scalars["String"];
 };
 
-export type AuthFormResponseFragmentFragment = {
+export type RegularAuthFormResponseFragment = {
   __typename?: "AuthFormResponse";
   user?: {
     __typename?: "User";
@@ -124,13 +124,13 @@ export type AuthFormResponseFragmentFragment = {
   errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
 };
 
-export type FieldErrorFragmentFragment = {
+export type RegularFieldErrorFragment = {
   __typename?: "FieldError";
   field: string;
   message: string;
 };
 
-export type UserFragmentFragment = {
+export type RegularUserFragment = {
   __typename?: "User";
   id: string;
   username: string;
@@ -138,6 +138,27 @@ export type UserFragmentFragment = {
   isConfirmed: boolean;
   createdAt: string;
   updatedAt: string;
+};
+
+export type LoginUserMutationVariables = Exact<{
+  loginUserInput: LoginUserInput;
+}>;
+
+export type LoginUserMutation = {
+  __typename?: "Mutation";
+  loginUser: {
+    __typename?: "AuthFormResponse";
+    user?: {
+      __typename?: "User";
+      id: string;
+      username: string;
+      email: string;
+      isConfirmed: boolean;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
+  };
 };
 
 export type RegisterUserMutationVariables = Exact<{
@@ -176,12 +197,12 @@ export type GetCurrentUserQuery = {
   } | null;
 };
 
-export const UserFragmentFragmentDoc = {
+export const RegularUserFragmentDoc = {
   kind: "Document",
   definitions: [
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "UserFragment" },
+      name: { kind: "Name", value: "RegularUser" },
       typeCondition: { kind: "NamedType", name: { kind: "Name", value: "User" } },
       selectionSet: {
         kind: "SelectionSet",
@@ -196,13 +217,13 @@ export const UserFragmentFragmentDoc = {
       },
     },
   ],
-} as unknown as DocumentNode<UserFragmentFragment, unknown>;
-export const FieldErrorFragmentFragmentDoc = {
+} as unknown as DocumentNode<RegularUserFragment, unknown>;
+export const RegularFieldErrorFragmentDoc = {
   kind: "Document",
   definitions: [
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "FieldErrorFragment" },
+      name: { kind: "Name", value: "RegularFieldError" },
       typeCondition: { kind: "NamedType", name: { kind: "Name", value: "FieldError" } },
       selectionSet: {
         kind: "SelectionSet",
@@ -213,13 +234,13 @@ export const FieldErrorFragmentFragmentDoc = {
       },
     },
   ],
-} as unknown as DocumentNode<FieldErrorFragmentFragment, unknown>;
-export const AuthFormResponseFragmentFragmentDoc = {
+} as unknown as DocumentNode<RegularFieldErrorFragment, unknown>;
+export const RegularAuthFormResponseFragmentDoc = {
   kind: "Document",
   definitions: [
     {
       kind: "FragmentDefinition",
-      name: { kind: "Name", value: "AuthFormResponseFragment" },
+      name: { kind: "Name", value: "RegularAuthFormResponse" },
       typeCondition: { kind: "NamedType", name: { kind: "Name", value: "AuthFormResponse" } },
       selectionSet: {
         kind: "SelectionSet",
@@ -230,7 +251,7 @@ export const AuthFormResponseFragmentFragmentDoc = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "FragmentSpread", name: { kind: "Name", value: "UserFragment" } },
+                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularUser" } },
               ],
             },
           },
@@ -240,17 +261,63 @@ export const AuthFormResponseFragmentFragmentDoc = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "FragmentSpread", name: { kind: "Name", value: "FieldErrorFragment" } },
+                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularFieldError" } },
               ],
             },
           },
         ],
       },
     },
-    ...UserFragmentFragmentDoc.definitions,
-    ...FieldErrorFragmentFragmentDoc.definitions,
+    ...RegularUserFragmentDoc.definitions,
+    ...RegularFieldErrorFragmentDoc.definitions,
   ],
-} as unknown as DocumentNode<AuthFormResponseFragmentFragment, unknown>;
+} as unknown as DocumentNode<RegularAuthFormResponseFragment, unknown>;
+export const LoginUserDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "LoginUser" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "loginUserInput" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "LoginUserInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "loginUser" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "loginUserInput" },
+                value: { kind: "Variable", name: { kind: "Name", value: "loginUserInput" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "RegularAuthFormResponse" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularAuthFormResponseFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<LoginUserMutation, LoginUserMutationVariables>;
 export const RegisterUserDocument = {
   kind: "Document",
   definitions: [
@@ -286,7 +353,7 @@ export const RegisterUserDocument = {
               selections: [
                 {
                   kind: "FragmentSpread",
-                  name: { kind: "Name", value: "AuthFormResponseFragment" },
+                  name: { kind: "Name", value: "RegularAuthFormResponse" },
                 },
               ],
             },
@@ -294,7 +361,7 @@ export const RegisterUserDocument = {
         ],
       },
     },
-    ...AuthFormResponseFragmentFragmentDoc.definitions,
+    ...RegularAuthFormResponseFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<RegisterUserMutation, RegisterUserMutationVariables>;
 export const GetCurrentUserDocument = {
@@ -313,14 +380,14 @@ export const GetCurrentUserDocument = {
             selectionSet: {
               kind: "SelectionSet",
               selections: [
-                { kind: "FragmentSpread", name: { kind: "Name", value: "UserFragment" } },
+                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularUser" } },
               ],
             },
           },
         ],
       },
     },
-    ...UserFragmentFragmentDoc.definitions,
+    ...RegularUserFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
 

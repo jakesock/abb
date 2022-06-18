@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-export const USER_FRAGMENT = gql`
-  fragment UserFragment on User {
+export const REGULAR_USER_FRAGMENT = gql`
+  fragment RegularUser on User {
     id
     username
     email

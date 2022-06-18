@@ -25,6 +25,7 @@ const Home: NextPage = () => {
       <main>
         <p>Home Page!</p>
         <p>Current user: {username}</p>
+        <a href="/login">Login</a>
         <a href="/register">Register</a>
       </main>
     </div>

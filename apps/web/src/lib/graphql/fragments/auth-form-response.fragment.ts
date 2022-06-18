@@ -1,16 +1,16 @@
 import { gql } from "@apollo/client";
-import { FIELD_ERROR_FRAGMENT } from "./field-error.fragment";
-import { USER_FRAGMENT } from "./user.fragment";
+import { REGULAR_FIELD_ERROR_FRAGMENT } from "./field-error.fragment";
+import { REGULAR_USER_FRAGMENT } from "./user.fragment";
 
-export const AUTH_FORM_RESPONSE_FRAGMENT = gql`
-  fragment AuthFormResponseFragment on AuthFormResponse {
+export const REGULAR_AUTH_FORM_RESPONSE_FRAGMENT = gql`
+  fragment RegularAuthFormResponse on AuthFormResponse {
     user {
-      ...UserFragment
+      ...RegularUser
     }
     errors {
-      ...FieldErrorFragment
+      ...RegularFieldError
     }
   }
-  ${USER_FRAGMENT}
-  ${FIELD_ERROR_FRAGMENT}
+  ${REGULAR_USER_FRAGMENT}
+  ${REGULAR_FIELD_ERROR_FRAGMENT}
 `;
