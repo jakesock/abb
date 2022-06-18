@@ -1,0 +1,52 @@
+{
+  "name": "abb",
+  "version": "1.0.0",
+  "packageManager": "yarn@3.2.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "prepare": "husky install",
+    "commit": "cz",
+    "commit:signed": "cz -S",
+    "build": "yarn workspaces foreach -ptvR --from '{@abb/server,@abb/yup-schemas,@abb/errors}' run build && yarn install",
+    "test": "yarn run yup-schemas:test && yarn run errors:test && yarn run server:test",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "check:format": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "check:lint": "yarn workspaces foreach -pvR --from '{@abb/server,@abb/yup-schemas,@abb/errors}' run check:lint",
+    "check:types": "yarn workspaces foreach -pvR --from '{@abb/server,@abb/yup-schemas,@abb/errors}' run check:types",
+    "check:all": "yarn workspaces foreach -pvR --from '{@abb/server,@abb/yup-schemas,@abb/errors}' run check:all",
+    "server:build": "yarn workspace @abb/server run build",
+    "server:test": "yarn workspace @abb/server run test",
+    "server:lint": "yarn workspace @abb/server run lint",
+    "server:format": "yarn workspace @abb/server run format",
+    "server:check:all": "yarn workspace @abb/server run check:all",
+    "errors:build": "yarn workspace @abb/errors run build",
+    "errors:test": "yarn workspace @abb/errors run test",
+    "errors:lint": "yarn workspace @abb/errors run lint",
+    "errors:format": "yarn workspace @abb/errors run format",
+    "errors:check:all": "yarn workspace @abb/errors run check:all",
+    "yup-schemas:build": "yarn workspace @abb/yup-schemas run build",
+    "yup-schemas:test": "yarn workspace @abb/yup-schemas run test",
+    "yup-schemas:lint": "yarn workspace @abb/yup-schemas run lint",
+    "yup-schemas:format": "yarn workspace @abb/yup-schemas run format",
+    "yup-schemas:check:all": "yarn workspace @abb/yup-schemas run check:all"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.2",
+    "@commitlint/config-conventional": "^17.0.2",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.15.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^12.4.1",
+    "prettier": "^2.6.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog",
+      "defaultScope": "global"
+    }
+  }
+}
