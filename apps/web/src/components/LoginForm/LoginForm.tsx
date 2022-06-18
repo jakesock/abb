@@ -52,7 +52,6 @@ export const LoginForm: React.FC = () => {
             name="usernameOrEmail"
             label="Username or Email"
             placeholder="Username or Email"
-            type="email"
           />
           <FormInput name="password" label="Password" placeholder="Password" password />
           <button type="submit" disabled={!isValid || isSubmitting}>
