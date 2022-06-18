@@ -14,9 +14,11 @@
     "check:format": "prettier --check .",
     "check:types": "tsc --pretty --noEmit",
     "check:lint": "eslint .",
-    "check:all": "yarn check:format && yarn check:lint && yarn check:types"
+    "check:all": "yarn check:format && yarn check:lint && yarn check:types",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
+    "@abb/yup-schemas": "workspace:*",
     "@apollo/client": "^3.6.8",
     "@apollo/link-error": "^2.0.0-beta.3",
     "@types/apollo-upload-client": "^17.0.0",
@@ -32,6 +34,13 @@
   "devDependencies": {
     "@abb/config": "workspace:*",
     "@abb/tsconfig": "workspace:*",
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/fragment-matcher": "^3.2.1",
+    "@graphql-codegen/introspection": "^2.1.1",
+    "@graphql-codegen/typed-document-node": "^2.2.13",
+    "@graphql-codegen/typescript": "^2.5.1",
+    "@graphql-codegen/typescript-operations": "^2.4.2",
+    "@graphql-codegen/typescript-react-apollo": "^3.2.16",
     "@types/node": "18.0.0",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.5",

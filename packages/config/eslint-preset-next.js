@@ -136,6 +136,14 @@ module.exports = {
         ],
       },
     },
+    {
+      files: ["**/graphql/generated.ts"],
+      rules: {
+        "unicorn/no-abusive-eslint-disable": "off",
+        "eslint-comments/disable-enable-pair": "off",
+        "eslint-comments/no-unlimited-disable": "off",
+      },
+    },
   ],
-  ignorePatterns: ["**/.*.js", "**/*.json", "node_modules", ".next", "public"],
+  ignorePatterns: ["**/.*.js", "**/*.json", "node_modules", ".next", "public", "**/generated.ts"],
 };
