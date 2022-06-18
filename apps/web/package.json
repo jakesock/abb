@@ -17,7 +17,15 @@
     "check:all": "yarn check:format && yarn check:lint && yarn check:types"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.8",
+    "@apollo/link-error": "^2.0.0-beta.3",
+    "@types/apollo-upload-client": "^17.0.0",
+    "apollo-upload-client": "^17.0.0",
+    "deepmerge": "^4.2.2",
+    "graphql": "^16.5.0",
+    "lodash": "^4.17.21",
     "next": "12.1.6",
+    "next-with-apollo": "^5.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
