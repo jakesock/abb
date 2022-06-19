@@ -140,6 +140,27 @@ export type RegularUserFragment = {
   updatedAt: string;
 };
 
+export type ConfirmUserEmailMutationVariables = Exact<{
+  code: Scalars["String"];
+}>;
+
+export type ConfirmUserEmailMutation = {
+  __typename?: "Mutation";
+  confirmUserEmail: {
+    __typename?: "AuthFormResponse";
+    user?: {
+      __typename?: "User";
+      id: string;
+      username: string;
+      email: string;
+      isConfirmed: boolean;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
+  };
+};
+
 export type LoginUserMutationVariables = Exact<{
   loginUserInput: LoginUserInput;
 }>;
@@ -184,6 +205,15 @@ export type RegisterUserMutation = {
     } | null;
     errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
   };
+};
+
+export type SendNewConfirmationCodeMutationVariables = Exact<{
+  sendNewConfirmationCodeInput: SendNewConfirmationCodeInput;
+}>;
+
+export type SendNewConfirmationCodeMutation = {
+  __typename?: "Mutation";
+  sendNewConfirmationCode: boolean;
 };
 
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never }>;
@@ -276,6 +306,52 @@ export const RegularAuthFormResponseFragmentDoc = {
     ...RegularFieldErrorFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<RegularAuthFormResponseFragment, unknown>;
+export const ConfirmUserEmailDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "ConfirmUserEmail" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "code" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "confirmUserEmail" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "code" },
+                value: { kind: "Variable", name: { kind: "Name", value: "code" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "RegularAuthFormResponse" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularAuthFormResponseFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<ConfirmUserEmailMutation, ConfirmUserEmailMutationVariables>;
 export const LoginUserDocument = {
   kind: "Document",
   definitions: [
@@ -382,6 +458,54 @@ export const RegisterUserDocument = {
     ...RegularAuthFormResponseFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<RegisterUserMutation, RegisterUserMutationVariables>;
+export const SendNewConfirmationCodeDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "SendNewConfirmationCode" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "sendNewConfirmationCodeInput" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "SendNewConfirmationCodeInput" },
+            },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "sendNewConfirmationCode" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "sendNewConfirmationCodeInput" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "sendNewConfirmationCodeInput" },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  SendNewConfirmationCodeMutation,
+  SendNewConfirmationCodeMutationVariables
+>;
 export const GetCurrentUserDocument = {
   kind: "Document",
   definitions: [

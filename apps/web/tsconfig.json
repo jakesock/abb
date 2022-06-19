@@ -1,7 +1,6 @@
 {
   "extends": "@abb/tsconfig/nextjs.json",
   "compilerOptions": {
-    "baseUrl": "./src",
     "noEmit": true
   },
   "include": ["."],

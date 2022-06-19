@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { LogoutButton } from "../components/LogoutButton";
+import { Navbar } from "../components/Navbar";
 import { GetCurrentUserQuery } from "../lib/graphql/generated";
 import { GET_CURRENT_USER_QUERY } from "../lib/graphql/queries";
 
@@ -24,11 +24,9 @@ const Home: NextPage = () => {
   return (
     <div>
       <main>
+        <Navbar />
         <p>Home Page!</p>
         <p>Current user: {username}</p>
-        <a href="/login">Login</a>
-        <a href="/register">Register</a>
-        <LogoutButton />
       </main>
     </div>
   );

@@ -45,7 +45,7 @@ export const RegisterForm: React.FC = () => {
           setErrors(toErrorMap(response.data.registerUser.errors));
         } else if (response.data?.registerUser.user) {
           // eslint-disable-next-line no-console
-          router.push("/").catch((error) => console.error("[Router Error]:", error));
+          router.push("/confirm-email").catch((error) => console.error("[Router Error]:", error));
         }
       }}
     >
