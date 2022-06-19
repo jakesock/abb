@@ -4,7 +4,7 @@ Web frontend for abb.
 
 ## TODO
 
-Functionality:
+### [x] Functionality:
 
 - [x] Send Reset Password email
 - [x] Reset Password form/page
@@ -12,16 +12,18 @@ Functionality:
 - [x] Change user password form/page
 - [x] custom isauth hook for protecting routes
 
-Tests:
+### [ ] UI:
+
+- [ ] Basic protoyping with a component library
+  - [ ] Chakra UI
+- [ ] (AFTER TESTS) Create UI Library with storybook
+
+### Tests:
 
 - [ ] Set up tests for web
 - [ ] Write tests for components/pages
 
-Deployment:
+### Deployment:
 
 - [ ] Deploy backend (digital ocean?)
 - [ ] Deploy frontend (vercel)
-
-Styling:
-
-- [ ] Create UI Library with storybook

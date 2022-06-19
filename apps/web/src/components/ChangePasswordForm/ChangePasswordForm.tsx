@@ -1,5 +1,6 @@
 import { changeUserPasswordSchema } from "@abb/yup-schemas";
 import { useMutation } from "@apollo/client";
+import { Box, Button } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import {
@@ -53,19 +54,39 @@ export const ChangePasswordForm: React.FC = () => {
         }
       }}
     >
-      {({ isSubmitting, isValid }) => (
+      {({ isSubmitting }) => (
         <Form>
-          <FormInput name="oldPassword" label="Old Password" placeholder="Old Password" password />
-          <FormInput name="password" label="New Password" placeholder="New Password" password />
           <FormInput
-            name="confirmPassword"
-            label="Confirm New Password"
-            placeholder="Confirm New Password"
-            password
+            type="password"
+            name="oldPassword"
+            label="Old Password"
+            placeholder="Old Password"
           />
-          <button type="submit" disabled={isSubmitting || !isValid}>
-            {isSubmitting ? "Changing Password..." : "Change Password"}
-          </button>
+          <Box mt={4}>
+            <FormInput
+              type="password"
+              name="password"
+              label="New Password"
+              placeholder="New Password"
+            />
+          </Box>
+          <Box mt={4}>
+            <FormInput
+              type="password"
+              name="confirmPassword"
+              label="Confirm New Password"
+              placeholder="Confirm New Password"
+            />
+          </Box>
+          <Button
+            type="submit"
+            isLoading={isSubmitting}
+            marginTop={4}
+            colorScheme="blue"
+            width="100%"
+          >
+            Change Password
+          </Button>
         </Form>
       )}
     </Formik>

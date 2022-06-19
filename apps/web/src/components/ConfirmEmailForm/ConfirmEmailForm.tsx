@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/client";
+import { Button } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import {
@@ -34,12 +35,18 @@ export const ConfirmEmailForm: React.FC = () => {
         }
       }}
     >
-      {({ isSubmitting, isValid }) => (
+      {({ isSubmitting }) => (
         <Form>
           <FormInput name="code" label="Confirmation Code" placeholder="i.e. B2J57HLK" />
-          <button type="submit" disabled={isSubmitting || !isValid}>
-            {isSubmitting ? "Confirming Email..." : "Confirm Email"}
-          </button>
+          <Button
+            type="submit"
+            isLoading={isSubmitting}
+            marginTop={4}
+            colorScheme="blue"
+            width="100%"
+          >
+            Confirm Email
+          </Button>
         </Form>
       )}
     </Formik>

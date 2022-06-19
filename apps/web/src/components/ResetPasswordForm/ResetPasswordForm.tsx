@@ -1,5 +1,6 @@
 import { passwordConfirmPasswordValidationSchema } from "@abb/yup-schemas";
 import { useMutation } from "@apollo/client";
+import { Box, Button, useToast } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -15,8 +16,9 @@ import { FormInput } from "../FormInput";
 
 export const ResetPasswordForm: React.FC = () => {
   const router = useRouter();
+  const toast = useToast();
+  const TOAST_ID = "reset-password-form-token-error";
   const [token, setToken] = useState("");
-  const [tokenError, setTokenError] = useState<string | null>(null);
   const [resetUserPassword] = useMutation<
     ResetUserPasswordMutation,
     ResetUserPasswordMutationVariables
@@ -61,9 +63,18 @@ export const ResetPasswordForm: React.FC = () => {
           const tokenErrorReponse = errors.find((error) => error.field === "token");
 
           if (tokenErrorReponse) {
-            // If the token is invalid, display the error message
-            // No need to show the password error since the token is invalid and the password cannot change
-            setTokenError(tokenErrorReponse.message);
+            // If the token is invalid, show a toast error, no need to show the field errors as it cannot be submitted successfully anyways
+            if (!toast.isActive(TOAST_ID)) {
+              toast({
+                id: TOAST_ID,
+                title: tokenErrorReponse.message,
+                description: "Please request a new password reset link.",
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+                position: "bottom-right",
+              });
+            }
           } else {
             // If the token is valid, show the other errors
             setErrors(toErrorMap(errors));
@@ -75,22 +86,27 @@ export const ResetPasswordForm: React.FC = () => {
         }
       }}
     >
-      {({ isSubmitting, isValid }) => (
-        <>
-          <Form>
-            <FormInput name="password" label="Password" placeholder="New Password" password />
+      {({ isSubmitting }) => (
+        <Form>
+          <FormInput type="password" name="password" label="Password" placeholder="New Password" />
+          <Box mt={4}>
             <FormInput
+              type="password"
               name="confirmPassword"
               label="Confirm Password"
               placeholder="New Password"
-              password
             />
-            <button type="submit" disabled={!isValid || isSubmitting}>
-              {isSubmitting ? "Resetting Password..." : "Reset Password"}
-            </button>
-          </Form>
-          {tokenError && <p>{tokenError}</p>}
-        </>
+          </Box>
+          <Button
+            type="submit"
+            isLoading={isSubmitting}
+            marginTop={4}
+            colorScheme="blue"
+            width="100%"
+          >
+            Reset Password
+          </Button>
+        </Form>
       )}
     </Formik>
   );

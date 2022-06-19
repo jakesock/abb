@@ -1,5 +1,6 @@
 import { loginUserSchema } from "@abb/yup-schemas";
 import { useMutation } from "@apollo/client";
+import { Box, Button } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import {
@@ -46,17 +47,26 @@ export const LoginForm: React.FC = () => {
         }
       }}
     >
-      {({ isSubmitting, isValid }) => (
+      {({ isSubmitting }) => (
         <Form>
           <FormInput
+            type="text"
             name="usernameOrEmail"
             label="Username or Email"
             placeholder="Username or Email"
           />
-          <FormInput name="password" label="Password" placeholder="Password" password />
-          <button type="submit" disabled={!isValid || isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Login"}
-          </button>
+          <Box mt={4}>
+            <FormInput type="password" name="password" label="Password" placeholder="Password" />
+          </Box>
+          <Button
+            type="submit"
+            isLoading={isSubmitting}
+            marginTop={4}
+            colorScheme="blue"
+            width="100%"
+          >
+            Login
+          </Button>
         </Form>
       )}
     </Formik>

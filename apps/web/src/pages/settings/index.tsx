@@ -1,19 +1,26 @@
+import { Link, ListItem, UnorderedList } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import NextLink from "next/link";
+import { PageLayout } from "../../components/PageLayout";
 import { useProtectedRoute } from "../../lib/hooks";
 
 const SettingsPage: NextPage = () => {
   const { isLoading } = useProtectedRoute("/login");
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return null;
   }
 
   return (
-    <main>
-      <h1>Settings</h1>
-      <NextLink href="/settings/change-password">Change Password</NextLink>
-    </main>
+    <PageLayout heading="Settings">
+      <UnorderedList>
+        <ListItem>
+          <NextLink href="/settings/change-password" passHref>
+            <Link href="/settings/change-password">Change Password</Link>
+          </NextLink>
+        </ListItem>
+      </UnorderedList>
+    </PageLayout>
   );
 };
 

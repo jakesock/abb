@@ -1,10 +1,11 @@
 import { NextPage } from "next";
+import { PageLayout } from "../components/PageLayout";
 import { SendPasswordResetEmailForm } from "../components/SendPasswordResetEmailForm";
 
 const RequestPasswordResetPage: NextPage = () => (
-  <main>
+  <PageLayout heading="Reset Password Request">
     <SendPasswordResetEmailForm />
-  </main>
+  </PageLayout>
 );
 
 export default RequestPasswordResetPage;

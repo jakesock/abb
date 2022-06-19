@@ -1,90 +1,69 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable react/require-default-props */
-import { useField, useFormikContext } from "formik";
-import React, {
-  InputHTMLAttributes,
-  TextareaHTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import {
+  Button,
+  ComponentWithAs,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputProps,
+  InputRightElement,
+  Textarea,
+  TextareaProps,
+} from "@chakra-ui/react";
+import { useField } from "formik";
+import React, { InputHTMLAttributes, TextareaHTMLAttributes, useState } from "react";
+
+type InputOrTextarea =
+  | ComponentWithAs<"input", InputProps>
+  | ComponentWithAs<"textarea", TextareaProps>;
 
 type InputFieldProps = InputHTMLAttributes<HTMLInputElement> &
   TextareaHTMLAttributes<HTMLTextAreaElement> & {
     name: string;
     label: string;
-    placeholder: string;
-    password?: boolean;
+    // eslint-disable-next-line react/require-default-props
     textarea?: boolean;
   };
 
 export const FormInput: React.FC<InputFieldProps> = ({
   label,
+  textarea,
   size: _,
-  rows,
-  password = false,
-  textarea = false,
+  type,
   ...props
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const inputRef = useRef<HTMLInputElement | null>(null);
   const [field, { error, touched }] = useField(props);
-  const { handleBlur } = useFormikContext();
+  const [show, setShow] = useState(false);
+  const handleShowHidePassword = () => setShow(!show);
 
-  const onFocus = () => setIsFocused(true);
-  const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    setIsFocused(false);
-    handleBlur(event); // Formik uses onVlur events for validation, etc. so handleBlur needed to keep this behavior
-  };
-  const onClick = () => {
-    setShowPassword(!showPassword);
-    inputRef.current?.focus(); // Keep focus on an input when show/hide password is clicked
-  };
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.selectionStart = inputRef.current.value.length;
-      inputRef.current.selectionEnd = inputRef.current.value.length;
-    }
-  }, [showPassword]);
-
-  if (password) {
-    return (
-      <div>
-        <label htmlFor={field.name}>{label}</label>
-        <input
-          id={field.name}
-          type={showPassword ? "text" : "password"}
-          onFocus={onFocus}
-          ref={inputRef}
-          {...field}
-          {...props}
-          onBlur={onBlur}
-        />
-        <button
-          type="button"
-          onClick={onClick}
-          style={{
-            color: isFocused ? "black" : "gray",
-          }}
-        >
-          {showPassword ? "Hide Password" : "Show Password"}
-        </button>
-        {error && touched ? <p>{error}</p> : null}
-      </div>
-    );
+  let Component: InputOrTextarea = Input;
+  if (textarea) {
+    Component = Textarea;
   }
 
   return (
-    <div>
-      <label htmlFor={field.name}>{label}</label>
-      {textarea ? (
-        <textarea id={field.name} rows={rows} {...field} {...props} />
+    <FormControl isInvalid={!!error && touched}>
+      <FormLabel htmlFor={field.name}>{label}</FormLabel>
+      {type === "password" ? (
+        <InputGroup size="md">
+          <Input
+            {...field}
+            {...props}
+            id={field.name}
+            type={show ? "text" : "password"}
+            pr="4.5rem"
+          />
+          <InputRightElement width="4.5rem">
+            <Button type="button" h="1.75rem" size="sm" onClick={handleShowHidePassword}>
+              {show ? "Hide" : "Show"}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
       ) : (
-        <input id={field.name} {...field} {...props} />
+        <Component {...field} {...props} type={type} id={field.name} />
       )}
-      {error && touched ? <p>{error}</p> : null}
-    </div>
+      {error && touched ? <FormErrorMessage>{error}</FormErrorMessage> : null}
+    </FormControl>
   );
 };

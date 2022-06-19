@@ -1,5 +1,6 @@
 import { registerUserSchema } from "@abb/yup-schemas";
 import { useMutation } from "@apollo/client";
+import { Box, Button } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import {
@@ -49,21 +50,40 @@ export const RegisterForm: React.FC = () => {
         }
       }}
     >
-      {({ isSubmitting, isValid }) => (
+      {({ isSubmitting }) => (
         <Form>
-          <FormInput name="username" label="Username" placeholder="Username" />
-          <FormInput name="email" label="Email" placeholder="Email" />
-          <FormInput name="confirmEmail" label="Confirm Email" placeholder="Confirm Email" />
-          <FormInput name="password" label="Password" placeholder="Password" password />
-          <FormInput
-            name="confirmPassword"
-            label="Confirm Password"
-            placeholder="Confirm Password"
-            password
-          />
-          <button type="submit" disabled={!isValid || isSubmitting}>
-            {isSubmitting ? "Submitting..." : "Register"}
-          </button>
+          <FormInput type="text" name="username" label="Username" placeholder="Username" />
+          <Box mt={4}>
+            <FormInput type="email" name="email" label="Email" placeholder="Email" />
+          </Box>
+          <Box mt={4}>
+            <FormInput
+              type="email"
+              name="confirmEmail"
+              label="Confirm Email"
+              placeholder="Confirm Email"
+            />
+          </Box>
+          <Box mt={4}>
+            <FormInput type="password" name="password" label="Password" placeholder="Password" />
+          </Box>
+          <Box mt={4}>
+            <FormInput
+              type="password"
+              name="confirmPassword"
+              label="Confirm Password"
+              placeholder="Confirm Password"
+            />
+          </Box>
+          <Button
+            type="submit"
+            isLoading={isSubmitting}
+            marginTop={4}
+            colorScheme="blue"
+            width="100%"
+          >
+            Register
+          </Button>
         </Form>
       )}
     </Formik>

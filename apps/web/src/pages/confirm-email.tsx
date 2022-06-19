@@ -1,16 +1,12 @@
 import type { NextPage } from "next";
 import { ConfirmEmailForm } from "../components/ConfirmEmailForm";
+import { PageLayout } from "../components/PageLayout";
 import { SendNewConfirmationCodeButton } from "../components/SendNewConfirmationCodeButton";
 
 const ConfirmEmailPage: NextPage = () => (
-  <main>
-    <div>
-      <ConfirmEmailForm />
-    </div>
-    <div>
-      <p>Need a new confirmation code?</p>
-      <SendNewConfirmationCodeButton />
-    </div>
-  </main>
+  <PageLayout heading="Confirm Email">
+    <ConfirmEmailForm />
+    <SendNewConfirmationCodeButton />
+  </PageLayout>
 );
 export default ConfirmEmailPage;

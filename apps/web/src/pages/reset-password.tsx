@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
+import { PageLayout } from "../components/PageLayout";
 import { ResetPasswordForm } from "../components/ResetPasswordForm";
 
 const ResetPasswordPage: NextPage = () => (
-  <main>
-    <h1>Reset Password</h1>
+  <PageLayout heading="Reset Password">
     <ResetPasswordForm />
-  </main>
+  </PageLayout>
 );
 
 export default ResetPasswordPage;

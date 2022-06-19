@@ -1,16 +1,18 @@
+import { Box, Link } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import NextLink from "next/link";
 import { LoginForm } from "../components/LoginForm";
+import { PageLayout } from "../components/PageLayout";
 
 const LoginPage: NextPage = () => (
-  <div>
-    <main>
-      <LoginForm />
-      <div>
-        <NextLink href="/request-password-reset">Forgot Password</NextLink>
-      </div>
-    </main>
-  </div>
+  <PageLayout heading="Login">
+    <LoginForm />
+    <Box mt={2}>
+      <NextLink href="/request-password-reset" passHref>
+        <Link href="/request-password-reset">Forgot Password</Link>
+      </NextLink>
+    </Box>
+  </PageLayout>
 );
 
 export default LoginPage;

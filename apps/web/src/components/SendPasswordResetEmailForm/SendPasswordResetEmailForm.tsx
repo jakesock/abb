@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
+import { Button, useToast } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
-import { useState } from "react";
 import * as Yup from "yup";
 import {
   SendPasswordResetEmailMutation,
@@ -10,7 +10,8 @@ import { SEND_PASSWORD_RESET_EMAIL_MUTATION } from "../../lib/graphql/mutations"
 import { FormInput } from "../FormInput";
 
 export const SendPasswordResetEmailForm: React.FC = () => {
-  const [alert, setAlert] = useState<string | null>(null);
+  const toast = useToast();
+  const TOAST_ID = "send-password-reset-email";
   const [sendPasswordResetEmail] = useMutation<
     SendPasswordResetEmailMutation,
     SendPasswordResetEmailMutationVariables
@@ -32,16 +33,31 @@ export const SendPasswordResetEmailForm: React.FC = () => {
           },
         });
 
-        setAlert(`Email sent to ${values.email}! Check your email for a reset link.`);
+        if (!toast.isActive(TOAST_ID)) {
+          toast({
+            id: TOAST_ID,
+            title: `Email sent to ${values.email}!`,
+            description: "Make sure to check your email for a link to reset your password.",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+            position: "bottom-right",
+          });
+        }
       }}
     >
-      {({ isSubmitting, isValid }) => (
+      {({ isSubmitting }) => (
         <Form>
           <FormInput name="email" label="Email" placeholder="Email" type="email" />
-          <button type="submit" disabled={isSubmitting || !isValid}>
-            {isSubmitting ? "Sending Password Reset Link..." : "Send Password Reset Link"}
-          </button>
-          <p>{alert}</p>
+          <Button
+            type="submit"
+            isLoading={isSubmitting}
+            marginTop={4}
+            colorScheme="blue"
+            width="100%"
+          >
+            Send Password Reset Link
+          </Button>
         </Form>
       )}
     </Formik>
