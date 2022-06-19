@@ -71,6 +71,7 @@ export const FormInput: React.FC<InputFieldProps> = ({
         >
           {showPassword ? "Hide Password" : "Show Password"}
         </button>
+        {error && touched ? <p>{error}</p> : null}
       </div>
     );
   }

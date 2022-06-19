@@ -6,8 +6,9 @@ Web frontend for abb.
 
 Functionality:
 
-- [ ] Send Reset Password email
+- [x] Send Reset Password email
 - [ ] Reset Password form/page
+  - [ ] Add validation schema to yup-schemas package and use in form
 - [ ] Change user password form/page
 
 Tests:
