@@ -13,7 +13,7 @@ const passwordErrorMessages = {
 };
 
 const emailErrorMessages = {
-  invalid: "InvalidEmail",
+  invalid: "Invalid Email",
 };
 
 export const userErrorMessages = {
