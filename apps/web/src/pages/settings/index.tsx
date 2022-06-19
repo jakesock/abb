@@ -1,23 +1,11 @@
-import { useQuery } from "@apollo/client";
 import type { NextPage } from "next";
 import NextLink from "next/link";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { GetCurrentUserQuery } from "../../lib/graphql/generated";
-import { GET_CURRENT_USER_QUERY } from "../../lib/graphql/queries";
+import { useProtectedRoute } from "../../lib/hooks";
 
 const SettingsPage: NextPage = () => {
-  const router = useRouter();
-  const { data, loading } = useQuery<GetCurrentUserQuery>(GET_CURRENT_USER_QUERY);
+  const { isLoading } = useProtectedRoute("/login");
 
-  useEffect(() => {
-    if (!data?.getCurrentUser && !loading) {
-      // eslint-disable-next-line no-console
-      router.push("/login").catch((error) => console.error("[Router Error]:", error));
-    }
-  }, [data, loading, router]);
-
-  if (loading) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 
