@@ -153,7 +153,7 @@ export class UserResolver {
    */
   @Mutation(() => AuthFormResponse)
   async resetUserPassword(
-    @Arg("resetPasswordInput") resetUserPasswordInput: ResetUserPasswordInput,
+    @Arg("resetUserPasswordInput") resetUserPasswordInput: ResetUserPasswordInput,
     @Ctx() ctx: MyContext
   ): Promise<AuthFormResponse> {
     return this.userService.resetPassword(resetUserPasswordInput, ctx);

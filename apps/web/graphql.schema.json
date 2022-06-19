@@ -364,7 +364,7 @@
             "description": null,
             "args": [
               {
-                "name": "resetPasswordInput",
+                "name": "resetUserPasswordInput",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",

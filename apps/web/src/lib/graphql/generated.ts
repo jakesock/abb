@@ -65,7 +65,7 @@ export type MutationRegisterUserArgs = {
 };
 
 export type MutationResetUserPasswordArgs = {
-  resetPasswordInput: ResetUserPasswordInput;
+  resetUserPasswordInput: ResetUserPasswordInput;
 };
 
 export type MutationSendNewConfirmationCodeArgs = {
@@ -140,6 +140,27 @@ export type RegularUserFragment = {
   updatedAt: string;
 };
 
+export type ChangeUserPasswordMutationVariables = Exact<{
+  changeUserPasswordInput: ChangeUserPasswordInput;
+}>;
+
+export type ChangeUserPasswordMutation = {
+  __typename?: "Mutation";
+  changeUserPassword: {
+    __typename?: "AuthFormResponse";
+    user?: {
+      __typename?: "User";
+      id: string;
+      username: string;
+      email: string;
+      isConfirmed: boolean;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
+  };
+};
+
 export type ConfirmUserEmailMutationVariables = Exact<{
   code: Scalars["String"];
 }>;
@@ -207,6 +228,27 @@ export type RegisterUserMutation = {
   };
 };
 
+export type ResetUserPasswordMutationVariables = Exact<{
+  resetUserPasswordInput: ResetUserPasswordInput;
+}>;
+
+export type ResetUserPasswordMutation = {
+  __typename?: "Mutation";
+  resetUserPassword: {
+    __typename?: "AuthFormResponse";
+    user?: {
+      __typename?: "User";
+      id: string;
+      username: string;
+      email: string;
+      isConfirmed: boolean;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
+  };
+};
+
 export type SendNewConfirmationCodeMutationVariables = Exact<{
   sendNewConfirmationCodeInput: SendNewConfirmationCodeInput;
 }>;
@@ -214,6 +256,15 @@ export type SendNewConfirmationCodeMutationVariables = Exact<{
 export type SendNewConfirmationCodeMutation = {
   __typename?: "Mutation";
   sendNewConfirmationCode: boolean;
+};
+
+export type SendPasswordResetEmailMutationVariables = Exact<{
+  email: Scalars["String"];
+}>;
+
+export type SendPasswordResetEmailMutation = {
+  __typename?: "Mutation";
+  sendPasswordResetEmail: boolean;
 };
 
 export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never }>;
@@ -306,6 +357,55 @@ export const RegularAuthFormResponseFragmentDoc = {
     ...RegularFieldErrorFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<RegularAuthFormResponseFragment, unknown>;
+export const ChangeUserPasswordDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "ChangeUserPassword" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "changeUserPasswordInput" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ChangeUserPasswordInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "changeUserPassword" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "changeUserPasswordInput" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "changeUserPasswordInput" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "RegularAuthFormResponse" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularAuthFormResponseFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<ChangeUserPasswordMutation, ChangeUserPasswordMutationVariables>;
 export const ConfirmUserEmailDocument = {
   kind: "Document",
   definitions: [
@@ -458,6 +558,55 @@ export const RegisterUserDocument = {
     ...RegularAuthFormResponseFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<RegisterUserMutation, RegisterUserMutationVariables>;
+export const ResetUserPasswordDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "ResetUserPassword" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "resetUserPasswordInput" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "ResetUserPasswordInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "resetUserPassword" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "resetUserPasswordInput" },
+                value: {
+                  kind: "Variable",
+                  name: { kind: "Name", value: "resetUserPasswordInput" },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "RegularAuthFormResponse" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularAuthFormResponseFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<ResetUserPasswordMutation, ResetUserPasswordMutationVariables>;
 export const SendNewConfirmationCodeDocument = {
   kind: "Document",
   definitions: [
@@ -505,6 +654,45 @@ export const SendNewConfirmationCodeDocument = {
 } as unknown as DocumentNode<
   SendNewConfirmationCodeMutation,
   SendNewConfirmationCodeMutationVariables
+>;
+export const SendPasswordResetEmailDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "SendPasswordResetEmail" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "email" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "sendPasswordResetEmail" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "email" },
+                value: { kind: "Variable", name: { kind: "Name", value: "email" } },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<
+  SendPasswordResetEmailMutation,
+  SendPasswordResetEmailMutationVariables
 >;
 export const GetCurrentUserDocument = {
   kind: "Document",

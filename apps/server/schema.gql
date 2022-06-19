@@ -30,7 +30,7 @@ type Mutation {
   loginUser(loginUserInput: LoginUserInput!): AuthFormResponse!
   logoutUser: Boolean!
   registerUser(registerUserInput: RegisterUserInput!): AuthFormResponse!
-  resetUserPassword(resetPasswordInput: ResetUserPasswordInput!): AuthFormResponse!
+  resetUserPassword(resetUserPasswordInput: ResetUserPasswordInput!): AuthFormResponse!
   sendNewConfirmationCode(sendNewConfirmationCodeInput: SendNewConfirmationCodeInput!): Boolean!
   sendPasswordResetEmail(email: String!): Boolean!
 }
