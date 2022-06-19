@@ -19,7 +19,12 @@ export const Navbar: React.FC = () => {
       </>
     );
   } else {
-    body = <LogoutButton />;
+    body = (
+      <>
+        <NextLink href="/settings">Settings</NextLink>
+        <LogoutButton />
+      </>
+    );
   }
 
   return (

@@ -7,9 +7,10 @@ Web frontend for abb.
 Functionality:
 
 - [x] Send Reset Password email
-- [ ] Reset Password form/page
-  - [ ] Add validation schema to yup-schemas package and use in form
-- [ ] Change user password form/page
+- [x] Reset Password form/page
+  - [x] Add validation schema to yup-schemas package and use in form
+- [x] Change user password form/page
+- [ ] custom isauth hook for protecting routes
 
 Tests:
 

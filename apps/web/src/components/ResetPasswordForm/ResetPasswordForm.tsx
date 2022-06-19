@@ -1,3 +1,4 @@
+import { passwordConfirmPasswordValidationSchema } from "@abb/yup-schemas";
 import { useMutation } from "@apollo/client";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
@@ -33,6 +34,7 @@ export const ResetPasswordForm: React.FC = () => {
         password: "",
         confirmPassword: "",
       }}
+      validationSchema={passwordConfirmPasswordValidationSchema}
       onSubmit={async (values, { setErrors }) => {
         const response = await resetUserPassword({
           variables: {
