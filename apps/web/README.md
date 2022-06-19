@@ -14,8 +14,8 @@ Web frontend for abb.
 
 ### [ ] UI:
 
-- [ ] Basic protoyping with a component library
-  - [ ] Chakra UI
+- [x] Basic protoyping with a component library
+  - [x] Chakra UI
 - [ ] (AFTER TESTS) Create UI Library with storybook
 
 ### Tests:
