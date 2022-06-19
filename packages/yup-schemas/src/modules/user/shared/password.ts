@@ -11,3 +11,8 @@ export const passwordFieldSchema = Yup.string()
 export const confirmPasswordFieldSchema = Yup.string()
   .oneOf([Yup.ref("password"), undefined], message.common.fieldsDoNotMatch("Passwords"))
   .required(message.common.required);
+
+export const passwordConfirmPasswordValidationSchema = Yup.object().shape({
+  password: passwordFieldSchema,
+  confirmPassword: confirmPasswordFieldSchema,
+});
