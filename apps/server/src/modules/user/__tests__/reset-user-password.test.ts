@@ -31,8 +31,8 @@ afterAll(async () => {
 });
 
 const resetUserPasswordMutation = `
-  mutation ResetUserPasswordMutation($resetPasswordInput: ResetUserPasswordInput!) {
-    resetUserPassword(resetPasswordInput: $resetPasswordInput) {
+  mutation ResetUserPasswordMutation($resetUserPasswordInput: ResetUserPasswordInput!) {
+    resetUserPassword(resetUserPasswordInput: $resetUserPasswordInput) {
       user {
         id
         email
@@ -74,7 +74,7 @@ describe("USER: Reset User Password Mutation", () => {
     const response = await gqlCall<AuthFormResponse>({
       source: resetUserPasswordMutation,
       variableValues: {
-        resetPasswordInput: {
+        resetUserPasswordInput: {
           token: invalidToken,
           password: invalidPassword,
           confirmPassword: invalidConfirmPassword,
@@ -102,7 +102,7 @@ describe("USER: Reset User Password Mutation", () => {
     const response = await gqlCall<AuthFormResponse>({
       source: resetUserPasswordMutation,
       variableValues: {
-        resetPasswordInput: {
+        resetUserPasswordInput: {
           token: nonExistentToken,
           password,
           confirmPassword: password,
