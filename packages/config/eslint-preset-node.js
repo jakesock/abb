@@ -108,6 +108,13 @@ module.exports = {
         "unicorn/prefer-module": "off",
       },
     },
+    {
+      files: ["**/migration/**/*.{ts,js}"],
+      rules: {
+        "require-jsdoc": "off",
+        "unicorn/filename-case": "off",
+      },
+    },
   ],
   ignorePatterns: ["**/.*.js", "**/*.json", "node_modules", "dist"],
 };

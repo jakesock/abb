@@ -19,6 +19,24 @@ type FieldError {
   message: String!
 }
 
+type Listing {
+  amenities: [String!]!
+  category: String!
+  createdAt: String!
+  description: String!
+  id: String!
+  latitude: Float!
+  longitude: Float!
+  maxNumberOfGuests: Int!
+  name: String!
+  numberOfBeds: Int!
+  owner: User!
+  ownerId: String!
+  pictureUrl: String
+  pricePerDay: Int!
+  updatedAt: String!
+}
+
 input LoginUserInput {
   password: String!
   usernameOrEmail: String!
@@ -63,6 +81,7 @@ type User {
   email: String!
   id: String!
   isConfirmed: Boolean!
+  listings: [Listing!]
   updatedAt: String!
   username: String!
 }

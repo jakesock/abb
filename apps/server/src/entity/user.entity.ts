@@ -1,9 +1,10 @@
 import { Field, ObjectType } from "type-graphql";
-import { Column, Entity } from "typeorm";
-import { BaseEntity, TableName } from "../types";
+import { Column, Entity, OneToMany } from "typeorm";
+import { BaseEntity } from "../types";
+import { Listing } from "./listing.entity";
 
 @ObjectType()
-@Entity({ name: TableName.USER })
+@Entity({ name: "users" })
 /**
  * A class that describes the User TypeORM entity and GraphQL Object.
  */
@@ -22,4 +23,8 @@ export class User extends BaseEntity {
   @Field(() => Boolean)
   @Column({ type: "boolean", name: "is_confirmed", default: false })
   isConfirmed!: boolean;
+
+  @Field(() => [Listing], { nullable: true })
+  @OneToMany(() => Listing, (listing) => listing.owner, { nullable: true })
+  listings?: Listing[];
 }

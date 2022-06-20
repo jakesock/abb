@@ -11,7 +11,7 @@ export const ormConfig: DataSourceOptions = {
   port: Number(process.env.DB_PORT) || 5432,
   database: PROD ? process.env.PROD_DB : process.env.DEV_DB,
   username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  password: process.env.DB_PASSWORD || "postgres",
   synchronize: !PROD,
   logging: !PROD,
   entities: [path.join(__dirname, "../../**/*.entity{.ts,.js}")],
