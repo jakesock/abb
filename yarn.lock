@@ -94,7 +94,7 @@ __metadata:
     reflect-metadata: ^0.1.13
     rimraf: ^3.0.2
     ts-jest: ^28.0.2
-    ts-node: ^10.8.1
+    ts-node: ^10.7.0
     type-graphql: ^1.1.1
     typedi: ^0.10.0
     typeorm: ^0.3.6
@@ -14324,7 +14324,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.8.0, ts-node@npm:^10.8.1":
+"ts-node@npm:^10.7.0, ts-node@npm:^10.8.0":
   version: 10.8.1
   resolution: "ts-node@npm:10.8.1"
   dependencies:
