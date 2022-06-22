@@ -10,6 +10,7 @@ import rateLimit from "express-rate-limit";
 import session from "express-session";
 import { fieldExtensionsEstimator, simpleEstimator } from "graphql-query-complexity";
 import { createComplexityPlugin } from "graphql-query-complexity-apollo-plugin";
+import { graphqlUploadExpress } from "graphql-upload";
 import "reflect-metadata";
 import { corsConfig, rateLimitConfig, redisClient, sessionConfig } from "./lib/config";
 import { PROD } from "./lib/constants";
@@ -37,6 +38,7 @@ export async function createApolloExpressServer(): CreateApolloExpressServerRetu
     app.use(cors(corsConfig));
     app.use(session(sessionConfig));
     app.use(rateLimit(rateLimitConfig));
+    app.use(graphqlUploadExpress({ maxFileSize: 10_000_000, maxFiles: 10 }));
 
     // Define Apollo Server and GraphQL Schema
     const schema = await buildSchema();

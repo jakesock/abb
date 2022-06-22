@@ -1,6 +1,7 @@
 import { GraphQLSchema } from "graphql";
 import { AuthChecker, buildSchema as buildTypeGraphQLSchema, ResolverData } from "type-graphql";
 import Container from "typedi";
+import { ListingResolver } from "../../modules/listing/listing.resolver";
 import { UserResolver } from "../../modules/user/user.resolver";
 import { MyContext } from "../../types";
 
@@ -23,7 +24,7 @@ const customAuthChecker: AuthChecker<MyContext> = ({
  */
 export const buildSchema = (): Promise<GraphQLSchema> =>
   buildTypeGraphQLSchema({
-    resolvers: [UserResolver],
+    resolvers: [UserResolver, ListingResolver],
     container: Container,
     emitSchemaFile: true,
     authChecker: customAuthChecker,

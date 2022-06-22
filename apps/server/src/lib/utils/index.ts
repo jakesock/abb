@@ -1,4 +1,6 @@
 export { buildSchema } from "./build-schema";
+export { cloudinary, uploadPhoto } from "./cloudinary";
+export type { CloudinaryImage } from "./cloudinary";
 export { createConfirmationCode } from "./create-confirmation-code";
 export { initializeDatabase } from "./initialize-database";
 export { logger } from "./logger";

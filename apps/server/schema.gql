@@ -14,6 +14,19 @@ input ChangeUserPasswordInput {
   password: String!
 }
 
+input CreateListingInput {
+  amenities: [String!]!
+  category: String!
+  description: String!
+  latitude: Float!
+  longitude: Float!
+  maxNumberOfGuests: Int!
+  name: String!
+  numberOfBeds: Int!
+  photo: Upload!
+  pricePerDay: Int!
+}
+
 type FieldError {
   field: String!
   message: String!
@@ -37,6 +50,11 @@ type Listing {
   updatedAt: String!
 }
 
+type ListingFormResponse {
+  errors: [FieldError!]
+  listing: Listing
+}
+
 input LoginUserInput {
   password: String!
   usernameOrEmail: String!
@@ -45,6 +63,7 @@ input LoginUserInput {
 type Mutation {
   changeUserPassword(changeUserPasswordInput: ChangeUserPasswordInput!): AuthFormResponse!
   confirmUserEmail(code: String!): AuthFormResponse!
+  createListing(createListingInput: CreateListingInput!): ListingFormResponse!
   loginUser(loginUserInput: LoginUserInput!): AuthFormResponse!
   logoutUser: Boolean!
   registerUser(registerUserInput: RegisterUserInput!): AuthFormResponse!
@@ -75,6 +94,9 @@ input SendNewConfirmationCodeInput {
   userEmail: String!
   userId: String!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
 type User {
   createdAt: String!

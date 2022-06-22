@@ -1,4 +1,5 @@
 import { commonErrorMessages } from "./common";
+import { listingErrorMessages } from "./listing";
 import { userErrorMessages } from "./user";
 
 export const message = {
@@ -7,5 +8,8 @@ export const message = {
   },
   user: {
     ...userErrorMessages,
+  },
+  listing: {
+    ...listingErrorMessages,
   },
 };
