@@ -145,5 +145,5 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ["**/.*.js", "**/*.json", "node_modules", ".next", "public", "**/generated.ts"],
+  ignorePatterns: ["**/.*.js", "**/*.json", "node_modules", ".next", "public"],
 };
