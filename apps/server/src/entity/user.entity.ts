@@ -25,6 +25,6 @@ export class User extends BaseEntity {
   isConfirmed!: boolean;
 
   @Field(() => [Listing], { nullable: true })
-  @OneToMany(() => Listing, (listing) => listing.owner, { nullable: true })
+  @OneToMany(() => Listing, (listing) => listing.owner, { nullable: true, eager: true })
   listings?: Listing[];
 }
