@@ -74,6 +74,7 @@ type Mutation {
 
 type Query {
   getCurrentUser: User
+  getListing(id: String!): Listing
 }
 
 input RegisterUserInput {

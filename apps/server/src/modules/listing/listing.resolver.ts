@@ -1,4 +1,13 @@
-import { Arg, Ctx, FieldResolver, Mutation, Resolver, Root, UseMiddleware } from "type-graphql";
+import {
+  Arg,
+  Ctx,
+  FieldResolver,
+  Mutation,
+  Query,
+  Resolver,
+  Root,
+  UseMiddleware,
+} from "type-graphql";
 import { Service } from "typedi";
 import { Listing, User } from "../../entity";
 import { IsAuthenticated } from "../../lib/middleware";
@@ -28,6 +37,16 @@ export class ListingResolver {
   @FieldResolver(() => User)
   owner(@Root() listing: Listing, @Ctx() { userLoader }: MyContext): Promise<User> {
     return userLoader.load(listing.ownerId);
+  }
+
+  /**
+   * Get Listing Query.
+   * @param {string} id - The id of the listing to be retrieved.
+   * @return {Promise<Listing | null>} - Promise that resolves to the listing with the given id or null if it doesn't exist.
+   */
+  @Query(() => Listing, { nullable: true })
+  async getListing(@Arg("id") id: string): Promise<Listing | null> {
+    return this.listingService.getOne(id);
   }
 
   /**

@@ -13,6 +13,20 @@ import { CreateListingInput } from "./inputs";
  */
 export class ListingService {
   /**
+   * Finds one listing by id.
+   * @param {string} id - The id of the listing to be retrieved.
+   * @return {Promise<Listing | null>} - Promise that resolves to the listing with the given id.
+   */
+  getOne = async (id: string): Promise<Listing | null> => {
+    const listing = await Listing.findOne({ where: { id } });
+    if (!listing) {
+      return null;
+    }
+
+    return listing;
+  };
+
+  /**
    * Create a new listing.
    *
    * Validates input, uploads image, and creates a new listing.
