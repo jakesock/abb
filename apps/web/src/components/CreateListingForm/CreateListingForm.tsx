@@ -123,8 +123,6 @@ export const CreateListingForm: React.FC = () => {
               setFieldValue={setFieldValue}
             />
           </Box>
-          {/* TODO: ARRAY CHIP INPUT!!! */}
-
           <Box mt={4}>
             <ChipInput
               name="amenities"

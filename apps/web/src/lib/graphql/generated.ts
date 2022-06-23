@@ -124,6 +124,11 @@ export type MutationSendPasswordResetEmailArgs = {
 export type Query = {
   __typename?: "Query";
   getCurrentUser?: Maybe<User>;
+  getListing?: Maybe<Listing>;
+};
+
+export type QueryGetListingArgs = {
+  id: Scalars["String"];
 };
 
 export type RegisterUserInput = {
@@ -193,6 +198,7 @@ export type RegularListingFormResponseFragment = {
     longitude: number;
     createdAt: string;
     updatedAt: string;
+    owner: { __typename?: "User"; username: string };
   } | null;
   errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
 };
@@ -212,6 +218,7 @@ export type RegularListingFragment = {
   longitude: number;
   createdAt: string;
   updatedAt: string;
+  owner: { __typename?: "User"; username: string };
 };
 
 export type RegularUserFragment = {
@@ -289,6 +296,7 @@ export type CreateListingMutation = {
       longitude: number;
       createdAt: string;
       updatedAt: string;
+      owner: { __typename?: "User"; username: string };
     } | null;
     errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
   };
@@ -394,6 +402,31 @@ export type GetCurrentUserQuery = {
   } | null;
 };
 
+export type GetListingQueryVariables = Exact<{
+  id: Scalars["String"];
+}>;
+
+export type GetListingQuery = {
+  __typename?: "Query";
+  getListing?: {
+    __typename?: "Listing";
+    id: string;
+    name: string;
+    category: string;
+    description: string;
+    pictureUrl?: string | null;
+    pricePerDay: number;
+    numberOfBeds: number;
+    maxNumberOfGuests: number;
+    amenities: Array<string>;
+    latitude: number;
+    longitude: number;
+    createdAt: string;
+    updatedAt: string;
+    owner: { __typename?: "User"; username: string };
+  } | null;
+};
+
 export const RegularUserFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -490,6 +523,14 @@ export const RegularListingFragmentDoc = {
           { kind: "Field", name: { kind: "Name", value: "amenities" } },
           { kind: "Field", name: { kind: "Name", value: "latitude" } },
           { kind: "Field", name: { kind: "Name", value: "longitude" } },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "owner" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [{ kind: "Field", name: { kind: "Name", value: "username" } }],
+            },
+          },
           { kind: "Field", name: { kind: "Name", value: "createdAt" } },
           { kind: "Field", name: { kind: "Name", value: "updatedAt" } },
         ],
@@ -943,6 +984,49 @@ export const GetCurrentUserDocument = {
     ...RegularUserFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
+export const GetListingDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetListing" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "getListing" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: { kind: "Variable", name: { kind: "Name", value: "id" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularListing" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularListingFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<GetListingQuery, GetListingQueryVariables>;
 
 export interface PossibleTypesResultData {
   possibleTypes: {

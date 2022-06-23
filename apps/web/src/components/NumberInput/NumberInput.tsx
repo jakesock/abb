@@ -37,7 +37,7 @@ export const NumberInput: React.FC<NumberInputProps> = ({
         type={type}
         id={field.name}
         onChange={(value) => {
-          setFieldValue(field.name, value);
+          setFieldValue(field.name, Number(value));
         }}
       >
         <ChakraNumberInputField />

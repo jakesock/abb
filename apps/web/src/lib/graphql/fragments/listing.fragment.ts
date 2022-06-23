@@ -13,6 +13,9 @@ export const REGULAR_LISTING_FRAGMENT = gql`
     amenities
     latitude
     longitude
+    owner {
+      username
+    }
     createdAt
     updatedAt
   }
