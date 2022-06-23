@@ -31,16 +31,16 @@ export class ListingService {
         throw new NotAuthenticatedError(); // User not logged in
       }
 
-      // Validate form input
-      const errors = await validateFormInput(createListingInput, createListingSchema);
-      if (errors.length > 0) {
-        return { errors };
-      }
-
       // Get user from database
       const user = await User.findOneBy({ id: userId });
       if (!user) {
         throw new NotAuthorizedError(); // Invalid session, user id, or user deleted
+      }
+
+      // Validate form input
+      const errors = await validateFormInput(createListingInput, createListingSchema);
+      if (errors.length > 0) {
+        return { errors };
       }
 
       const photoError: FieldError = {
@@ -50,6 +50,7 @@ export class ListingService {
 
       // Upload image
       const photo = await createListingInput.photo;
+      if (!photo) return { errors: [photoError] }; // Photo is required
       const uploadRes = await uploadPhoto(photo);
       if (!uploadRes) return { errors: [photoError] }; // There was a problem uploading the photo
 

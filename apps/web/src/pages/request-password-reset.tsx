@@ -3,7 +3,7 @@ import { PageLayout } from "../components/PageLayout";
 import { SendPasswordResetEmailForm } from "../components/SendPasswordResetEmailForm";
 
 const RequestPasswordResetPage: NextPage = () => (
-  <PageLayout heading="Reset Password Request">
+  <PageLayout heading="Reset Password Request" formPage>
     <SendPasswordResetEmailForm />
   </PageLayout>
 );

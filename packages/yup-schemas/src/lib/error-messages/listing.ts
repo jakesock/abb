@@ -39,7 +39,7 @@ const guestsErrorMessages = {
 const amenitiesErrorMessages = {
   valueTooShort: `Too short! Minimum of ${LISTING_AMENITY_VALUE_MIN} characters in length`,
   valueTooLong: `Too short! Minimum of ${LISTING_AMENITY_VALUE_MAX} characters in length`,
-  tooLittle: `You must select at least ${LISTING_AMENITY_ARRAY_MIN} amenities`,
+  tooLittle: `You must provie at least ${LISTING_AMENITY_ARRAY_MIN} amenity/amenities`,
 };
 
 export const listingErrorMessages = {

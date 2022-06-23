@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
-import { ChangePasswordForm } from "../../components/ChangePasswordForm";
+import { CreateListingForm } from "../../components/CreateListingForm";
 import { PageLayout } from "../../components/PageLayout";
 import { useProtectedRoute } from "../../lib/hooks";
 
-const ChangePasswordPage: NextPage = () => {
+const CreateListingPage: NextPage = () => {
   const { isLoggedIn, isLoading } = useProtectedRoute("/login");
 
   if (!isLoggedIn || isLoading) {
@@ -11,10 +11,10 @@ const ChangePasswordPage: NextPage = () => {
   }
 
   return (
-    <PageLayout heading="Change Password" formPage>
-      <ChangePasswordForm />
+    <PageLayout heading="Create Listing" formPage>
+      <CreateListingForm />
     </PageLayout>
   );
 };
 
-export default ChangePasswordPage;
+export default CreateListingPage;

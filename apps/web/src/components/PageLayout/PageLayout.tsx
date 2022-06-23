@@ -5,17 +5,18 @@ import { Wrapper } from "../Wrapper";
 interface ILayoutProps {
   heading: string;
   children: React.ReactNode;
+  formPage?: boolean;
 }
 
-export const PageLayout: React.FC<ILayoutProps> = ({ heading, children }) => (
+export const PageLayout: React.FC<ILayoutProps> = ({ heading, children, formPage = false }) => (
   <>
     <Navbar />
-    <Box marginTop={6} paddingX={4}>
-      <Wrapper variant="regular">
+    <Box marginY={6} paddingX={4}>
+      <Wrapper variant="md">
         <Heading size="lg" mb={6}>
           {heading}
         </Heading>
-        <Wrapper variant="small">{children}</Wrapper>
+        <Wrapper variant={formPage ? "xs" : "sm"}>{children}</Wrapper>
       </Wrapper>
     </Box>
   </>

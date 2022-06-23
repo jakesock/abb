@@ -29,6 +29,11 @@ export const Navbar: React.FC = () => {
     body = (
       <Flex align="center">
         <Box mr={4}>Welcome back, {data.getCurrentUser.username}!</Box>
+        <NextLink href="/listings/create" passHref>
+          <Link href="/listings/create" mr={4}>
+            Create Listing
+          </Link>
+        </NextLink>
         <NextLink href="/settings" passHref>
           <Link href="/settings" mr={4}>
             Settings

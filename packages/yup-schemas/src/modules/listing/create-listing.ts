@@ -14,7 +14,7 @@ import {
 import { message } from "../../lib/error-messages";
 
 export const createListingSchema = Yup.object().shape({
-  photo: Yup.object().required(message.common.required),
+  photo: Yup.mixed().nullable(),
   name: Yup.string()
     .min(LISTING_NAME_MIN, message.listing.name.tooShort)
     .max(LISTING_NAME_MAX, message.listing.name.tooLong)
@@ -34,7 +34,7 @@ export const createListingSchema = Yup.object().shape({
   maxNumberOfGuests: Yup.number()
     .min(LISTING_GUESTS_MIN, message.listing.guests.tooLittle)
     .required(message.common.required),
-  amentities: Yup.array()
+  amenities: Yup.array()
     .of(
       Yup.string()
         .min(LISTING_AMENITY_VALUE_MIN, message.listing.amenities.valueTooShort)

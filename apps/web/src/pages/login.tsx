@@ -5,7 +5,7 @@ import { LoginForm } from "../components/LoginForm";
 import { PageLayout } from "../components/PageLayout";
 
 const LoginPage: NextPage = () => (
-  <PageLayout heading="Login">
+  <PageLayout heading="Login" formPage>
     <LoginForm />
     <Box mt={2}>
       <NextLink href="/request-password-reset" passHref>

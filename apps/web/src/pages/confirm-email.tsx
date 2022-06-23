@@ -4,7 +4,7 @@ import { PageLayout } from "../components/PageLayout";
 import { SendNewConfirmationCodeButton } from "../components/SendNewConfirmationCodeButton";
 
 const ConfirmEmailPage: NextPage = () => (
-  <PageLayout heading="Confirm Email">
+  <PageLayout heading="Confirm Email" formPage>
     <ConfirmEmailForm />
     <SendNewConfirmationCodeButton />
   </PageLayout>

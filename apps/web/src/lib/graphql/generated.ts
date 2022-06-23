@@ -11,6 +11,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
 };
 
 export type AuthFormResponse = {
@@ -25,10 +27,48 @@ export type ChangeUserPasswordInput = {
   password: Scalars["String"];
 };
 
+export type CreateListingInput = {
+  amenities: Array<Scalars["String"]>;
+  category: Scalars["String"];
+  description: Scalars["String"];
+  latitude: Scalars["Float"];
+  longitude: Scalars["Float"];
+  maxNumberOfGuests: Scalars["Int"];
+  name: Scalars["String"];
+  numberOfBeds: Scalars["Int"];
+  photo: Scalars["Upload"];
+  pricePerDay: Scalars["Int"];
+};
+
 export type FieldError = {
   __typename?: "FieldError";
   field: Scalars["String"];
   message: Scalars["String"];
+};
+
+export type Listing = {
+  __typename?: "Listing";
+  amenities: Array<Scalars["String"]>;
+  category: Scalars["String"];
+  createdAt: Scalars["String"];
+  description: Scalars["String"];
+  id: Scalars["String"];
+  latitude: Scalars["Float"];
+  longitude: Scalars["Float"];
+  maxNumberOfGuests: Scalars["Int"];
+  name: Scalars["String"];
+  numberOfBeds: Scalars["Int"];
+  owner: User;
+  ownerId: Scalars["String"];
+  pictureUrl?: Maybe<Scalars["String"]>;
+  pricePerDay: Scalars["Int"];
+  updatedAt: Scalars["String"];
+};
+
+export type ListingFormResponse = {
+  __typename?: "ListingFormResponse";
+  errors?: Maybe<Array<FieldError>>;
+  listing?: Maybe<Listing>;
 };
 
 export type LoginUserInput = {
@@ -40,6 +80,7 @@ export type Mutation = {
   __typename?: "Mutation";
   changeUserPassword: AuthFormResponse;
   confirmUserEmail: AuthFormResponse;
+  createListing: ListingFormResponse;
   loginUser: AuthFormResponse;
   logoutUser: Scalars["Boolean"];
   registerUser: AuthFormResponse;
@@ -54,6 +95,10 @@ export type MutationChangeUserPasswordArgs = {
 
 export type MutationConfirmUserEmailArgs = {
   code: Scalars["String"];
+};
+
+export type MutationCreateListingArgs = {
+  createListingInput: CreateListingInput;
 };
 
 export type MutationLoginUserArgs = {
@@ -106,6 +151,7 @@ export type User = {
   email: Scalars["String"];
   id: Scalars["String"];
   isConfirmed: Scalars["Boolean"];
+  listings?: Maybe<Array<Listing>>;
   updatedAt: Scalars["String"];
   username: Scalars["String"];
 };
@@ -128,6 +174,44 @@ export type RegularFieldErrorFragment = {
   __typename?: "FieldError";
   field: string;
   message: string;
+};
+
+export type RegularListingFormResponseFragment = {
+  __typename?: "ListingFormResponse";
+  listing?: {
+    __typename?: "Listing";
+    id: string;
+    name: string;
+    category: string;
+    description: string;
+    pictureUrl?: string | null;
+    pricePerDay: number;
+    numberOfBeds: number;
+    maxNumberOfGuests: number;
+    amenities: Array<string>;
+    latitude: number;
+    longitude: number;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
+};
+
+export type RegularListingFragment = {
+  __typename?: "Listing";
+  id: string;
+  name: string;
+  category: string;
+  description: string;
+  pictureUrl?: string | null;
+  pricePerDay: number;
+  numberOfBeds: number;
+  maxNumberOfGuests: number;
+  amenities: Array<string>;
+  latitude: number;
+  longitude: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type RegularUserFragment = {
@@ -175,6 +259,34 @@ export type ConfirmUserEmailMutation = {
       username: string;
       email: string;
       isConfirmed: boolean;
+      createdAt: string;
+      updatedAt: string;
+    } | null;
+    errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
+  };
+};
+
+export type CreateListingMutationVariables = Exact<{
+  createListingInput: CreateListingInput;
+}>;
+
+export type CreateListingMutation = {
+  __typename?: "Mutation";
+  createListing: {
+    __typename?: "ListingFormResponse";
+    listing?: {
+      __typename?: "Listing";
+      id: string;
+      name: string;
+      category: string;
+      description: string;
+      pictureUrl?: string | null;
+      pricePerDay: number;
+      numberOfBeds: number;
+      maxNumberOfGuests: number;
+      amenities: Array<string>;
+      latitude: number;
+      longitude: number;
       createdAt: string;
       updatedAt: string;
     } | null;
@@ -357,6 +469,71 @@ export const RegularAuthFormResponseFragmentDoc = {
     ...RegularFieldErrorFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<RegularAuthFormResponseFragment, unknown>;
+export const RegularListingFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "RegularListing" },
+      typeCondition: { kind: "NamedType", name: { kind: "Name", value: "Listing" } },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "name" } },
+          { kind: "Field", name: { kind: "Name", value: "category" } },
+          { kind: "Field", name: { kind: "Name", value: "description" } },
+          { kind: "Field", name: { kind: "Name", value: "pictureUrl" } },
+          { kind: "Field", name: { kind: "Name", value: "pricePerDay" } },
+          { kind: "Field", name: { kind: "Name", value: "numberOfBeds" } },
+          { kind: "Field", name: { kind: "Name", value: "maxNumberOfGuests" } },
+          { kind: "Field", name: { kind: "Name", value: "amenities" } },
+          { kind: "Field", name: { kind: "Name", value: "latitude" } },
+          { kind: "Field", name: { kind: "Name", value: "longitude" } },
+          { kind: "Field", name: { kind: "Name", value: "createdAt" } },
+          { kind: "Field", name: { kind: "Name", value: "updatedAt" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<RegularListingFragment, unknown>;
+export const RegularListingFormResponseFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "RegularListingFormResponse" },
+      typeCondition: { kind: "NamedType", name: { kind: "Name", value: "ListingFormResponse" } },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "listing" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularListing" } },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "errors" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularFieldError" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularListingFragmentDoc.definitions,
+    ...RegularFieldErrorFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<RegularListingFormResponseFragment, unknown>;
 export const ChangeUserPasswordDocument = {
   kind: "Document",
   definitions: [
@@ -452,6 +629,52 @@ export const ConfirmUserEmailDocument = {
     ...RegularAuthFormResponseFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<ConfirmUserEmailMutation, ConfirmUserEmailMutationVariables>;
+export const CreateListingDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateListing" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "createListingInput" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "CreateListingInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createListing" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "createListingInput" },
+                value: { kind: "Variable", name: { kind: "Name", value: "createListingInput" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "RegularListingFormResponse" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularListingFormResponseFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<CreateListingMutation, CreateListingMutationVariables>;
 export const LoginUserDocument = {
   kind: "Document",
   definitions: [

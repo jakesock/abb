@@ -5,9 +5,9 @@ import { PageLayout } from "../../components/PageLayout";
 import { useProtectedRoute } from "../../lib/hooks";
 
 const SettingsPage: NextPage = () => {
-  const { isLoading } = useProtectedRoute("/login");
+  const { isLoggedIn, isLoading } = useProtectedRoute("/login");
 
-  if (isLoading) {
+  if (!isLoggedIn || isLoading) {
     return null;
   }
 
