@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { Box, Flex, Heading, Link } from "@chakra-ui/react";
+import { Box, Flex, Heading, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { GetCurrentUserQuery } from "../../lib/graphql/generated";
 import { GET_CURRENT_USER_QUERY } from "../../lib/graphql/queries";
@@ -28,7 +28,6 @@ export const Navbar: React.FC = () => {
   } else {
     body = (
       <Flex align="center">
-        <Box mr={4}>Welcome back, {data.getCurrentUser.username}!</Box>
         <NextLink href="/listings/create" passHref>
           <Link href="/listings/create" mr={4}>
             Create Listing
@@ -47,11 +46,16 @@ export const Navbar: React.FC = () => {
   return (
     <Flex bg="gray.50" boxShadow="md" zIndex={1} position="sticky" top={0} p={4}>
       <Flex flex={1} m="auto" align="center" maxW={1000}>
-        <NextLink href="/" passHref>
-          <Link href="/">
-            <Heading size="md">Vacay!</Heading>
-          </Link>
-        </NextLink>
+        <Flex align="center">
+          <NextLink href="/" passHref>
+            <Link href="/" mr={4}>
+              <Heading size="md">Vacay!</Heading>
+            </Link>
+          </NextLink>
+          {data?.getCurrentUser?.username && (
+            <Text mr={4}>Welcome back, {data.getCurrentUser.username}!</Text>
+          )}
+        </Flex>
         <Box ml="auto">{body}</Box>
       </Flex>
     </Flex>

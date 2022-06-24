@@ -3,7 +3,7 @@ import { Listing } from "../../components/Listing";
 import { PageLayout } from "../../components/PageLayout";
 
 const ListingPage: NextPage = () => (
-  <PageLayout heading="Listing">
+  <PageLayout>
     <Listing />
   </PageLayout>
 );

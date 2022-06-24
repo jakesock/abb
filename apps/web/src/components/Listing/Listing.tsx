@@ -54,11 +54,11 @@ export const Listing: React.FC = () => {
       <ListingHeader
         name={name}
         pictureUrl={pictureUrl}
-        pricePerDay={pricePerDay}
         latitude={latitude}
         longitude={longitude}
       />
       <ListingInfo
+        pricePerDay={pricePerDay}
         category={category}
         description={description}
         numBeds={numberOfBeds}

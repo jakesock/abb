@@ -6,7 +6,6 @@ interface IListingHeaderProps {
   name: string;
   latitude: number;
   longitude: number;
-  pricePerDay: number;
   pictureUrl: string | null | undefined;
 }
 
@@ -14,16 +13,10 @@ export const ListingHeader: React.FC<IListingHeaderProps> = ({
   name,
   latitude,
   longitude,
-  pricePerDay,
   pictureUrl,
 }) => (
   <Box>
-    <ListingHeading
-      name={name}
-      latitude={latitude}
-      longitude={longitude}
-      pricePerDay={pricePerDay}
-    />
+    <ListingHeading name={name} latitude={latitude} longitude={longitude} />
     <ListingImage name={name} pictureUrl={pictureUrl} />
   </Box>
 );
