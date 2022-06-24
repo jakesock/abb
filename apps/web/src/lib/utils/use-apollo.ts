@@ -12,6 +12,7 @@ import fetch from "isomorphic-unfetch";
 import isEqual from "lodash/isEqual";
 import type { AppProps } from "next/app";
 import { useMemo } from "react";
+import { PaginatedListingResponse } from "../graphql/generated";
 
 const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__";
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
@@ -71,7 +72,26 @@ const createApolloClient = (
       typePolicies: {
         Query: {
           fields: {
-            // TODO: Add pagination field for 'getAll...' queries
+            getListings: {
+              keyArgs: [],
+              /**
+               * getListings field policy merge function. Merge the pagination data from the cache with the data from the server.
+               * @param {PaginatedListingResponse | undefined} existing - The existing data in the cache.
+               * @param {PaginatedListingResponse} incoming - The new data that is being fetched.
+               * @return {PaginatedListingResponse} - The merged data.
+               */
+              merge(
+                existing: PaginatedListingResponse | undefined,
+                incoming: PaginatedListingResponse
+              ): PaginatedListingResponse {
+                const merged = {
+                  ...incoming,
+                  listings: [...(existing?.listings || []), ...incoming.listings],
+                };
+
+                return merged;
+              },
+            },
           },
         },
       },

@@ -121,14 +121,26 @@ export type MutationSendPasswordResetEmailArgs = {
   email: Scalars["String"];
 };
 
+export type PaginatedListingResponse = {
+  __typename?: "PaginatedListingResponse";
+  hasMore: Scalars["Boolean"];
+  listings: Array<Listing>;
+};
+
 export type Query = {
   __typename?: "Query";
   getCurrentUser?: Maybe<User>;
   getListing?: Maybe<Listing>;
+  getListings: PaginatedListingResponse;
 };
 
 export type QueryGetListingArgs = {
   id: Scalars["String"];
+};
+
+export type QueryGetListingsArgs = {
+  cursor?: InputMaybe<Scalars["String"]>;
+  limit: Scalars["Int"];
 };
 
 export type RegisterUserInput = {
@@ -425,6 +437,36 @@ export type GetListingQuery = {
     updatedAt: string;
     owner: { __typename?: "User"; username: string };
   } | null;
+};
+
+export type GetListingsQueryVariables = Exact<{
+  limit: Scalars["Int"];
+  cursor?: InputMaybe<Scalars["String"]>;
+}>;
+
+export type GetListingsQuery = {
+  __typename?: "Query";
+  getListings: {
+    __typename?: "PaginatedListingResponse";
+    hasMore: boolean;
+    listings: Array<{
+      __typename?: "Listing";
+      id: string;
+      name: string;
+      category: string;
+      description: string;
+      pictureUrl?: string | null;
+      pricePerDay: number;
+      numberOfBeds: number;
+      maxNumberOfGuests: number;
+      amenities: Array<string>;
+      latitude: number;
+      longitude: number;
+      createdAt: string;
+      updatedAt: string;
+      owner: { __typename?: "User"; username: string };
+    }>;
+  };
 };
 
 export const RegularUserFragmentDoc = {
@@ -1027,6 +1069,69 @@ export const GetListingDocument = {
     ...RegularListingFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<GetListingQuery, GetListingQueryVariables>;
+export const GetListingsDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetListings" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "limit" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "Int" } },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "cursor" } },
+          type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "getListings" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "limit" },
+                value: { kind: "Variable", name: { kind: "Name", value: "limit" } },
+              },
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "cursor" },
+                value: { kind: "Variable", name: { kind: "Name", value: "cursor" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "listings" },
+                  selectionSet: {
+                    kind: "SelectionSet",
+                    selections: [
+                      { kind: "FragmentSpread", name: { kind: "Name", value: "RegularListing" } },
+                    ],
+                  },
+                },
+                { kind: "Field", name: { kind: "Name", value: "hasMore" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularListingFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<GetListingsQuery, GetListingsQueryVariables>;
 
 export interface PossibleTypesResultData {
   possibleTypes: {
