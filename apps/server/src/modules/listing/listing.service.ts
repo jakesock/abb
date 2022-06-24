@@ -2,8 +2,9 @@ import { InternalServerError } from "@abb/errors";
 import { createListingSchema } from "@abb/yup-schemas";
 import { Service } from "typedi";
 import { Listing } from "../../entity";
+import { REAL_MAX_PAGINATED_POSTS_LIMIT } from "../../lib/constants";
 import { logger, uploadPhoto, validateFormInput } from "../../lib/utils";
-import { FieldError, ListingFormResponse, MyContext } from "../../types";
+import { FieldError, ListingFormResponse, MyContext, PaginatedListingResponse } from "../../types";
 import { CreateListingInput } from "./inputs";
 
 @Service()
@@ -20,6 +21,34 @@ export class ListingService {
   getOne = async (id: string): Promise<Listing | null> => {
     const listing = await Listing.findOne({ where: { id } });
     return listing;
+  };
+
+  /**
+   * Gets many listings.
+   *
+   * @param {number} limit - The maximum number of listings to be retrieved.
+   * @param {string | null} cursor - The cursor to be used for pagination.
+   * @return {Promise<PaginatedListingResponse>} - Promise that resolves to the paginated listings.
+   */
+  getMany = async (limit: number, cursor: string | null): Promise<PaginatedListingResponse> => {
+    const realLimit = Math.min(REAL_MAX_PAGINATED_POSTS_LIMIT, limit);
+    const realLimitPlusOne = realLimit + 1;
+    const queryBuilder = Listing.createQueryBuilder("l")
+      .orderBy('l."created_at"', "DESC")
+      .take(realLimitPlusOne);
+
+    if (cursor) {
+      queryBuilder.where('l."created_at" < :cursor', {
+        cursor: new Date(Number.parseInt(cursor, 10)),
+      });
+    }
+
+    const listings = await queryBuilder.getMany();
+
+    return {
+      listings: listings.slice(0, realLimit),
+      hasMore: listings.length === realLimitPlusOne,
+    };
   };
 
   /**

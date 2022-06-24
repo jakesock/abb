@@ -1,4 +1,5 @@
 export { COOKIE_NAME, FRONTEND_URL, SESSION_SECRET } from "./middleware-config";
+export { REAL_MAX_PAGINATED_POSTS_LIMIT } from "./numbers";
 export {
   SERVER_WIDE_RATE_LIMIT_MAX,
   SERVER_WIDE_RATE_LIMIT_MESSAGE,

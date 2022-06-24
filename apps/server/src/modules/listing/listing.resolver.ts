@@ -2,6 +2,7 @@ import {
   Arg,
   Ctx,
   FieldResolver,
+  Int,
   Mutation,
   Query,
   Resolver,
@@ -11,7 +12,7 @@ import {
 import { Service } from "typedi";
 import { Listing, User } from "../../entity";
 import { IsAuthenticated } from "../../lib/middleware";
-import { ListingFormResponse, MyContext } from "../../types";
+import { ListingFormResponse, MyContext, PaginatedListingResponse } from "../../types";
 import { CreateListingInput } from "./inputs";
 import { ListingService } from "./listing.service";
 
@@ -47,6 +48,20 @@ export class ListingResolver {
   @Query(() => Listing, { nullable: true })
   async getListing(@Arg("id") id: string): Promise<Listing | null> {
     return this.listingService.getOne(id);
+  }
+
+  /**
+   * Get Listing Query.
+   * @param {number} limit - The maximum number of listings to be retrieved.
+   * @param {string | null} cursor - The cursor to be used for pagination (createdAt field).
+   * @return {Promise<PaginatedListingResponse>} - Promise that resolves to the paginated listings.
+   */
+  @Query(() => PaginatedListingResponse)
+  async getListings(
+    @Arg("limit", () => Int) limit: number,
+    @Arg("cursor", () => String, { nullable: true }) cursor: string | null
+  ): Promise<PaginatedListingResponse> {
+    return this.listingService.getMany(limit, cursor);
   }
 
   /**

@@ -1,0 +1,1 @@
+export const REAL_MAX_PAGINATED_POSTS_LIMIT = 50;

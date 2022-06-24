@@ -72,9 +72,15 @@ type Mutation {
   sendPasswordResetEmail(email: String!): Boolean!
 }
 
+type PaginatedListingResponse {
+  hasMore: Boolean!
+  listings: [Listing!]!
+}
+
 type Query {
   getCurrentUser: User
   getListing(id: String!): Listing
+  getListings(cursor: String, limit: Int!): PaginatedListingResponse!
 }
 
 input RegisterUserInput {
