@@ -11,12 +11,13 @@ Web frontend for abb.
   - [x] Add validation schema to yup-schemas package and use in form
 - [x] Change user password form/page
 - [x] custom isauth hook for protecting routes
+- [ ] infinite scroll for listings
 
 ### [ ] UI:
 
 - [x] Basic protoyping with a component library
   - [x] Chakra UI
-- [ ] (AFTER TESTS) Create UI Library with storybook
+- [ ] (AFTER TESTS & DEPLOY) Create UI Library with storybook
 
 ### Tests:
 
