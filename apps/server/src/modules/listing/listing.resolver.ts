@@ -78,4 +78,16 @@ export class ListingResolver {
   ): Promise<ListingFormResponse> {
     return this.listingService.create(createListingInput, ctx);
   }
+
+  /**
+   * Delete Listing Mutation.
+   * @param {string} id - The id of the listing to be deleted.
+   * @param {MyContext} ctx - Our GraphQL context.
+   * @return {Promise<boolean>} - Promise that resolves to a boolean indicating whether or not the listing was deleted.
+   */
+  @Mutation(() => Boolean)
+  @UseMiddleware(IsAuthenticated)
+  async deleteListing(@Arg("id") id: string, @Ctx() ctx: MyContext): Promise<boolean> {
+    return this.listingService.delete(id, ctx);
+  }
 }

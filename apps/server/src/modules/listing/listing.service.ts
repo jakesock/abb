@@ -93,4 +93,16 @@ export class ListingService {
       throw new InternalServerError("Error creating listing");
     }
   };
+
+  /**
+   * Delete a listing.
+   *
+   * @param {string} id - The id of the listing to be deleted.
+   * @param {MyContext} ctx - Our GraphQL context.
+   * @return {Promise<boolean>} - Promise that resolves to a boolean indicating whether or not the listing was deleted.
+   */
+  delete = async (id: string, { req }: MyContext): Promise<boolean> => {
+    await Listing.delete({ id, ownerId: req.session.userId });
+    return true;
+  };
 }
