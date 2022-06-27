@@ -1,11 +1,12 @@
-import { InternalServerError } from "@abb/errors";
-import { createListingSchema } from "@abb/yup-schemas";
+import { InternalServerError, NotAuthorizedError } from "@abb/errors";
+import { createListingSchema, updateListingSchema } from "@abb/yup-schemas";
 import { Service } from "typedi";
 import { Listing } from "../../entity";
 import { REAL_MAX_PAGINATED_POSTS_LIMIT } from "../../lib/constants";
 import { logger, uploadPhoto, validateFormInput } from "../../lib/utils";
 import { FieldError, ListingFormResponse, MyContext, PaginatedListingResponse } from "../../types";
-import { CreateListingInput } from "./inputs";
+import { CreateListingInput, UpdateListingInput } from "./inputs";
+import { getRealUpdateListingInput } from "./utils";
 
 @Service()
 /**
@@ -95,7 +96,65 @@ export class ListingService {
   };
 
   /**
-   * Delete a listing.
+   * Updates a listing.
+   *
+   * Validates input, uploads image (if one), and updates a listing.
+   * @param {UpdateListingInput} updateListingInput - Input object for the update listing mutation.
+   * @param {MyContext} ctx - Our GraphQL context.
+   * @return {Promise<ListingFormResponse>} Promise that resolves to a ListingFormResponse.
+   */
+  update = async (
+    updateListingInput: UpdateListingInput,
+    { req }: MyContext
+  ): Promise<ListingFormResponse> => {
+    try {
+      // Validate form input
+      const errors = await validateFormInput(updateListingInput, updateListingSchema);
+      if (errors.length > 0) return { errors };
+
+      // Check Listing exists
+      const listing = await Listing.findOne({ where: { id: updateListingInput.id } });
+      if (!listing) return { errors: [{ field: "id", message: "Listing not found" }] };
+
+      // User not logged in or user is not the owner of the listing
+      if (!req.session.userId || listing.ownerId !== req.session.userId)
+        throw new NotAuthorizedError();
+
+      // Ensure that all fields contain a valid value
+      const realUpdateListingInput = getRealUpdateListingInput(updateListingInput, listing);
+
+      const photoError: FieldError = {
+        field: "newPhoto",
+        message: "Something went wrong uploading your photo. Please try again.",
+      };
+
+      // Upload new image if one was provided
+      if (updateListingInput.newPhoto) {
+        const photo = await updateListingInput.newPhoto;
+        if (!photo) return { errors: [photoError] }; // Photo is required
+        const uploadRes = await uploadPhoto(photo);
+        if (!uploadRes) return { errors: [photoError] }; // There was a problem uploading the photo
+
+        // Add new photo url to listing along with rest of input
+        Object.assign(listing, {
+          ...realUpdateListingInput,
+          pictureUrl: uploadRes.url,
+        });
+      } else {
+        Object.assign(listing, realUpdateListingInput);
+      }
+
+      // Save listing with changes
+      const updatedListing = await listing.save();
+      return { listing: updatedListing };
+    } catch (error) {
+      logger.error("Error Updating Listing: %s", error);
+      throw new InternalServerError("Error updating listing");
+    }
+  };
+
+  /**
+   * Deletes a listing.
    *
    * @param {string} id - The id of the listing to be deleted.
    * @param {MyContext} ctx - Our GraphQL context.

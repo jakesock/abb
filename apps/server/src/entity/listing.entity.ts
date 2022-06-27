@@ -9,6 +9,8 @@ import { User } from "./user.entity";
  * A class that describes the Listing TypeORM entity and GraphQL Object.
  */
 export class Listing extends BaseEntity {
+  [key: string]: unknown;
+
   @Field(() => String)
   @Column({ type: "varchar", length: 100 })
   name!: string;

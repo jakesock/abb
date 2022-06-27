@@ -64,12 +64,14 @@ type Mutation {
   changeUserPassword(changeUserPasswordInput: ChangeUserPasswordInput!): AuthFormResponse!
   confirmUserEmail(code: String!): AuthFormResponse!
   createListing(createListingInput: CreateListingInput!): ListingFormResponse!
+  deleteListing(id: String!): Boolean!
   loginUser(loginUserInput: LoginUserInput!): AuthFormResponse!
   logoutUser: Boolean!
   registerUser(registerUserInput: RegisterUserInput!): AuthFormResponse!
   resetUserPassword(resetUserPasswordInput: ResetUserPasswordInput!): AuthFormResponse!
   sendNewConfirmationCode(sendNewConfirmationCodeInput: SendNewConfirmationCodeInput!): Boolean!
   sendPasswordResetEmail(email: String!): Boolean!
+  updateListing(updateListingInput: UpdateListingInput!): ListingFormResponse!
 }
 
 type PaginatedListingResponse {
@@ -100,6 +102,20 @@ input ResetUserPasswordInput {
 input SendNewConfirmationCodeInput {
   userEmail: String!
   userId: String!
+}
+
+input UpdateListingInput {
+  amenities: [String!]
+  category: String
+  description: String
+  id: String!
+  latitude: Float
+  longitude: Float
+  maxNumberOfGuests: Int
+  name: String
+  newPhoto: Upload
+  numberOfBeds: Int
+  pricePerDay: Int
 }
 
 """The `Upload` scalar type represents a file upload."""

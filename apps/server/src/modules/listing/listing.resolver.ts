@@ -13,7 +13,7 @@ import { Service } from "typedi";
 import { Listing, User } from "../../entity";
 import { IsAuthenticated } from "../../lib/middleware";
 import { ListingFormResponse, MyContext, PaginatedListingResponse } from "../../types";
-import { CreateListingInput } from "./inputs";
+import { CreateListingInput, UpdateListingInput } from "./inputs";
 import { ListingService } from "./listing.service";
 
 @Service()
@@ -77,6 +77,21 @@ export class ListingResolver {
     @Ctx() ctx: MyContext
   ): Promise<ListingFormResponse> {
     return this.listingService.create(createListingInput, ctx);
+  }
+
+  /**
+   * Update Listing Mutation.
+   * @param {UpdateListingInput} updateListingInput - Input object for the update listing mutation.
+   * @param {MyContext} ctx - Our GraphQL context.
+   * @return {Promise<ListingFormResponse>} Promise that resolves to a ListingFormResponse.
+   */
+  @Mutation(() => ListingFormResponse)
+  @UseMiddleware(IsAuthenticated)
+  async updateListing(
+    @Arg("updateListingInput") updateListingInput: UpdateListingInput,
+    @Ctx() ctx: MyContext
+  ): Promise<ListingFormResponse> {
+    return this.listingService.update(updateListingInput, ctx);
   }
 
   /**
