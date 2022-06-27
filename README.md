@@ -4,8 +4,8 @@ A monorepo for an AirBnB clone using Next.js, Express, Apollo Server/Apollo Clie
 
 ## TODO:
 
-- [ ] Add update listings functionality
-- [ ] Add delete listings funcitonality
+- [x] Add update listings functionality
+- [x] Add delete listings funcitonality
 - [ ] Update User entity to include host name, etc.
 - [ ] Update Listings entity to include more info about the listing
 - [ ] Add seed function to drop the db and seed database with dummy data
