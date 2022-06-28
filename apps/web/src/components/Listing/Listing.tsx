@@ -45,6 +45,7 @@ export const Listing: React.FC = () => {
     latitude,
     longitude,
     owner,
+    ownerId,
     createdAt,
     updatedAt,
   } = listing;
@@ -56,6 +57,8 @@ export const Listing: React.FC = () => {
         pictureUrl={pictureUrl}
         latitude={latitude}
         longitude={longitude}
+        listingId={listingId}
+        ownerId={ownerId}
       />
       <ListingInfo
         pricePerDay={pricePerDay}

@@ -11,7 +11,10 @@ export const ListingTimelineDates: React.FC<IListingTimelineDatesProps> = ({
   updatedAt,
 }) => {
   const formattedCreatedAt = format(Number(createdAt), "MMMM do, yyyy");
-  const formattedUpdatedAt = formatDistance(Number(updatedAt), new Date(), { addSuffix: true });
+  const formattedUpdatedAt = formatDistance(Date.now(), Number(updatedAt), {
+    addSuffix: true,
+    includeSeconds: true,
+  });
 
   return (
     <Flex mt={4} justify="space-between">
@@ -23,24 +26,16 @@ export const ListingTimelineDates: React.FC<IListingTimelineDatesProps> = ({
           {formattedCreatedAt}
         </Text>
       </Box>
-      {/* {createdAt !== updatedAt && (
+      {createdAt !== updatedAt && (
         <Box>
-          <Text fontSize="xl" fontWeight="bold">
+          <Text fontSize="sm" fontWeight="bold">
             Listing Last Updated
           </Text>
-          <Text fontSize="lg" fontStyle="italic">
+          <Text fontSize="sm" fontStyle="italic">
             {formattedUpdatedAt}
           </Text>
         </Box>
-      )} */}
-      <Box>
-        <Text fontSize="sm" fontWeight="bold">
-          Listing Last Updated
-        </Text>
-        <Text fontSize="sm" fontStyle="italic">
-          {formattedUpdatedAt}
-        </Text>
-      </Box>
+      )}
     </Flex>
   );
 };

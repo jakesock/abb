@@ -8,6 +8,7 @@ type ImageInputProps = {
   error: string | undefined;
   touched: boolean | undefined;
   setFieldValue: (field: string, value: unknown, shouldValidate?: boolean) => void;
+  initialImageUrl?: string;
 };
 
 export const ImageInput: React.FC<ImageInputProps> = ({
@@ -17,8 +18,9 @@ export const ImageInput: React.FC<ImageInputProps> = ({
   error,
   touched,
   setFieldValue,
+  initialImageUrl = "",
 }) => {
-  const [displayImageUrl, setDisplayImageUrl] = useState<string>("");
+  const [displayImageUrl, setDisplayImageUrl] = useState<string>(initialImageUrl);
 
   return (
     <FormControl isInvalid={!!error && touched}>

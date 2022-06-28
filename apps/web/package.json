@@ -21,6 +21,7 @@
     "@abb/yup-schemas": "workspace:*",
     "@apollo/client": "^3.6.8",
     "@apollo/link-error": "^2.0.0-beta.3",
+    "@chakra-ui/icons": "^2.0.2",
     "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",

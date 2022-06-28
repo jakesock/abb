@@ -7,6 +7,8 @@ interface IListingHeaderProps {
   latitude: number;
   longitude: number;
   pictureUrl: string | null | undefined;
+  listingId: string;
+  ownerId: string;
 }
 
 export const ListingHeader: React.FC<IListingHeaderProps> = ({
@@ -14,9 +16,17 @@ export const ListingHeader: React.FC<IListingHeaderProps> = ({
   latitude,
   longitude,
   pictureUrl,
+  listingId,
+  ownerId,
 }) => (
   <Box>
-    <ListingHeading name={name} latitude={latitude} longitude={longitude} />
+    <ListingHeading
+      name={name}
+      latitude={latitude}
+      longitude={longitude}
+      listingId={listingId}
+      ownerId={ownerId}
+    />
     <ListingImage name={name} pictureUrl={pictureUrl} />
   </Box>
 );

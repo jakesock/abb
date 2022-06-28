@@ -81,12 +81,14 @@ export type Mutation = {
   changeUserPassword: AuthFormResponse;
   confirmUserEmail: AuthFormResponse;
   createListing: ListingFormResponse;
+  deleteListing: Scalars["Boolean"];
   loginUser: AuthFormResponse;
   logoutUser: Scalars["Boolean"];
   registerUser: AuthFormResponse;
   resetUserPassword: AuthFormResponse;
   sendNewConfirmationCode: Scalars["Boolean"];
   sendPasswordResetEmail: Scalars["Boolean"];
+  updateListing: ListingFormResponse;
 };
 
 export type MutationChangeUserPasswordArgs = {
@@ -99,6 +101,10 @@ export type MutationConfirmUserEmailArgs = {
 
 export type MutationCreateListingArgs = {
   createListingInput: CreateListingInput;
+};
+
+export type MutationDeleteListingArgs = {
+  id: Scalars["String"];
 };
 
 export type MutationLoginUserArgs = {
@@ -119,6 +125,10 @@ export type MutationSendNewConfirmationCodeArgs = {
 
 export type MutationSendPasswordResetEmailArgs = {
   email: Scalars["String"];
+};
+
+export type MutationUpdateListingArgs = {
+  updateListingInput: UpdateListingInput;
 };
 
 export type PaginatedListingResponse = {
@@ -162,6 +172,20 @@ export type SendNewConfirmationCodeInput = {
   userId: Scalars["String"];
 };
 
+export type UpdateListingInput = {
+  amenities?: InputMaybe<Array<Scalars["String"]>>;
+  category?: InputMaybe<Scalars["String"]>;
+  description?: InputMaybe<Scalars["String"]>;
+  id: Scalars["String"];
+  latitude?: InputMaybe<Scalars["Float"]>;
+  longitude?: InputMaybe<Scalars["Float"]>;
+  maxNumberOfGuests?: InputMaybe<Scalars["Int"]>;
+  name?: InputMaybe<Scalars["String"]>;
+  newPhoto?: InputMaybe<Scalars["Upload"]>;
+  numberOfBeds?: InputMaybe<Scalars["Int"]>;
+  pricePerDay?: InputMaybe<Scalars["Int"]>;
+};
+
 export type User = {
   __typename?: "User";
   createdAt: Scalars["String"];
@@ -171,20 +195,6 @@ export type User = {
   listings?: Maybe<Array<Listing>>;
   updatedAt: Scalars["String"];
   username: Scalars["String"];
-};
-
-export type RegularAuthFormResponseFragment = {
-  __typename?: "AuthFormResponse";
-  user?: {
-    __typename?: "User";
-    id: string;
-    username: string;
-    email: string;
-    isConfirmed: boolean;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-  errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
 };
 
 export type RegularFieldErrorFragment = {
@@ -208,6 +218,7 @@ export type RegularListingFormResponseFragment = {
     amenities: Array<string>;
     latitude: number;
     longitude: number;
+    ownerId: string;
     createdAt: string;
     updatedAt: string;
     owner: { __typename?: "User"; username: string };
@@ -228,9 +239,24 @@ export type RegularListingFragment = {
   amenities: Array<string>;
   latitude: number;
   longitude: number;
+  ownerId: string;
   createdAt: string;
   updatedAt: string;
   owner: { __typename?: "User"; username: string };
+};
+
+export type RegularAuthFormResponseFragment = {
+  __typename?: "AuthFormResponse";
+  user?: {
+    __typename?: "User";
+    id: string;
+    username: string;
+    email: string;
+    isConfirmed: boolean;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+  errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
 };
 
 export type RegularUserFragment = {
@@ -241,6 +267,72 @@ export type RegularUserFragment = {
   isConfirmed: boolean;
   createdAt: string;
   updatedAt: string;
+};
+
+export type CreateListingMutationVariables = Exact<{
+  createListingInput: CreateListingInput;
+}>;
+
+export type CreateListingMutation = {
+  __typename?: "Mutation";
+  createListing: {
+    __typename?: "ListingFormResponse";
+    listing?: {
+      __typename?: "Listing";
+      id: string;
+      name: string;
+      category: string;
+      description: string;
+      pictureUrl?: string | null;
+      pricePerDay: number;
+      numberOfBeds: number;
+      maxNumberOfGuests: number;
+      amenities: Array<string>;
+      latitude: number;
+      longitude: number;
+      ownerId: string;
+      createdAt: string;
+      updatedAt: string;
+      owner: { __typename?: "User"; username: string };
+    } | null;
+    errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
+  };
+};
+
+export type DeleteListingMutationVariables = Exact<{
+  id: Scalars["String"];
+}>;
+
+export type DeleteListingMutation = { __typename?: "Mutation"; deleteListing: boolean };
+
+export type UpdateListingMutationVariables = Exact<{
+  updateListingInput: UpdateListingInput;
+}>;
+
+export type UpdateListingMutation = {
+  __typename?: "Mutation";
+  updateListing: {
+    __typename?: "ListingFormResponse";
+    listing?: {
+      __typename?: "Listing";
+      id: string;
+      name: string;
+      category: string;
+      description: string;
+      pictureUrl?: string | null;
+      pricePerDay: number;
+      numberOfBeds: number;
+      maxNumberOfGuests: number;
+      amenities: Array<string>;
+      latitude: number;
+      longitude: number;
+      ownerId: string;
+      createdAt: string;
+      updatedAt: string;
+      owner: { __typename?: "User"; username: string };
+    } | null;
+    errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
+  };
 };
 
 export type ChangeUserPasswordMutationVariables = Exact<{
@@ -280,35 +372,6 @@ export type ConfirmUserEmailMutation = {
       isConfirmed: boolean;
       createdAt: string;
       updatedAt: string;
-    } | null;
-    errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
-  };
-};
-
-export type CreateListingMutationVariables = Exact<{
-  createListingInput: CreateListingInput;
-}>;
-
-export type CreateListingMutation = {
-  __typename?: "Mutation";
-  createListing: {
-    __typename?: "ListingFormResponse";
-    listing?: {
-      __typename?: "Listing";
-      id: string;
-      name: string;
-      category: string;
-      description: string;
-      pictureUrl?: string | null;
-      pricePerDay: number;
-      numberOfBeds: number;
-      maxNumberOfGuests: number;
-      amenities: Array<string>;
-      latitude: number;
-      longitude: number;
-      createdAt: string;
-      updatedAt: string;
-      owner: { __typename?: "User"; username: string };
     } | null;
     errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
   };
@@ -399,21 +462,6 @@ export type SendPasswordResetEmailMutation = {
   sendPasswordResetEmail: boolean;
 };
 
-export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetCurrentUserQuery = {
-  __typename?: "Query";
-  getCurrentUser?: {
-    __typename?: "User";
-    id: string;
-    username: string;
-    email: string;
-    isConfirmed: boolean;
-    createdAt: string;
-    updatedAt: string;
-  } | null;
-};
-
 export type GetListingQueryVariables = Exact<{
   id: Scalars["String"];
 }>;
@@ -433,6 +481,7 @@ export type GetListingQuery = {
     amenities: Array<string>;
     latitude: number;
     longitude: number;
+    ownerId: string;
     createdAt: string;
     updatedAt: string;
     owner: { __typename?: "User"; username: string };
@@ -462,6 +511,7 @@ export type GetListingsQuery = {
       amenities: Array<string>;
       latitude: number;
       longitude: number;
+      ownerId: string;
       createdAt: string;
       updatedAt: string;
       owner: { __typename?: "User"; username: string };
@@ -469,81 +519,21 @@ export type GetListingsQuery = {
   };
 };
 
-export const RegularUserFragmentDoc = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "FragmentDefinition",
-      name: { kind: "Name", value: "RegularUser" },
-      typeCondition: { kind: "NamedType", name: { kind: "Name", value: "User" } },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          { kind: "Field", name: { kind: "Name", value: "id" } },
-          { kind: "Field", name: { kind: "Name", value: "username" } },
-          { kind: "Field", name: { kind: "Name", value: "email" } },
-          { kind: "Field", name: { kind: "Name", value: "isConfirmed" } },
-          { kind: "Field", name: { kind: "Name", value: "createdAt" } },
-          { kind: "Field", name: { kind: "Name", value: "updatedAt" } },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<RegularUserFragment, unknown>;
-export const RegularFieldErrorFragmentDoc = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "FragmentDefinition",
-      name: { kind: "Name", value: "RegularFieldError" },
-      typeCondition: { kind: "NamedType", name: { kind: "Name", value: "FieldError" } },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          { kind: "Field", name: { kind: "Name", value: "field" } },
-          { kind: "Field", name: { kind: "Name", value: "message" } },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<RegularFieldErrorFragment, unknown>;
-export const RegularAuthFormResponseFragmentDoc = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "FragmentDefinition",
-      name: { kind: "Name", value: "RegularAuthFormResponse" },
-      typeCondition: { kind: "NamedType", name: { kind: "Name", value: "AuthFormResponse" } },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "user" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularUser" } },
-              ],
-            },
-          },
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "errors" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularFieldError" } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    ...RegularUserFragmentDoc.definitions,
-    ...RegularFieldErrorFragmentDoc.definitions,
-  ],
-} as unknown as DocumentNode<RegularAuthFormResponseFragment, unknown>;
+export type GetCurrentUserQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetCurrentUserQuery = {
+  __typename?: "Query";
+  getCurrentUser?: {
+    __typename?: "User";
+    id: string;
+    username: string;
+    email: string;
+    isConfirmed: boolean;
+    createdAt: string;
+    updatedAt: string;
+  } | null;
+};
+
 export const RegularListingFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -565,6 +555,7 @@ export const RegularListingFragmentDoc = {
           { kind: "Field", name: { kind: "Name", value: "amenities" } },
           { kind: "Field", name: { kind: "Name", value: "latitude" } },
           { kind: "Field", name: { kind: "Name", value: "longitude" } },
+          { kind: "Field", name: { kind: "Name", value: "ownerId" } },
           {
             kind: "Field",
             name: { kind: "Name", value: "owner" },
@@ -580,6 +571,23 @@ export const RegularListingFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<RegularListingFragment, unknown>;
+export const RegularFieldErrorFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "RegularFieldError" },
+      typeCondition: { kind: "NamedType", name: { kind: "Name", value: "FieldError" } },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "field" } },
+          { kind: "Field", name: { kind: "Name", value: "message" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<RegularFieldErrorFragment, unknown>;
 export const RegularListingFormResponseFragmentDoc = {
   kind: "Document",
   definitions: [
@@ -617,6 +625,192 @@ export const RegularListingFormResponseFragmentDoc = {
     ...RegularFieldErrorFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<RegularListingFormResponseFragment, unknown>;
+export const RegularUserFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "RegularUser" },
+      typeCondition: { kind: "NamedType", name: { kind: "Name", value: "User" } },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          { kind: "Field", name: { kind: "Name", value: "id" } },
+          { kind: "Field", name: { kind: "Name", value: "username" } },
+          { kind: "Field", name: { kind: "Name", value: "email" } },
+          { kind: "Field", name: { kind: "Name", value: "isConfirmed" } },
+          { kind: "Field", name: { kind: "Name", value: "createdAt" } },
+          { kind: "Field", name: { kind: "Name", value: "updatedAt" } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<RegularUserFragment, unknown>;
+export const RegularAuthFormResponseFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "RegularAuthFormResponse" },
+      typeCondition: { kind: "NamedType", name: { kind: "Name", value: "AuthFormResponse" } },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "user" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularUser" } },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "errors" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularFieldError" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularUserFragmentDoc.definitions,
+    ...RegularFieldErrorFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<RegularAuthFormResponseFragment, unknown>;
+export const CreateListingDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "CreateListing" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "createListingInput" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "CreateListingInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "createListing" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "createListingInput" },
+                value: { kind: "Variable", name: { kind: "Name", value: "createListingInput" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "RegularListingFormResponse" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularListingFormResponseFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<CreateListingMutation, CreateListingMutationVariables>;
+export const DeleteListingDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "DeleteListing" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "id" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "String" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "deleteListing" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "id" },
+                value: { kind: "Variable", name: { kind: "Name", value: "id" } },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteListingMutation, DeleteListingMutationVariables>;
+export const UpdateListingDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "mutation",
+      name: { kind: "Name", value: "UpdateListing" },
+      variableDefinitions: [
+        {
+          kind: "VariableDefinition",
+          variable: { kind: "Variable", name: { kind: "Name", value: "updateListingInput" } },
+          type: {
+            kind: "NonNullType",
+            type: { kind: "NamedType", name: { kind: "Name", value: "UpdateListingInput" } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "updateListing" },
+            arguments: [
+              {
+                kind: "Argument",
+                name: { kind: "Name", value: "updateListingInput" },
+                value: { kind: "Variable", name: { kind: "Name", value: "updateListingInput" } },
+              },
+            ],
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "RegularListingFormResponse" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularListingFormResponseFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<UpdateListingMutation, UpdateListingMutationVariables>;
 export const ChangeUserPasswordDocument = {
   kind: "Document",
   definitions: [
@@ -712,52 +906,6 @@ export const ConfirmUserEmailDocument = {
     ...RegularAuthFormResponseFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<ConfirmUserEmailMutation, ConfirmUserEmailMutationVariables>;
-export const CreateListingDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "mutation",
-      name: { kind: "Name", value: "CreateListing" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "createListingInput" } },
-          type: {
-            kind: "NonNullType",
-            type: { kind: "NamedType", name: { kind: "Name", value: "CreateListingInput" } },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "createListing" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "createListingInput" },
-                value: { kind: "Variable", name: { kind: "Name", value: "createListingInput" } },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "FragmentSpread",
-                  name: { kind: "Name", value: "RegularListingFormResponse" },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    ...RegularListingFormResponseFragmentDoc.definitions,
-  ],
-} as unknown as DocumentNode<CreateListingMutation, CreateListingMutationVariables>;
 export const LoginUserDocument = {
   kind: "Document",
   definitions: [
@@ -1000,32 +1148,6 @@ export const SendPasswordResetEmailDocument = {
   SendPasswordResetEmailMutation,
   SendPasswordResetEmailMutationVariables
 >;
-export const GetCurrentUserDocument = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "GetCurrentUser" },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getCurrentUser" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularUser" } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    ...RegularUserFragmentDoc.definitions,
-  ],
-} as unknown as DocumentNode<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
 export const GetListingDocument = {
   kind: "Document",
   definitions: [
@@ -1132,6 +1254,32 @@ export const GetListingsDocument = {
     ...RegularListingFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<GetListingsQuery, GetListingsQueryVariables>;
+export const GetCurrentUserDocument = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "OperationDefinition",
+      operation: "query",
+      name: { kind: "Name", value: "GetCurrentUser" },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "getCurrentUser" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "FragmentSpread", name: { kind: "Name", value: "RegularUser" } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...RegularUserFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<GetCurrentUserQuery, GetCurrentUserQueryVariables>;
 
 export interface PossibleTypesResultData {
   possibleTypes: {

@@ -13,6 +13,7 @@ export const REGULAR_LISTING_FRAGMENT = gql`
     amenities
     latitude
     longitude
+    ownerId
     owner {
       username
     }
