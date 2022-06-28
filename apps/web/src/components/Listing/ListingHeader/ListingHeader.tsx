@@ -1,30 +1,21 @@
 import { Box } from "@chakra-ui/react";
+import { RegularListingFragment } from "../../../lib/graphql/generated";
 import { ListingHeading } from "./ListingHeading";
 import { ListingImage } from "./ListingImage";
 
 interface IListingHeaderProps {
-  name: string;
-  latitude: number;
-  longitude: number;
-  pictureUrl: string | null | undefined;
-  listingId: string;
-  ownerId: string;
+  listing: RegularListingFragment;
 }
 
 export const ListingHeader: React.FC<IListingHeaderProps> = ({
-  name,
-  latitude,
-  longitude,
-  pictureUrl,
-  listingId,
-  ownerId,
+  listing: { id, name, latitude, longitude, ownerId, pictureUrl },
 }) => (
   <Box>
     <ListingHeading
       name={name}
       latitude={latitude}
       longitude={longitude}
-      listingId={listingId}
+      listingId={id}
       ownerId={ownerId}
     />
     <ListingImage name={name} pictureUrl={pictureUrl} />

@@ -1,62 +1,47 @@
 import { updateListingSchema } from "@abb/yup-schemas";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { Box, Button, useToast } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import {
-  GetListingQuery,
-  GetListingQueryVariables,
+  RegularListingFragment,
   UpdateListingMutation,
   UpdateListingMutationVariables,
 } from "../../lib/graphql/generated";
 import { UPDATE_LISTING_MUTATION } from "../../lib/graphql/mutations";
-import { GET_LISTING_QUERY } from "../../lib/graphql/queries";
 import { toErrorMap } from "../../lib/utils";
 import { ChipInput } from "../ChipInput/ChipInput";
 import { FormInput } from "../FormInput";
 import { ImageInput } from "../ImageInput";
 import { NumberInput } from "../NumberInput";
 
-export const UpdateListingForm: React.FC = () => {
+interface IUpdateListingFormProps {
+  listing: RegularListingFragment;
+}
+
+export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }) => {
   const router = useRouter();
   const toast = useToast();
-
   const TOAST_ID_GRAPHQL_ERROR = "update-listing-form-graphql-error";
   const TOAST_ID_INVALID_POST_ID = "update-listing-form-invalid-post-id";
-  const { id: listingId } = router.query;
-
   const [updateListing] = useMutation<UpdateListingMutation, UpdateListingMutationVariables>(
     UPDATE_LISTING_MUTATION
   );
-  const { data, loading, error } = useQuery<GetListingQuery, GetListingQueryVariables>(
-    GET_LISTING_QUERY,
-    { variables: { id: listingId as string } }
-  );
-
-  if (loading) {
-    return null;
-  }
-  if (error) {
-    return <p>Error: {error.message}</p>;
-  }
-  if (!data?.getListing) {
-    return <p>Listing not found</p>;
-  }
 
   return (
     <Formik
       initialValues={{
-        id: data.getListing.id,
+        id: listing.id,
         newPhoto: "",
-        name: data.getListing.name || "",
-        category: data.getListing.category || "",
-        description: data.getListing.description || "",
-        pricePerDay: data.getListing.pricePerDay || 49,
-        numberOfBeds: data.getListing.numberOfBeds || 1,
-        maxNumberOfGuests: data.getListing.maxNumberOfGuests || 1,
-        amenities: data.getListing.amenities || [],
-        latitude: data.getListing.latitude || 1.234_567,
-        longitude: data.getListing.longitude || -1.234_567,
+        name: listing.name || "",
+        category: listing.category || "",
+        description: listing.description || "",
+        pricePerDay: listing.pricePerDay || 49,
+        numberOfBeds: listing.numberOfBeds || 1,
+        maxNumberOfGuests: listing.maxNumberOfGuests || 1,
+        amenities: listing.amenities || [],
+        latitude: listing.latitude || 1.234_567,
+        longitude: listing.longitude || -1.234_567,
       }}
       validationSchema={updateListingSchema}
       onSubmit={async (values, { setErrors }) => {
@@ -140,7 +125,7 @@ export const UpdateListingForm: React.FC = () => {
             error={photoError}
             touched={photoTouched}
             setFieldValue={setFieldValue}
-            initialImageUrl={data?.getListing?.pictureUrl || ""}
+            initialImageUrl={listing.pictureUrl || ""}
           />
           <Box mt={4}>
             <FormInput name="name" label="Title" placeholder="Title" />

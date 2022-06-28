@@ -1,46 +1,40 @@
 import { Box, Divider } from "@chakra-ui/react";
+import { RegularListingFragment } from "../../../lib/graphql/generated";
 import { ListingAmenities } from "./ListingAmenities";
 import { ListingCategory } from "./ListingCategory";
 import { ListingDescription } from "./ListingDescription";
 import { ListingTimelineDates } from "./ListingTimelineDates";
 
 interface IListingInfoProps {
-  category: string;
-  host: string;
-  pricePerDay: number;
-  maxGuests: number;
-  numBeds: number;
-  description: string;
-  amenities: string[];
-  listingId: string;
-  createdAt: string;
-  updatedAt: string;
+  listing: RegularListingFragment;
 }
 
 export const ListingInfo: React.FC<IListingInfoProps> = ({
-  category,
-  pricePerDay,
-  host,
-  maxGuests,
-  numBeds,
-  description,
-  amenities,
-  listingId,
-  createdAt,
-  updatedAt,
+  listing: {
+    id,
+    category,
+    owner: { username },
+    pricePerDay,
+    maxNumberOfGuests,
+    numberOfBeds,
+    description,
+    amenities,
+    createdAt,
+    updatedAt,
+  },
 }) => (
   <Box>
     <ListingCategory
-      pricePerDay={pricePerDay}
       category={category}
-      host={host}
-      maxGuests={maxGuests}
-      numBeds={numBeds}
+      host={username}
+      pricePerDay={pricePerDay}
+      maxGuests={maxNumberOfGuests}
+      numBeds={numberOfBeds}
     />
     <Divider mt={4} />
     <ListingDescription description={description} />
     <Divider mt={4} />
-    <ListingAmenities amenities={amenities} listingId={listingId} />
+    <ListingAmenities amenities={amenities} listingId={id} />
     <Divider mt={4} />
     <ListingTimelineDates createdAt={createdAt} updatedAt={updatedAt} />
   </Box>
