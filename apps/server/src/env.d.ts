@@ -15,6 +15,9 @@ declare global {
       EMAIL_PORT: string;
       EMAIL_USER: string;
       EMAIL_PASSWORD: string;
+      CLOUDINARY_CLOUD_NAME: string;
+      CLOUDINARY_API_KEY: string;
+      CLOUDINARY_API_SECRET: string;
       SESSION_SECRET: string;
       FRONTEND_URL: string;
     }
