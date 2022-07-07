@@ -35,7 +35,7 @@ This project uses yarn v2 for dependency and workspace (monorepo) management. Fo
 1. Clone the repository
 
 ```
-git clone https://github.com/jakesock/abb.git
+git clone git@github.com:jakesock/abb.git
 ```
 
 2. Change to the root directory of the repository
@@ -53,7 +53,7 @@ yarn workspaces focus @abb/errors @abb/yup-schemas @abb/config @abb/tsconfig
 4. Build the packages the server and web app will use
 
 ```
-  yarn run errors:build && yarn run yup-schemas:build
+yarn run errors:build && yarn run yup-schemas:build
 ```
 
 5. Install rest of dependencies
@@ -97,13 +97,13 @@ yarn run build:watch
 2. In a second terminal window (still in the apps/server folder), run this command to start the development server:
 
 ```
-  yarn run dev
+yarn run dev
 ```
 
 3. In a third terminal window, change directories in to the apps/web folder and run this command:
 
 ```
-  yarn run dev
+yarn run dev
 ```
 
 ## Making commits
