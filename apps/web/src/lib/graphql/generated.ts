@@ -33,11 +33,11 @@ export type CreateListingInput = {
   description: Scalars["String"];
   latitude: Scalars["Float"];
   longitude: Scalars["Float"];
-  maxNumberOfGuests: Scalars["Int"];
-  name: Scalars["String"];
   numberOfBeds: Scalars["Int"];
+  numberOfGuests: Scalars["Int"];
   photo: Scalars["Upload"];
-  pricePerDay: Scalars["Int"];
+  pricePerNight: Scalars["Int"];
+  title: Scalars["String"];
 };
 
 export type FieldError = {
@@ -52,16 +52,16 @@ export type Listing = {
   category: Scalars["String"];
   createdAt: Scalars["String"];
   description: Scalars["String"];
+  host: User;
+  hostId: Scalars["String"];
   id: Scalars["String"];
   latitude: Scalars["Float"];
   longitude: Scalars["Float"];
-  maxNumberOfGuests: Scalars["Int"];
-  name: Scalars["String"];
   numberOfBeds: Scalars["Int"];
-  owner: User;
-  ownerId: Scalars["String"];
+  numberOfGuests: Scalars["Int"];
   pictureUrl?: Maybe<Scalars["String"]>;
-  pricePerDay: Scalars["Int"];
+  pricePerNight: Scalars["Int"];
+  title: Scalars["String"];
   updatedAt: Scalars["String"];
 };
 
@@ -179,11 +179,11 @@ export type UpdateListingInput = {
   id: Scalars["String"];
   latitude?: InputMaybe<Scalars["Float"]>;
   longitude?: InputMaybe<Scalars["Float"]>;
-  maxNumberOfGuests?: InputMaybe<Scalars["Int"]>;
-  name?: InputMaybe<Scalars["String"]>;
   newPhoto?: InputMaybe<Scalars["Upload"]>;
   numberOfBeds?: InputMaybe<Scalars["Int"]>;
-  pricePerDay?: InputMaybe<Scalars["Int"]>;
+  numberOfGuests?: InputMaybe<Scalars["Int"]>;
+  pricePerNight?: InputMaybe<Scalars["Int"]>;
+  title?: InputMaybe<Scalars["String"]>;
 };
 
 export type User = {
@@ -208,20 +208,20 @@ export type RegularListingFormResponseFragment = {
   listing?: {
     __typename?: "Listing";
     id: string;
-    name: string;
-    category: string;
+    title: string;
     description: string;
-    pictureUrl?: string | null;
-    pricePerDay: number;
+    pricePerNight: number;
+    numberOfGuests: number;
     numberOfBeds: number;
-    maxNumberOfGuests: number;
-    amenities: Array<string>;
+    category: string;
+    pictureUrl?: string | null;
     latitude: number;
     longitude: number;
-    ownerId: string;
+    amenities: Array<string>;
+    hostId: string;
     createdAt: string;
     updatedAt: string;
-    owner: { __typename?: "User"; username: string };
+    host: { __typename?: "User"; username: string };
   } | null;
   errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
 };
@@ -229,20 +229,20 @@ export type RegularListingFormResponseFragment = {
 export type RegularListingFragment = {
   __typename?: "Listing";
   id: string;
-  name: string;
-  category: string;
+  title: string;
   description: string;
-  pictureUrl?: string | null;
-  pricePerDay: number;
+  pricePerNight: number;
+  numberOfGuests: number;
   numberOfBeds: number;
-  maxNumberOfGuests: number;
-  amenities: Array<string>;
+  category: string;
+  pictureUrl?: string | null;
   latitude: number;
   longitude: number;
-  ownerId: string;
+  amenities: Array<string>;
+  hostId: string;
   createdAt: string;
   updatedAt: string;
-  owner: { __typename?: "User"; username: string };
+  host: { __typename?: "User"; username: string };
 };
 
 export type RegularAuthFormResponseFragment = {
@@ -280,20 +280,20 @@ export type CreateListingMutation = {
     listing?: {
       __typename?: "Listing";
       id: string;
-      name: string;
-      category: string;
+      title: string;
       description: string;
-      pictureUrl?: string | null;
-      pricePerDay: number;
+      pricePerNight: number;
+      numberOfGuests: number;
       numberOfBeds: number;
-      maxNumberOfGuests: number;
-      amenities: Array<string>;
+      category: string;
+      pictureUrl?: string | null;
       latitude: number;
       longitude: number;
-      ownerId: string;
+      amenities: Array<string>;
+      hostId: string;
       createdAt: string;
       updatedAt: string;
-      owner: { __typename?: "User"; username: string };
+      host: { __typename?: "User"; username: string };
     } | null;
     errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
   };
@@ -316,20 +316,20 @@ export type UpdateListingMutation = {
     listing?: {
       __typename?: "Listing";
       id: string;
-      name: string;
-      category: string;
+      title: string;
       description: string;
-      pictureUrl?: string | null;
-      pricePerDay: number;
+      pricePerNight: number;
+      numberOfGuests: number;
       numberOfBeds: number;
-      maxNumberOfGuests: number;
-      amenities: Array<string>;
+      category: string;
+      pictureUrl?: string | null;
       latitude: number;
       longitude: number;
-      ownerId: string;
+      amenities: Array<string>;
+      hostId: string;
       createdAt: string;
       updatedAt: string;
-      owner: { __typename?: "User"; username: string };
+      host: { __typename?: "User"; username: string };
     } | null;
     errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
   };
@@ -471,20 +471,20 @@ export type GetListingQuery = {
   getListing?: {
     __typename?: "Listing";
     id: string;
-    name: string;
-    category: string;
+    title: string;
     description: string;
-    pictureUrl?: string | null;
-    pricePerDay: number;
+    pricePerNight: number;
+    numberOfGuests: number;
     numberOfBeds: number;
-    maxNumberOfGuests: number;
-    amenities: Array<string>;
+    category: string;
+    pictureUrl?: string | null;
     latitude: number;
     longitude: number;
-    ownerId: string;
+    amenities: Array<string>;
+    hostId: string;
     createdAt: string;
     updatedAt: string;
-    owner: { __typename?: "User"; username: string };
+    host: { __typename?: "User"; username: string };
   } | null;
 };
 
@@ -501,20 +501,20 @@ export type GetListingsQuery = {
     listings: Array<{
       __typename?: "Listing";
       id: string;
-      name: string;
-      category: string;
+      title: string;
       description: string;
-      pictureUrl?: string | null;
-      pricePerDay: number;
+      pricePerNight: number;
+      numberOfGuests: number;
       numberOfBeds: number;
-      maxNumberOfGuests: number;
-      amenities: Array<string>;
+      category: string;
+      pictureUrl?: string | null;
       latitude: number;
       longitude: number;
-      ownerId: string;
+      amenities: Array<string>;
+      hostId: string;
       createdAt: string;
       updatedAt: string;
-      owner: { __typename?: "User"; username: string };
+      host: { __typename?: "User"; username: string };
     }>;
   };
 };
@@ -545,20 +545,20 @@ export const RegularListingFragmentDoc = {
         kind: "SelectionSet",
         selections: [
           { kind: "Field", name: { kind: "Name", value: "id" } },
-          { kind: "Field", name: { kind: "Name", value: "name" } },
-          { kind: "Field", name: { kind: "Name", value: "category" } },
+          { kind: "Field", name: { kind: "Name", value: "title" } },
           { kind: "Field", name: { kind: "Name", value: "description" } },
-          { kind: "Field", name: { kind: "Name", value: "pictureUrl" } },
-          { kind: "Field", name: { kind: "Name", value: "pricePerDay" } },
+          { kind: "Field", name: { kind: "Name", value: "pricePerNight" } },
+          { kind: "Field", name: { kind: "Name", value: "numberOfGuests" } },
           { kind: "Field", name: { kind: "Name", value: "numberOfBeds" } },
-          { kind: "Field", name: { kind: "Name", value: "maxNumberOfGuests" } },
-          { kind: "Field", name: { kind: "Name", value: "amenities" } },
+          { kind: "Field", name: { kind: "Name", value: "category" } },
+          { kind: "Field", name: { kind: "Name", value: "pictureUrl" } },
           { kind: "Field", name: { kind: "Name", value: "latitude" } },
           { kind: "Field", name: { kind: "Name", value: "longitude" } },
-          { kind: "Field", name: { kind: "Name", value: "ownerId" } },
+          { kind: "Field", name: { kind: "Name", value: "amenities" } },
+          { kind: "Field", name: { kind: "Name", value: "hostId" } },
           {
             kind: "Field",
-            name: { kind: "Name", value: "owner" },
+            name: { kind: "Name", value: "host" },
             selectionSet: {
               kind: "SelectionSet",
               selections: [{ kind: "Field", name: { kind: "Name", value: "username" } }],

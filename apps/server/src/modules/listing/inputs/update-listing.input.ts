@@ -16,22 +16,22 @@ export class UpdateListingInput implements Partial<Listing> {
   newPhoto?: Promise<FileUpload>;
 
   @Field(() => String, { nullable: true })
-  name?: string;
-
-  @Field(() => String, { nullable: true })
-  category?: string;
+  title?: string;
 
   @Field(() => String, { nullable: true })
   description?: string;
 
   @Field(() => Int, { nullable: true })
-  pricePerDay?: number;
+  pricePerNight?: number;
+
+  @Field(() => Int, { nullable: true })
+  numberOfGuests?: number;
 
   @Field(() => Int, { nullable: true })
   numberOfBeds?: number;
 
-  @Field(() => Int, { nullable: true })
-  maxNumberOfGuests?: number;
+  @Field(() => String, { nullable: true })
+  category?: string;
 
   @Field(() => [String], { nullable: true })
   amenities?: string[];

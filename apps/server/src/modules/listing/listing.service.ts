@@ -84,7 +84,7 @@ export class ListingService {
 
       const listing = await Listing.create({
         ...createListingInput,
-        ownerId: req.session.userId, // Add user id to listing
+        hostId: req.session.userId, // Add user id to listing
         pictureUrl: uploadRes.url, // Add photo url to listing
       }).save();
 
@@ -116,8 +116,8 @@ export class ListingService {
       const listing = await Listing.findOne({ where: { id: updateListingInput.id } });
       if (!listing) return { errors: [{ field: "id", message: "Listing not found" }] };
 
-      // User not logged in or user is not the owner of the listing
-      if (!req.session.userId || listing.ownerId !== req.session.userId)
+      // User not logged in or user is not the host of the listing
+      if (!req.session.userId || listing.hostId !== req.session.userId)
         throw new NotAuthorizedError();
 
       // Ensure that all fields contain a valid value
@@ -161,7 +161,7 @@ export class ListingService {
    * @return {Promise<boolean>} - Promise that resolves to a boolean indicating whether or not the listing was deleted.
    */
   delete = async (id: string, { req }: MyContext): Promise<boolean> => {
-    await Listing.delete({ id, ownerId: req.session.userId });
+    await Listing.delete({ id, hostId: req.session.userId });
     return true;
   };
 }

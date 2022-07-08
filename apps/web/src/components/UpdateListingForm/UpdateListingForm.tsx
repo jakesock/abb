@@ -33,15 +33,15 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
       initialValues={{
         id: listing.id,
         newPhoto: "",
-        name: listing.name || "",
-        category: listing.category || "",
+        title: listing.title || "",
         description: listing.description || "",
-        pricePerDay: listing.pricePerDay || 49,
+        pricePerNight: listing.pricePerNight || 75,
+        numberOfGuests: listing.numberOfGuests || 1,
         numberOfBeds: listing.numberOfBeds || 1,
-        maxNumberOfGuests: listing.maxNumberOfGuests || 1,
-        amenities: listing.amenities || [],
+        category: listing.category || "",
         latitude: listing.latitude || 1.234_567,
         longitude: listing.longitude || -1.234_567,
+        amenities: listing.amenities || [],
       }}
       validationSchema={updateListingSchema}
       onSubmit={async (values, { setErrors }) => {
@@ -49,16 +49,16 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
           variables: {
             updateListingInput: {
               id: values.id,
-              name: values.name || undefined,
-              category: values.category || undefined,
+              newPhoto: values.newPhoto || undefined,
+              title: values.title || undefined,
               description: values.description || undefined,
-              pricePerDay: values.pricePerDay || undefined,
+              pricePerNight: values.pricePerNight || undefined,
               numberOfBeds: values.numberOfBeds || undefined,
-              maxNumberOfGuests: values.maxNumberOfGuests || undefined,
-              amenities: values.amenities || undefined,
+              numberOfGuests: values.numberOfGuests || undefined,
+              category: values.category || undefined,
               latitude: values.latitude || undefined,
               longitude: values.longitude || undefined,
-              newPhoto: values.newPhoto || undefined,
+              amenities: values.amenities || undefined,
             },
           },
         });
@@ -128,20 +128,28 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
             initialImageUrl={listing.pictureUrl || ""}
           />
           <Box mt={4}>
-            <FormInput name="name" label="Title" placeholder="Title" />
-          </Box>
-          <Box mt={4}>
-            <FormInput name="category" label="Category" placeholder="Category" />
+            <FormInput name="title" label="Title" placeholder="Title" />
           </Box>
           <Box mt={4}>
             <FormInput name="description" label="Description" placeholder="Description" textarea />
           </Box>
           <Box mt={4}>
             <NumberInput
-              name="pricePerDay"
-              label="Price Per Day"
-              placeholder="Price Per Day"
+              name="pricePerNight"
+              label="Price Per Night"
+              placeholder="Price Per Night"
               min={0}
+              step={5}
+              setFieldValue={setFieldValue}
+            />
+          </Box>
+          <Box mt={4}>
+            <NumberInput
+              name="numberOfGuests"
+              label="Number of Guests"
+              placeholder="Number of Guests"
+              min={1}
+              max={50}
               step={1}
               setFieldValue={setFieldValue}
             />
@@ -152,28 +160,13 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
               label="Number of Beds"
               placeholder="Number of Beds"
               min={1}
+              max={50}
               step={1}
               setFieldValue={setFieldValue}
             />
           </Box>
           <Box mt={4}>
-            <NumberInput
-              name="maxNumberOfGuests"
-              label="Max Number of Guests"
-              placeholder="Max Number of Guests"
-              min={1}
-              step={1}
-              setFieldValue={setFieldValue}
-            />
-          </Box>
-          <Box mt={4}>
-            <ChipInput
-              name="amenities"
-              inputLabel="Amenities"
-              placeholder="Enter Amenities"
-              setFieldValue={setFieldValue}
-              initialLabels={amenities}
-            />
+            <FormInput name="category" label="Category" placeholder="Category" />
           </Box>
           <Box mt={4}>
             <NumberInput
@@ -193,6 +186,15 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
               step={0.000_001}
               pattern="-?[0-9]\d*(\.\d{0,6})?$"
               setFieldValue={setFieldValue}
+            />
+          </Box>
+          <Box mt={4}>
+            <ChipInput
+              name="amenities"
+              inputLabel="Amenities"
+              placeholder="Enter Amenities"
+              setFieldValue={setFieldValue}
+              initialLabels={amenities}
             />
           </Box>
           <Button

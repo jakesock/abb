@@ -13,12 +13,12 @@ import { GET_CURRENT_USER_QUERY } from "../../../lib/graphql/queries";
 
 interface IEditDeleteListingButtonsProps {
   listingId: string;
-  ownerId: string;
+  hostId: string;
 }
 
 export const EditDeleteListingButtons: React.FC<IEditDeleteListingButtonsProps> = ({
   listingId,
-  ownerId,
+  hostId,
 }) => {
   const { data: currentUserData } = useQuery<GetCurrentUserQuery>(GET_CURRENT_USER_QUERY);
   const [deletePost] = useMutation<DeleteListingMutation, DeleteListingMutationVariables>(
@@ -26,7 +26,7 @@ export const EditDeleteListingButtons: React.FC<IEditDeleteListingButtonsProps> 
   );
   const router = useRouter();
 
-  if (currentUserData?.getCurrentUser?.id !== ownerId) {
+  if (currentUserData?.getCurrentUser?.id !== hostId) {
     return null;
   }
 

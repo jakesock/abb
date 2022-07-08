@@ -29,15 +29,15 @@ export class ListingResolver {
   constructor(private readonly listingService: ListingService) {}
 
   /**
-   * Listing: Owner field resolver.
-   * Resolves the user defined in the owner field using the userLoader dataloader.
+   * Listing: Host field resolver.
+   * Resolves the user defined in the host field using the userLoader dataloader.
    * @param {Listing} listing - Listing entity (root object from which to derive the field and its value).
    * @param {MyContext} ctx - Our GraphQL context.
    * @return {Promise<User>} - Promise that resolves to the user entity.
    */
   @FieldResolver(() => User)
-  owner(@Root() listing: Listing, @Ctx() { userLoader }: MyContext): Promise<User> {
-    return userLoader.load(listing.ownerId);
+  host(@Root() listing: Listing, @Ctx() { userLoader }: MyContext): Promise<User> {
+    return userLoader.load(listing.hostId);
   }
 
   /**

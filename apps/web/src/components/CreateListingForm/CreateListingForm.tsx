@@ -23,15 +23,15 @@ export const CreateListingForm: React.FC = () => {
     <Formik
       initialValues={{
         photo: "",
-        name: "",
-        category: "",
+        title: "",
         description: "",
-        pricePerDay: 49,
+        pricePerNight: 75,
+        numberOfGuests: 1,
         numberOfBeds: 1,
-        maxNumberOfGuests: 1,
-        amenities: [],
+        category: "",
         latitude: 1.234_567,
         longitude: -1.234_567,
+        amenities: [],
       }}
       validationSchema={createListingSchema}
       onSubmit={async (values, { setErrors, setFieldError }) => {
@@ -85,20 +85,28 @@ export const CreateListingForm: React.FC = () => {
             setFieldValue={setFieldValue}
           />
           <Box mt={4}>
-            <FormInput name="name" label="Title" placeholder="Title" />
-          </Box>
-          <Box mt={4}>
-            <FormInput name="category" label="Category" placeholder="Category" />
+            <FormInput name="title" label="Title" placeholder="Title" />
           </Box>
           <Box mt={4}>
             <FormInput name="description" label="Description" placeholder="Description" textarea />
           </Box>
           <Box mt={4}>
             <NumberInput
-              name="pricePerDay"
-              label="Price Per Day"
-              placeholder="Price Per Day"
-              min={0}
+              name="pricePerNight"
+              label="Price Per Night"
+              placeholder="Price Per Night"
+              min={10}
+              step={5}
+              setFieldValue={setFieldValue}
+            />
+          </Box>
+          <Box mt={4}>
+            <NumberInput
+              name="numberOfGuests"
+              label="Number of Guests"
+              placeholder="Number of Guests"
+              min={1}
+              max={50}
               step={1}
               setFieldValue={setFieldValue}
             />
@@ -109,27 +117,13 @@ export const CreateListingForm: React.FC = () => {
               label="Number of Beds"
               placeholder="Number of Beds"
               min={1}
+              max={50}
               step={1}
               setFieldValue={setFieldValue}
             />
           </Box>
           <Box mt={4}>
-            <NumberInput
-              name="maxNumberOfGuests"
-              label="Max Number of Guests"
-              placeholder="Max Number of Guests"
-              min={1}
-              step={1}
-              setFieldValue={setFieldValue}
-            />
-          </Box>
-          <Box mt={4}>
-            <ChipInput
-              name="amenities"
-              inputLabel="Amenities"
-              placeholder="Enter Amenities"
-              setFieldValue={setFieldValue}
-            />
+            <FormInput name="category" label="Category" placeholder="Category" />
           </Box>
           <Box mt={4}>
             <NumberInput
@@ -148,6 +142,14 @@ export const CreateListingForm: React.FC = () => {
               placeholder="Longitude"
               step={0.000_001}
               pattern="-?[0-9]\d*(\.\d{0,6})?$"
+              setFieldValue={setFieldValue}
+            />
+          </Box>
+          <Box mt={4}>
+            <ChipInput
+              name="amenities"
+              inputLabel="Amenities"
+              placeholder="Enter Amenities"
               setFieldValue={setFieldValue}
             />
           </Box>

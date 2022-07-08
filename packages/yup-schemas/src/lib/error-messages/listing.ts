@@ -2,22 +2,20 @@ import {
   LISTING_AMENITY_ARRAY_MIN,
   LISTING_AMENITY_VALUE_MAX,
   LISTING_AMENITY_VALUE_MIN,
+  LISTING_BEDS_MAX,
   LISTING_BEDS_MIN,
   LISTING_CATEGORY_MAX,
   LISTING_DESCRIPTION_MAX,
+  LISTING_GUESTS_MAX,
   LISTING_GUESTS_MIN,
-  LISTING_NAME_MAX,
-  LISTING_NAME_MIN,
   LISTING_PRICE_MIN,
+  LISTING_TITLE_MAX,
+  LISTING_TITLE_MIN,
 } from "../constants";
 
-const nameErrorMessages = {
-  tooShort: `Too short! Minimum of ${LISTING_NAME_MIN} characters in length`,
-  tooLong: `Too long! Maximum of ${LISTING_NAME_MAX} characters in length`,
-};
-
-const categoryErrorMessages = {
-  tooLong: `Too long! Maximum of ${LISTING_CATEGORY_MAX} characters in length`,
+const titleErrorMessages = {
+  tooShort: `Too short! Minimum of ${LISTING_TITLE_MIN} characters in length`,
+  tooLong: `Too long! Maximum of ${LISTING_TITLE_MAX} characters in length`,
 };
 
 const descriptionErrorMessages = {
@@ -28,12 +26,18 @@ const priceErrorMessages = {
   tooLittle: `Price per day must be at least ${LISTING_PRICE_MIN}`,
 };
 
-const bedsErrorMessages = {
-  tooLittle: `Number of beds must be at least ${LISTING_BEDS_MIN}`,
+const guestsErrorMessages = {
+  tooLittle: `Number of guests must be at least ${LISTING_GUESTS_MIN}`,
+  tooLarge: `Number of guests must be at most ${LISTING_GUESTS_MAX}`,
 };
 
-const guestsErrorMessages = {
-  tooLittle: `Maximum number of guests must be at least ${LISTING_GUESTS_MIN}`,
+const bedsErrorMessages = {
+  tooLittle: `Number of beds must be at least ${LISTING_BEDS_MIN}`,
+  tooLarge: `Number of beds must be at most ${LISTING_BEDS_MAX}`,
+};
+
+const categoryErrorMessages = {
+  tooLong: `Too long! Maximum of ${LISTING_CATEGORY_MAX} characters in length`,
 };
 
 const amenitiesErrorMessages = {
@@ -43,11 +47,8 @@ const amenitiesErrorMessages = {
 };
 
 export const listingErrorMessages = {
-  name: {
-    ...nameErrorMessages,
-  },
-  category: {
-    ...categoryErrorMessages,
+  title: {
+    ...titleErrorMessages,
   },
   description: {
     ...descriptionErrorMessages,
@@ -55,11 +56,14 @@ export const listingErrorMessages = {
   price: {
     ...priceErrorMessages,
   },
+  guests: {
+    ...guestsErrorMessages,
+  },
   beds: {
     ...bedsErrorMessages,
   },
-  guests: {
-    ...guestsErrorMessages,
+  category: {
+    ...categoryErrorMessages,
   },
   amenities: {
     ...amenitiesErrorMessages,

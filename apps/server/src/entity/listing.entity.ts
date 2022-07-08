@@ -12,50 +12,68 @@ export class Listing extends BaseEntity {
   [key: string]: unknown;
 
   @Field(() => String)
-  @Column({ type: "varchar", length: 100 })
-  name!: string;
-
-  @Field(() => String)
-  @Column({ type: "varchar", length: 100 })
-  category!: string;
+  @Column({ type: "varchar", length: 50 })
+  title!: string;
 
   @Field(() => String)
   @Column({ type: "text" })
   description!: string;
 
-  @Field(() => String, { nullable: true })
-  @Column({ type: "text", name: "picture_url", nullable: true })
-  pictureUrl?: string;
+  @Field(() => Int)
+  @Column({ type: "int", name: "price_per_night" })
+  pricePerNight!: number;
 
   @Field(() => Int)
-  @Column({ type: "int", name: "price_per_day" })
-  pricePerDay!: number;
+  @Column({ type: "int", name: "number_of_guests" })
+  numberOfGuests!: number;
 
   @Field(() => Int)
   @Column({ type: "int", name: "number_of_beds" })
   numberOfBeds!: number;
 
-  @Field(() => Int)
-  @Column({ type: "int", name: "max_number_of_guests" })
-  maxNumberOfGuests!: number;
+  // TODO: Number of bedrooms (int)
+  // TODO: Number of bathrooms (float)
+  // TODO: hasPrivateBathrooms (boolean)
 
-  @Field(() => [String])
-  @Column({ type: "text", array: true })
-  amenities!: string[];
+  // TODO: Change to space kind, enum
+  @Field(() => String)
+  @Column({ type: "varchar", length: 100 })
+  category!: string;
 
+  // TODO: isPetFriendly (boolean)
+  // TODO: hasSecurityCamera (boolean)
+  // TODO: hasWeapons (boolean)
+  // TODO: hasDangerousAnimals (boolean)
+
+  // Host (User) relation
+  @Field(() => String)
+  @Column({ type: "uuid", name: "host_id" })
+  hostId!: string;
+
+  @Field(() => User)
+  @ManyToOne(() => User, (user) => user.listings)
+  host!: User;
+
+  // TODO: ListingType relation
+  // TODO: LsitingSubType relation
+
+  // TODO: Change to address relation
   @Field(() => Float)
   @Column({ type: "double precision" })
   latitude!: number;
 
+  // TODO: Change to address relation
   @Field(() => Float)
   @Column({ type: "double precision" })
   longitude!: number;
 
-  @Field(() => String)
-  @Column({ type: "uuid", name: "owner_id" })
-  ownerId!: string;
+  // TODO: Change to Photo relation
+  @Field(() => String, { nullable: true })
+  @Column({ type: "text", name: "picture_url", nullable: true })
+  pictureUrl?: string;
 
-  @Field(() => User)
-  @ManyToOne(() => User, (user) => user.listings)
-  owner!: User;
+  // TODO: Change to Amenities relation
+  @Field(() => [String])
+  @Column({ type: "text", array: true })
+  amenities!: string[];
 }

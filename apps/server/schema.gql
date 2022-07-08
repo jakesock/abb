@@ -20,11 +20,11 @@ input CreateListingInput {
   description: String!
   latitude: Float!
   longitude: Float!
-  maxNumberOfGuests: Int!
-  name: String!
   numberOfBeds: Int!
+  numberOfGuests: Int!
   photo: Upload!
-  pricePerDay: Int!
+  pricePerNight: Int!
+  title: String!
 }
 
 type FieldError {
@@ -37,16 +37,16 @@ type Listing {
   category: String!
   createdAt: String!
   description: String!
+  host: User!
+  hostId: String!
   id: String!
   latitude: Float!
   longitude: Float!
-  maxNumberOfGuests: Int!
-  name: String!
   numberOfBeds: Int!
-  owner: User!
-  ownerId: String!
+  numberOfGuests: Int!
   pictureUrl: String
-  pricePerDay: Int!
+  pricePerNight: Int!
+  title: String!
   updatedAt: String!
 }
 
@@ -111,11 +111,11 @@ input UpdateListingInput {
   id: String!
   latitude: Float
   longitude: Float
-  maxNumberOfGuests: Int
-  name: String
   newPhoto: Upload
   numberOfBeds: Int
-  pricePerDay: Int
+  numberOfGuests: Int
+  pricePerNight: Int
+  title: String
 }
 
 """The `Upload` scalar type represents a file upload."""

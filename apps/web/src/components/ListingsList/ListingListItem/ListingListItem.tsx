@@ -29,7 +29,7 @@ export const ListingListItem: React.FC<IListingListItemProps> = ({ listing }) =>
               ? listing.pictureUrl
               : "https://www.pngkey.com/png/detail/233-2332677_ega-png.png"
           }
-          alt={`${listing.name} photo`}
+          alt={`${listing.title} photo`}
           borderTopRadius="lg"
           objectFit="cover"
           boxSize="full"
@@ -50,16 +50,16 @@ export const ListingListItem: React.FC<IListingListItemProps> = ({ listing }) =>
             textTransform="uppercase"
             ml="2"
           >
-            {listing.maxNumberOfGuests} guests &bull; {listing.numberOfBeds} beds
+            {listing.numberOfGuests} guests &bull; {listing.numberOfBeds} beds
           </Text>
         </Flex>
 
         <Text mt={1} fontWeight="semibold" as="h4" lineHeight="tight" noOfLines={1}>
-          {listing.name}
+          {listing.title}
         </Text>
 
         <Text>
-          {formatMoney(listing.pricePerDay * 7, "USD").split(".")[0]}
+          {formatMoney(listing.pricePerNight * 7, "USD").split(".")[0]}
           <Text as="span" color="gray.600">
             {" "}
             per week
@@ -67,7 +67,7 @@ export const ListingListItem: React.FC<IListingListItemProps> = ({ listing }) =>
         </Text>
 
         <Text mt={2} color="gray.600" fontSize="sm">
-          Hosted by {listing.owner.username}
+          Hosted by {listing.host.username}
         </Text>
       </Box>
     </Box>

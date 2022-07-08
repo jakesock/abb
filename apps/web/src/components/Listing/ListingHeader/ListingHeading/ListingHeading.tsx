@@ -2,22 +2,22 @@ import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { EditDeleteListingButtons } from "../../EditDeleteListingButtons";
 
 interface IListingHeadingProps {
-  name: string;
+  title: string;
   latitude: number;
   longitude: number;
   listingId: string;
-  ownerId: string;
+  hostId: string;
 }
 
 export const ListingHeading: React.FC<IListingHeadingProps> = ({
-  name,
+  title,
   latitude,
   longitude,
   listingId,
-  ownerId,
+  hostId,
 }) => (
   <Box>
-    <Heading size="lg">{name}</Heading>
+    <Heading size="lg">{title}</Heading>
     <Flex justify="space-between">
       <Box mt={2}>
         <Text display="inline-block">Location:</Text>{" "}
@@ -25,7 +25,7 @@ export const ListingHeading: React.FC<IListingHeadingProps> = ({
           {latitude}, {longitude}
         </Text>
       </Box>
-      <EditDeleteListingButtons listingId={listingId} ownerId={ownerId} />
+      <EditDeleteListingButtons listingId={listingId} hostId={hostId} />
     </Flex>
   </Box>
 );

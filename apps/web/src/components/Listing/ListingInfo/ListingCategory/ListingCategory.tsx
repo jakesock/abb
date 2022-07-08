@@ -4,17 +4,17 @@ import { formatMoney } from "../../../../lib/utils";
 interface IListingCategoryProps {
   category: string;
   host: string;
-  maxGuests: number;
+  numGuests: number;
   numBeds: number;
-  pricePerDay: number;
+  pricePerNight: number;
 }
 
 export const ListingCategory: React.FC<IListingCategoryProps> = ({
   category,
   host,
-  maxGuests,
+  numGuests,
   numBeds,
-  pricePerDay,
+  pricePerNight,
 }) => (
   <Flex mt={4} justify="space-between" align="center">
     <Box>
@@ -22,7 +22,7 @@ export const ListingCategory: React.FC<IListingCategoryProps> = ({
         {category} hosted by {host}
       </Text>
       <Text fontSize="sm" fontWeight="bold" color="gray.500" textTransform="uppercase" mt={1}>
-        {maxGuests} {maxGuests > 1 ? "guests" : "guest"} &bull; {numBeds}{" "}
+        {numGuests} {numGuests > 1 ? "guests" : "guest"} &bull; {numBeds}{" "}
         {numBeds > 1 ? "beds" : "bed"}
       </Text>
     </Box>
@@ -37,7 +37,7 @@ export const ListingCategory: React.FC<IListingCategoryProps> = ({
     >
       <Box>
         <Text fontSize="lg" display="inline-block" fontWeight="bold">
-          {formatMoney(pricePerDay, "USD").split(".")[0]}
+          {formatMoney(pricePerNight, "USD").split(".")[0]}
         </Text>{" "}
         <Text fontSize="lg" display="inline-block">
           per night

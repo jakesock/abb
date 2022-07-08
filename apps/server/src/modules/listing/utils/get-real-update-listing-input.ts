@@ -13,20 +13,20 @@ export function getRealUpdateListingInput(
 ): Omit<UpdateListingInput, "id" | "newPhoto"> {
   // TODO: REFACTOR TO USE FUNCTION TO KEEP THINGS DRY
   return {
-    name: updateListingInput.name ? updateListingInput.name : listing.name,
-    category: updateListingInput.category ? updateListingInput.category : listing.category,
+    title: updateListingInput.title ? updateListingInput.title : listing.title,
     description: updateListingInput.description
       ? updateListingInput.description
       : listing.description,
-    pricePerDay: updateListingInput.pricePerDay
-      ? updateListingInput.pricePerDay
-      : listing.pricePerDay,
+    pricePerNight: updateListingInput.pricePerNight
+      ? updateListingInput.pricePerNight
+      : listing.pricePerNight,
+    numberOfGuests: updateListingInput.numberOfGuests
+      ? updateListingInput.numberOfGuests
+      : listing.numberOfGuests,
     numberOfBeds: updateListingInput.numberOfBeds
       ? updateListingInput.numberOfBeds
       : listing.numberOfBeds,
-    maxNumberOfGuests: updateListingInput.maxNumberOfGuests
-      ? updateListingInput.maxNumberOfGuests
-      : listing.maxNumberOfGuests,
+    category: updateListingInput.category ? updateListingInput.category : listing.category,
     amenities: updateListingInput.amenities ? updateListingInput.amenities : listing.amenities,
     latitude: updateListingInput.latitude ? updateListingInput.latitude : listing.latitude,
     longitude: updateListingInput.longitude ? updateListingInput.longitude : listing.longitude,

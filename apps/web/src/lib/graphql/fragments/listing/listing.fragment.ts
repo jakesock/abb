@@ -3,18 +3,18 @@ import { gql } from "@apollo/client";
 export const REGULAR_LISTING_FRAGMENT = gql`
   fragment RegularListing on Listing {
     id
-    name
-    category
+    title
     description
-    pictureUrl
-    pricePerDay
+    pricePerNight
+    numberOfGuests
     numberOfBeds
-    maxNumberOfGuests
-    amenities
+    category
+    pictureUrl
     latitude
     longitude
-    ownerId
-    owner {
+    amenities
+    hostId
+    host {
       username
     }
     createdAt

@@ -13,22 +13,22 @@ export class CreateListingInput implements Partial<Listing> {
   photo!: Promise<FileUpload>;
 
   @Field()
-  name!: string;
-
-  @Field()
-  category!: string;
+  title!: string;
 
   @Field()
   description!: string;
 
   @Field(() => Int)
-  pricePerDay!: number;
+  pricePerNight!: number;
+
+  @Field(() => Int)
+  numberOfGuests!: number;
 
   @Field(() => Int)
   numberOfBeds!: number;
 
-  @Field(() => Int)
-  maxNumberOfGuests!: number;
+  @Field()
+  category!: string;
 
   @Field(() => [String])
   amenities!: string[];
