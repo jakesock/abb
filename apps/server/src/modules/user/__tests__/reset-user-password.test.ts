@@ -9,6 +9,8 @@ import { invalidExpiredConfirmationCodeErrorMessage } from "../error-messages";
 let TestDataSource: DataSource;
 const testUser = {
   username: "ResetPassword",
+  firstName: "ResetPassword",
+  lastName: "ResetPassword",
   email: "ResetPassword@test.com",
   password: "ResetPassword123",
 };
@@ -20,6 +22,8 @@ beforeAll(async () => {
 
   await User.create({
     username: testUser.username,
+    firstName: testUser.firstName,
+    lastName: testUser.lastName,
     email: testUser.email,
     password: testUser.password,
   }).save();

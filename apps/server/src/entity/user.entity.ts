@@ -20,6 +20,37 @@ export class User extends BaseEntity {
   @Column()
   password!: string;
 
+  @Field(() => String)
+  @Column({ type: "varchar", name: "first_name", length: 255 })
+  firstName!: string;
+
+  @Field(() => String, { nullable: true })
+  @Column({ type: "varchar", name: "middle_name", length: 255, nullable: true })
+  middleName?: string;
+
+  @Field(() => String)
+  @Column({ type: "varchar", name: "last_name", length: 255 })
+  lastName!: string;
+
+  /**
+   * Full name of the user, with middle name if it exists.
+   * @return {string} - Full name of the user.
+   */
+  @Field(() => String)
+  fullName(): string {
+    if (this.middleName) {
+      return `${this.firstName} ${this.middleName} ${this.lastName}`;
+    }
+    return `${this.firstName} ${this.lastName}`;
+  }
+
+  // TODO: about (optional text)
+  // TODO: location (optional string)
+  // TODO: languages (optional array of strings)
+  // TODO: work (optional string)
+  // TODO: ROLES (enum, admin, user, guest)
+  // TODO: avatar (Photo relation)
+
   @Field(() => Boolean)
   @Column({ type: "boolean", name: "is_confirmed", default: false })
   isConfirmed!: boolean;

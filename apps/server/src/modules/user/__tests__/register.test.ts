@@ -9,6 +9,8 @@ import { emailTakenErrorMessage, usernameTakenErrorMessage } from "../error-mess
 let TestDataSource: DataSource;
 const userInfo = {
   username: "RegisterUser",
+  firstName: "RegisterUser",
+  lastName: "RegisterUser",
   email: "RegisterUser@test.com",
   password: "RegisterUser123",
 };
@@ -42,13 +44,15 @@ const registerMutation = `
 
 describe("USER: Register User Mutation", () => {
   it("creates user with valid input", async () => {
-    const { username, email, password } = userInfo;
+    const { username, firstName, lastName, email, password } = userInfo;
 
     const response = await gqlCall<AuthFormResponse>({
       source: registerMutation,
       variableValues: {
         registerUserInput: {
           username,
+          firstName,
+          lastName,
           email,
           confirmEmail: email,
           password,
@@ -92,6 +96,14 @@ describe("USER: Register User Mutation", () => {
         message: errorMessages.common.required,
       },
       {
+        field: "firstName",
+        message: errorMessages.common.required,
+      },
+      {
+        field: "lastName",
+        message: errorMessages.common.required,
+      },
+      {
         field: "email",
         message: errorMessages.common.required,
       },
@@ -123,6 +135,8 @@ describe("USER: Register User Mutation", () => {
         registerUserInput: {
           username: "",
           email: "",
+          firstName: "",
+          lastName: "",
           confirmEmail: "",
           password: "",
           confirmPassword: "",
@@ -137,7 +151,7 @@ describe("USER: Register User Mutation", () => {
   });
 
   it("returns errors if username or email is already taken", async () => {
-    const { username, email, password } = userInfo;
+    const { username, firstName, lastName, email, password } = userInfo;
     const expectedErrors: FieldError[] = [
       {
         field: "username",
@@ -154,6 +168,8 @@ describe("USER: Register User Mutation", () => {
       variableValues: {
         registerUserInput: {
           username,
+          firstName,
+          lastName,
           email,
           confirmEmail: email,
           password,
@@ -168,7 +184,7 @@ describe("USER: Register User Mutation", () => {
   });
 
   it("returns error if username is too short", async () => {
-    const { password } = userInfo;
+    const { firstName, lastName, password } = userInfo;
     const email = "testboy@test.com";
     const invalidUsername = "wo";
     const expectedErrors: FieldError[] = [
@@ -183,6 +199,8 @@ describe("USER: Register User Mutation", () => {
       variableValues: {
         registerUserInput: {
           username: invalidUsername,
+          firstName,
+          lastName,
           email,
           confirmEmail: email,
           password,
@@ -198,7 +216,7 @@ describe("USER: Register User Mutation", () => {
   });
 
   it("returns error if username is too long", async () => {
-    const { password } = userInfo;
+    const { firstName, lastName, password } = userInfo;
     const invalidUsername = "abcdefghijklmnopqrstuvwxyz";
     const email = "testboy@test.com";
     const expectedErrors: FieldError[] = [
@@ -213,6 +231,8 @@ describe("USER: Register User Mutation", () => {
       variableValues: {
         registerUserInput: {
           username: invalidUsername,
+          firstName,
+          lastName,
           email,
           confirmEmail: email,
           password,
@@ -228,7 +248,7 @@ describe("USER: Register User Mutation", () => {
   });
 
   it("returns error if username contains invalid characters", async () => {
-    const { password } = userInfo;
+    const { firstName, lastName, password } = userInfo;
     const invalidUsername = "abc?*&";
     const email = "testboy@test.com";
     const expectedErrors: FieldError[] = [
@@ -243,6 +263,8 @@ describe("USER: Register User Mutation", () => {
       variableValues: {
         registerUserInput: {
           username: invalidUsername,
+          firstName,
+          lastName,
           email,
           confirmEmail: email,
           password,
@@ -258,7 +280,7 @@ describe("USER: Register User Mutation", () => {
   });
 
   it("returns error if email is invalid", async () => {
-    const { password } = userInfo;
+    const { firstName, lastName, password } = userInfo;
     const username = "testboy";
     const invalidEmail = "testboytest.com";
     const expectedErrors: FieldError[] = [
@@ -273,6 +295,8 @@ describe("USER: Register User Mutation", () => {
       variableValues: {
         registerUserInput: {
           username,
+          firstName,
+          lastName,
           email: invalidEmail,
           confirmEmail: invalidEmail,
           password,
@@ -288,7 +312,7 @@ describe("USER: Register User Mutation", () => {
   });
 
   it("returns error if emails do not match", async () => {
-    const { password } = userInfo;
+    const { firstName, lastName, password } = userInfo;
     const username = "testboy";
     const email = "testboy@test.com";
     const invalidConfirmEmail = "testboy23@test.com";
@@ -304,6 +328,10 @@ describe("USER: Register User Mutation", () => {
       variableValues: {
         registerUserInput: {
           username,
+
+          firstName,
+          lastName,
+
           email,
           confirmEmail: invalidConfirmEmail,
           password,
@@ -339,6 +367,8 @@ describe("USER: Register User Mutation", () => {
         registerUserInput: {
           username,
           email,
+          firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
           confirmEmail: email,
           password: invalidPassword,
           confirmPassword: invalidPassword,
@@ -369,7 +399,10 @@ describe("USER: Register User Mutation", () => {
       variableValues: {
         registerUserInput: {
           username,
+          firstName: userInfo.firstName,
+          lastName: userInfo.lastName,
           email,
+
           confirmEmail: email,
           password: invalidPassword,
           confirmPassword: invalidPassword,
@@ -386,7 +419,7 @@ describe("USER: Register User Mutation", () => {
   it("returns error if passwords do not match", async () => {
     const username = "testboy";
     const email = "testboy@test.com";
-    const { password } = userInfo;
+    const { firstName, lastName, password } = userInfo;
     const invalidConfirmPassword = "Test123456789";
     const expectedErrors: FieldError[] = [
       {
@@ -400,6 +433,8 @@ describe("USER: Register User Mutation", () => {
       variableValues: {
         registerUserInput: {
           username,
+          firstName,
+          lastName,
           email,
           confirmEmail: email,
           password,

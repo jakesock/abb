@@ -23,6 +23,9 @@ export const RegisterForm: React.FC = () => {
     <Formik
       initialValues={{
         username: "",
+        firstName: "",
+        middleName: "",
+        lastName: "",
         email: "",
         confirmEmail: "",
         password: "",
@@ -31,7 +34,12 @@ export const RegisterForm: React.FC = () => {
       validationSchema={registerUserSchema}
       onSubmit={async (values, { setErrors }) => {
         const response = await registerUser({
-          variables: { registerUserInput: values },
+          variables: {
+            registerUserInput: {
+              ...values,
+              middleName: values.middleName ? values.middleName : undefined,
+            },
+          },
           update: (cache, { data }) => {
             cache.writeQuery<GetCurrentUserQuery>({
               query: GET_CURRENT_USER_QUERY,
@@ -53,6 +61,20 @@ export const RegisterForm: React.FC = () => {
       {({ isSubmitting }) => (
         <Form>
           <FormInput type="text" name="username" label="Username" placeholder="Username" />
+          <Box mt={4}>
+            <FormInput type="text" name="firstName" label="First Name" placeholder="First Name" />
+          </Box>
+          <Box mt={4}>
+            <FormInput
+              type="text"
+              name="middleName"
+              label="Middle Name (Optional)"
+              placeholder="Middle Name (optional)"
+            />
+          </Box>
+          <Box mt={4}>
+            <FormInput type="text" name="lastName" label="Last Name" placeholder="Last Name" />
+          </Box>
           <Box mt={4}>
             <FormInput type="email" name="email" label="Email" placeholder="Email" />
           </Box>

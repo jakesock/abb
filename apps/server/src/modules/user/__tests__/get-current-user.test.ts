@@ -7,6 +7,8 @@ let TestDataSource: DataSource;
 let userId: string;
 const testUser = {
   username: "CurrentUser",
+  firstName: "CurrentUser",
+  lastName: "CurrentUser",
   email: "CurrentUser@test.com",
   password: "CurrentUser123",
 };
@@ -18,6 +20,8 @@ beforeAll(async () => {
 
   const user = await User.create({
     username: testUser.username,
+    firstName: testUser.firstName,
+    lastName: testUser.lastName,
     email: testUser.email,
     password: testUser.password,
   }).save();

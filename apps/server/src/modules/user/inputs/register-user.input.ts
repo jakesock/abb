@@ -13,6 +13,18 @@ export class RegisterUserInput extends PasswordInput implements Partial<User> {
   @Field()
   username!: string;
 
+  // First name
+  @Field()
+  firstName!: string;
+
+  // Middle name
+  @Field({ nullable: true })
+  middleName?: string;
+
+  // Last name
+  @Field()
+  lastName!: string;
+
   // Email
   @Field()
   email!: string;

@@ -13,7 +13,7 @@ export const ListingInfo: React.FC<IListingInfoProps> = ({
   listing: {
     id,
     category,
-    host: { username },
+    host: { fullName },
     pricePerNight,
     numberOfGuests,
     numberOfBeds,
@@ -26,7 +26,7 @@ export const ListingInfo: React.FC<IListingInfoProps> = ({
   <Box>
     <ListingCategory
       category={category}
-      host={username}
+      host={fullName}
       pricePerNight={pricePerNight}
       numGuests={numberOfGuests}
       numBeds={numberOfBeds}

@@ -17,6 +17,8 @@ let TestDataSource: DataSource;
 const testUser = {
   username: "ChangePasswordUser",
   email: "ChangePasswordUser@test.com",
+  firstName: "ChangePassword",
+  lastName: "ChangePassword",
   password: "ChangePassword123",
   newPassword: "NewPassword123",
 };
@@ -31,6 +33,8 @@ beforeAll(async () => {
   const hashedPassword = await passwordManager.toHash(testUser.password);
   dbUser = await User.create({
     username: testUser.username,
+    firstName: testUser.firstName,
+    lastName: testUser.lastName,
     email: testUser.email,
     password: hashedPassword,
   }).save();

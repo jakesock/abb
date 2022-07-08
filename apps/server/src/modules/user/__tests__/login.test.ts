@@ -9,6 +9,8 @@ import { invalidLoginInputErrorMessage } from "../error-messages";
 let TestDataSource: DataSource;
 const testUser = {
   username: "LoginUser",
+  firstName: "LoginUser",
+  lastName: "LoginUser",
   email: "LoginUser@test.com",
   password: "LoginUser123",
 };
@@ -38,6 +40,8 @@ beforeAll(async () => {
   const hashedPassword = await passwordManager.toHash(testUser.password);
   await User.create({
     username: testUser.username,
+    firstName: testUser.firstName,
+    lastName: testUser.lastName,
     email: testUser.email,
     password: hashedPassword,
   }).save();

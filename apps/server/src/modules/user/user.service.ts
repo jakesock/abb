@@ -56,6 +56,8 @@ export class UserService {
     ctx: MyContext
   ): Promise<AuthFormResponse> => {
     try {
+      const { username, email, password, firstName, middleName, lastName } = registerUserInput;
+
       // Validate input, return errors (if any)
       const errors = await validateRegister(registerUserInput);
       if (errors.length > 0) {
@@ -64,12 +66,15 @@ export class UserService {
 
       // Hash password
       const passwordManager = new PasswordManager();
-      const hashedPassword = await passwordManager.toHash(registerUserInput.password);
+      const hashedPassword = await passwordManager.toHash(password);
 
       // Create new user and save to database
       const newUser = await User.create({
-        username: registerUserInput.username,
-        email: registerUserInput.email,
+        username,
+        firstName,
+        middleName,
+        lastName,
+        email,
         password: hashedPassword,
       }).save();
 

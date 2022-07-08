@@ -6,6 +6,8 @@ import { gqlCall, redisTestClient, testConnection } from "../../../test/utils";
 let TestDataSource: DataSource;
 const testUser = {
   username: "PasswordResetEmail",
+  firstName: "PasswordResetEmail",
+  lastName: "PasswordResetEmail",
   email: "PasswordResetEmail@test.com",
   password: "PasswordResetEmail123",
 };
@@ -17,6 +19,8 @@ beforeAll(async () => {
 
   await User.create({
     username: testUser.username,
+    firstName: testUser.firstName,
+    lastName: testUser.lastName,
     email: testUser.email,
     password: testUser.password,
   }).save();

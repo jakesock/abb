@@ -67,7 +67,7 @@ export const ListingListItem: React.FC<IListingListItemProps> = ({ listing }) =>
         </Text>
 
         <Text mt={2} color="gray.600" fontSize="sm">
-          Hosted by {listing.host.username}
+          Hosted by {listing.host.fullName}
         </Text>
       </Box>
     </Box>

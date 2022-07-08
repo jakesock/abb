@@ -13,6 +13,8 @@ export {
   LISTING_TITLE_MIN,
 } from "./listing";
 export {
+  FIRST_LAST_NAME_MAX,
+  FIRST_LAST_NAME_MIN,
   PASSWORD_MAX,
   PASSWORD_MIN,
   PASSWORD_REGEX,

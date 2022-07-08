@@ -89,6 +89,9 @@ input RegisterUserInput {
   confirmEmail: String!
   confirmPassword: String!
   email: String!
+  firstName: String!
+  lastName: String!
+  middleName: String
   password: String!
   username: String!
 }
@@ -124,9 +127,13 @@ scalar Upload
 type User {
   createdAt: String!
   email: String!
+  firstName: String!
+  fullName: String!
   id: String!
   isConfirmed: Boolean!
+  lastName: String!
   listings: [Listing!]
+  middleName: String
   updatedAt: String!
   username: String!
 }

@@ -1,5 +1,6 @@
 import * as Yup from "yup";
 import {
+  FIRST_LAST_NAME_MAX,
   USERNAME_MAX,
   USERNAME_MIN,
   USERNAME_NOTONEOF_SET,
@@ -16,6 +17,13 @@ export const registerUserSchema = Yup.object().shape({
     .max(USERNAME_MAX, message.user.username.tooLong)
     .notOneOf(USERNAME_NOTONEOF_SET, "Nice try")
     .matches(USERNAME_REGEX, message.user.username.invalidRegEx)
+    .required(message.common.required),
+  firstName: Yup.string()
+    .max(FIRST_LAST_NAME_MAX, message.user.name.tooLong)
+    .required(message.common.required),
+  middleName: Yup.string().max(FIRST_LAST_NAME_MAX, message.user.name.tooLong).optional(),
+  lastName: Yup.string()
+    .max(FIRST_LAST_NAME_MAX, message.user.name.tooLong)
     .required(message.common.required),
   email: Yup.string().email(message.user.email.invalid).required(message.common.required),
   confirmEmail: Yup.string()

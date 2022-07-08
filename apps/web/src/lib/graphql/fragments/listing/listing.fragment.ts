@@ -15,7 +15,7 @@ export const REGULAR_LISTING_FRAGMENT = gql`
     amenities
     hostId
     host {
-      username
+      fullName
     }
     createdAt
     updatedAt

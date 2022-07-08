@@ -157,6 +157,9 @@ export type RegisterUserInput = {
   confirmEmail: Scalars["String"];
   confirmPassword: Scalars["String"];
   email: Scalars["String"];
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+  middleName?: InputMaybe<Scalars["String"]>;
   password: Scalars["String"];
   username: Scalars["String"];
 };
@@ -190,9 +193,13 @@ export type User = {
   __typename?: "User";
   createdAt: Scalars["String"];
   email: Scalars["String"];
+  firstName: Scalars["String"];
+  fullName: Scalars["String"];
   id: Scalars["String"];
   isConfirmed: Scalars["Boolean"];
+  lastName: Scalars["String"];
   listings?: Maybe<Array<Listing>>;
+  middleName?: Maybe<Scalars["String"]>;
   updatedAt: Scalars["String"];
   username: Scalars["String"];
 };
@@ -221,7 +228,7 @@ export type RegularListingFormResponseFragment = {
     hostId: string;
     createdAt: string;
     updatedAt: string;
-    host: { __typename?: "User"; username: string };
+    host: { __typename?: "User"; fullName: string };
   } | null;
   errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
 };
@@ -242,7 +249,7 @@ export type RegularListingFragment = {
   hostId: string;
   createdAt: string;
   updatedAt: string;
-  host: { __typename?: "User"; username: string };
+  host: { __typename?: "User"; fullName: string };
 };
 
 export type RegularAuthFormResponseFragment = {
@@ -251,6 +258,7 @@ export type RegularAuthFormResponseFragment = {
     __typename?: "User";
     id: string;
     username: string;
+    fullName: string;
     email: string;
     isConfirmed: boolean;
     createdAt: string;
@@ -263,6 +271,7 @@ export type RegularUserFragment = {
   __typename?: "User";
   id: string;
   username: string;
+  fullName: string;
   email: string;
   isConfirmed: boolean;
   createdAt: string;
@@ -293,7 +302,7 @@ export type CreateListingMutation = {
       hostId: string;
       createdAt: string;
       updatedAt: string;
-      host: { __typename?: "User"; username: string };
+      host: { __typename?: "User"; fullName: string };
     } | null;
     errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
   };
@@ -329,7 +338,7 @@ export type UpdateListingMutation = {
       hostId: string;
       createdAt: string;
       updatedAt: string;
-      host: { __typename?: "User"; username: string };
+      host: { __typename?: "User"; fullName: string };
     } | null;
     errors?: Array<{ __typename?: "FieldError"; field: string; message: string }> | null;
   };
@@ -347,6 +356,7 @@ export type ChangeUserPasswordMutation = {
       __typename?: "User";
       id: string;
       username: string;
+      fullName: string;
       email: string;
       isConfirmed: boolean;
       createdAt: string;
@@ -368,6 +378,7 @@ export type ConfirmUserEmailMutation = {
       __typename?: "User";
       id: string;
       username: string;
+      fullName: string;
       email: string;
       isConfirmed: boolean;
       createdAt: string;
@@ -389,6 +400,7 @@ export type LoginUserMutation = {
       __typename?: "User";
       id: string;
       username: string;
+      fullName: string;
       email: string;
       isConfirmed: boolean;
       createdAt: string;
@@ -414,6 +426,7 @@ export type RegisterUserMutation = {
       __typename?: "User";
       id: string;
       username: string;
+      fullName: string;
       email: string;
       isConfirmed: boolean;
       createdAt: string;
@@ -435,6 +448,7 @@ export type ResetUserPasswordMutation = {
       __typename?: "User";
       id: string;
       username: string;
+      fullName: string;
       email: string;
       isConfirmed: boolean;
       createdAt: string;
@@ -484,7 +498,7 @@ export type GetListingQuery = {
     hostId: string;
     createdAt: string;
     updatedAt: string;
-    host: { __typename?: "User"; username: string };
+    host: { __typename?: "User"; fullName: string };
   } | null;
 };
 
@@ -514,7 +528,7 @@ export type GetListingsQuery = {
       hostId: string;
       createdAt: string;
       updatedAt: string;
-      host: { __typename?: "User"; username: string };
+      host: { __typename?: "User"; fullName: string };
     }>;
   };
 };
@@ -527,6 +541,7 @@ export type GetCurrentUserQuery = {
     __typename?: "User";
     id: string;
     username: string;
+    fullName: string;
     email: string;
     isConfirmed: boolean;
     createdAt: string;
@@ -561,7 +576,7 @@ export const RegularListingFragmentDoc = {
             name: { kind: "Name", value: "host" },
             selectionSet: {
               kind: "SelectionSet",
-              selections: [{ kind: "Field", name: { kind: "Name", value: "username" } }],
+              selections: [{ kind: "Field", name: { kind: "Name", value: "fullName" } }],
             },
           },
           { kind: "Field", name: { kind: "Name", value: "createdAt" } },
@@ -637,6 +652,7 @@ export const RegularUserFragmentDoc = {
         selections: [
           { kind: "Field", name: { kind: "Name", value: "id" } },
           { kind: "Field", name: { kind: "Name", value: "username" } },
+          { kind: "Field", name: { kind: "Name", value: "fullName" } },
           { kind: "Field", name: { kind: "Name", value: "email" } },
           { kind: "Field", name: { kind: "Name", value: "isConfirmed" } },
           { kind: "Field", name: { kind: "Name", value: "createdAt" } },
