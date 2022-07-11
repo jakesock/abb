@@ -30,6 +30,18 @@ export class CreateListingInput implements Partial<Listing> {
   @Field()
   category!: string;
 
+  @Field(() => Boolean)
+  isPetFriendly!: boolean;
+
+  @Field(() => Boolean)
+  hasSecurityCamera?: boolean;
+
+  @Field(() => Boolean)
+  hasWeapons!: boolean;
+
+  @Field(() => Boolean)
+  hasDangerousAnimals!: boolean;
+
   @Field(() => [String])
   amenities!: string[];
 

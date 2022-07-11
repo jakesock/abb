@@ -38,6 +38,10 @@ export const createListingSchema = Yup.object().shape({
   category: Yup.string()
     .max(LISTING_CATEGORY_MAX, message.listing.category.tooLong)
     .required(message.common.required),
+  isPetFriendly: Yup.boolean().required(message.common.required),
+  hasSecurityCamera: Yup.boolean().required(message.common.required),
+  hasWeapons: Yup.boolean().required(message.common.required),
+  hasDangerousAnimals: Yup.boolean().required(message.common.required),
   latitude: Yup.number().required(message.common.required),
   longitude: Yup.number().required(message.common.required),
   amenities: Yup.array()

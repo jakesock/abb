@@ -31,6 +31,10 @@ export type CreateListingInput = {
   amenities: Array<Scalars["String"]>;
   category: Scalars["String"];
   description: Scalars["String"];
+  hasDangerousAnimals: Scalars["Boolean"];
+  hasSecurityCamera: Scalars["Boolean"];
+  hasWeapons: Scalars["Boolean"];
+  isPetFriendly: Scalars["Boolean"];
   latitude: Scalars["Float"];
   longitude: Scalars["Float"];
   numberOfBeds: Scalars["Int"];
@@ -52,9 +56,13 @@ export type Listing = {
   category: Scalars["String"];
   createdAt: Scalars["String"];
   description: Scalars["String"];
+  hasDangerousAnimals: Scalars["Boolean"];
+  hasSecurityCamera: Scalars["Boolean"];
+  hasWeapons: Scalars["Boolean"];
   host: User;
   hostId: Scalars["String"];
   id: Scalars["String"];
+  isPetFriendly: Scalars["Boolean"];
   latitude: Scalars["Float"];
   longitude: Scalars["Float"];
   numberOfBeds: Scalars["Int"];
@@ -179,7 +187,11 @@ export type UpdateListingInput = {
   amenities?: InputMaybe<Array<Scalars["String"]>>;
   category?: InputMaybe<Scalars["String"]>;
   description?: InputMaybe<Scalars["String"]>;
+  hasDangerousAnimals?: InputMaybe<Scalars["Boolean"]>;
+  hasSecurityCamera?: InputMaybe<Scalars["Boolean"]>;
+  hasWeapons?: InputMaybe<Scalars["Boolean"]>;
   id: Scalars["String"];
+  isPetFriendly?: InputMaybe<Scalars["Boolean"]>;
   latitude?: InputMaybe<Scalars["Float"]>;
   longitude?: InputMaybe<Scalars["Float"]>;
   newPhoto?: InputMaybe<Scalars["Upload"]>;
@@ -221,6 +233,10 @@ export type RegularListingFormResponseFragment = {
     numberOfGuests: number;
     numberOfBeds: number;
     category: string;
+    isPetFriendly: boolean;
+    hasSecurityCamera: boolean;
+    hasWeapons: boolean;
+    hasDangerousAnimals: boolean;
     pictureUrl?: string | null;
     latitude: number;
     longitude: number;
@@ -242,6 +258,10 @@ export type RegularListingFragment = {
   numberOfGuests: number;
   numberOfBeds: number;
   category: string;
+  isPetFriendly: boolean;
+  hasSecurityCamera: boolean;
+  hasWeapons: boolean;
+  hasDangerousAnimals: boolean;
   pictureUrl?: string | null;
   latitude: number;
   longitude: number;
@@ -295,6 +315,10 @@ export type CreateListingMutation = {
       numberOfGuests: number;
       numberOfBeds: number;
       category: string;
+      isPetFriendly: boolean;
+      hasSecurityCamera: boolean;
+      hasWeapons: boolean;
+      hasDangerousAnimals: boolean;
       pictureUrl?: string | null;
       latitude: number;
       longitude: number;
@@ -331,6 +355,10 @@ export type UpdateListingMutation = {
       numberOfGuests: number;
       numberOfBeds: number;
       category: string;
+      isPetFriendly: boolean;
+      hasSecurityCamera: boolean;
+      hasWeapons: boolean;
+      hasDangerousAnimals: boolean;
       pictureUrl?: string | null;
       latitude: number;
       longitude: number;
@@ -491,6 +519,10 @@ export type GetListingQuery = {
     numberOfGuests: number;
     numberOfBeds: number;
     category: string;
+    isPetFriendly: boolean;
+    hasSecurityCamera: boolean;
+    hasWeapons: boolean;
+    hasDangerousAnimals: boolean;
     pictureUrl?: string | null;
     latitude: number;
     longitude: number;
@@ -521,6 +553,10 @@ export type GetListingsQuery = {
       numberOfGuests: number;
       numberOfBeds: number;
       category: string;
+      isPetFriendly: boolean;
+      hasSecurityCamera: boolean;
+      hasWeapons: boolean;
+      hasDangerousAnimals: boolean;
       pictureUrl?: string | null;
       latitude: number;
       longitude: number;
@@ -566,6 +602,10 @@ export const RegularListingFragmentDoc = {
           { kind: "Field", name: { kind: "Name", value: "numberOfGuests" } },
           { kind: "Field", name: { kind: "Name", value: "numberOfBeds" } },
           { kind: "Field", name: { kind: "Name", value: "category" } },
+          { kind: "Field", name: { kind: "Name", value: "isPetFriendly" } },
+          { kind: "Field", name: { kind: "Name", value: "hasSecurityCamera" } },
+          { kind: "Field", name: { kind: "Name", value: "hasWeapons" } },
+          { kind: "Field", name: { kind: "Name", value: "hasDangerousAnimals" } },
           { kind: "Field", name: { kind: "Name", value: "pictureUrl" } },
           { kind: "Field", name: { kind: "Name", value: "latitude" } },
           { kind: "Field", name: { kind: "Name", value: "longitude" } },

@@ -40,10 +40,21 @@ export class Listing extends BaseEntity {
   @Column({ type: "varchar", length: 100 })
   category!: string;
 
-  // TODO: isPetFriendly (boolean)
-  // TODO: hasSecurityCamera (boolean)
-  // TODO: hasWeapons (boolean)
-  // TODO: hasDangerousAnimals (boolean)
+  @Field(() => Boolean)
+  @Column({ type: "boolean", name: "is_pet_friendly" })
+  isPetFriendly!: boolean;
+
+  @Field(() => Boolean)
+  @Column({ type: "boolean", name: "has_security_camera" })
+  hasSecurityCamera!: boolean;
+
+  @Field(() => Boolean)
+  @Column({ type: "boolean", name: "has_weapons" })
+  hasWeapons!: boolean;
+
+  @Field(() => Boolean)
+  @Column({ type: "boolean", name: "has_dangerous_animals" })
+  hasDangerousAnimals!: boolean;
 
   // Host (User) relation
   @Field(() => String)

@@ -37,6 +37,10 @@ export const updateListingSchema = Yup.object().shape({
     .max(LISTING_BEDS_MAX, message.listing.beds.tooLarge)
     .optional(),
   category: Yup.string().max(LISTING_CATEGORY_MAX, message.listing.category.tooLong).optional(),
+  isPetFriendly: Yup.boolean().optional(),
+  hasSecurityCamera: Yup.boolean().optional(),
+  hasWeapons: Yup.boolean().optional(),
+  hasDangerousAnimals: Yup.boolean().optional(),
   latitude: Yup.number().optional(),
   longitude: Yup.number().optional(),
   amenities: Yup.array()

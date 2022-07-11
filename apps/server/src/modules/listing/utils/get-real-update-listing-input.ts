@@ -12,7 +12,7 @@ export function getRealUpdateListingInput(
   listing: Listing
 ): Omit<UpdateListingInput, "id" | "newPhoto"> {
   // TODO: REFACTOR TO USE FUNCTION TO KEEP THINGS DRY
-  return {
+  const realUpdateListingInput = {
     title: updateListingInput.title ? updateListingInput.title : listing.title,
     description: updateListingInput.description
       ? updateListingInput.description
@@ -27,8 +27,14 @@ export function getRealUpdateListingInput(
       ? updateListingInput.numberOfBeds
       : listing.numberOfBeds,
     category: updateListingInput.category ? updateListingInput.category : listing.category,
+    isPetFriendly: !!updateListingInput.isPetFriendly,
+    hasSecurityCamera: !!updateListingInput.hasSecurityCamera,
+    hasWeapons: !!updateListingInput.hasWeapons,
+    hasDangerousAnimals: !!updateListingInput.hasDangerousAnimals,
     amenities: updateListingInput.amenities ? updateListingInput.amenities : listing.amenities,
     latitude: updateListingInput.latitude ? updateListingInput.latitude : listing.latitude,
     longitude: updateListingInput.longitude ? updateListingInput.longitude : listing.longitude,
   };
+
+  return realUpdateListingInput;
 }

@@ -9,6 +9,10 @@ export const REGULAR_LISTING_FRAGMENT = gql`
     numberOfGuests
     numberOfBeds
     category
+    isPetFriendly
+    hasSecurityCamera
+    hasWeapons
+    hasDangerousAnimals
     pictureUrl
     latitude
     longitude

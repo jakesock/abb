@@ -33,6 +33,18 @@ export class UpdateListingInput implements Partial<Listing> {
   @Field(() => String, { nullable: true })
   category?: string;
 
+  @Field(() => Boolean, { nullable: true })
+  isPetFriendly?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  hasSecurityCamera?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  hasWeapons?: boolean;
+
+  @Field(() => Boolean, { nullable: true })
+  hasDangerousAnimals?: boolean;
+
   @Field(() => [String], { nullable: true })
   amenities?: string[];
 

@@ -10,6 +10,7 @@ import {
 } from "../../lib/graphql/generated";
 import { UPDATE_LISTING_MUTATION } from "../../lib/graphql/mutations";
 import { toErrorMap } from "../../lib/utils";
+import { CheckboxInput } from "../CheckboxInput";
 import { ChipInput } from "../ChipInput/ChipInput";
 import { FormInput } from "../FormInput";
 import { ImageInput } from "../ImageInput";
@@ -39,6 +40,10 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
         numberOfGuests: listing.numberOfGuests || 1,
         numberOfBeds: listing.numberOfBeds || 1,
         category: listing.category || "",
+        isPetFriendly: !!listing.isPetFriendly,
+        hasSecurityCamera: !!listing.hasSecurityCamera,
+        hasWeapons: !!listing.hasWeapons,
+        hasDangerousAnimals: !!listing.hasDangerousAnimals,
         latitude: listing.latitude || 1.234_567,
         longitude: listing.longitude || -1.234_567,
         amenities: listing.amenities || [],
@@ -56,6 +61,10 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
               numberOfBeds: values.numberOfBeds || undefined,
               numberOfGuests: values.numberOfGuests || undefined,
               category: values.category || undefined,
+              isPetFriendly: !!values.isPetFriendly,
+              hasSecurityCamera: !!values.hasSecurityCamera,
+              hasWeapons: !!values.hasWeapons,
+              hasDangerousAnimals: !!values.hasDangerousAnimals,
               latitude: values.latitude || undefined,
               longitude: values.longitude || undefined,
               amenities: values.amenities || undefined,
@@ -167,6 +176,18 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
           </Box>
           <Box mt={4}>
             <FormInput name="category" label="Category" placeholder="Category" />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="isPetFriendly" label="Property is pet friendly" />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="hasSecurityCamera" label="Property has security camera(s)" />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="hasWeapons" label="Property has weapons" />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="hasDangerousAnimals" label="Property has dangerous animals" />
           </Box>
           <Box mt={4}>
             <NumberInput

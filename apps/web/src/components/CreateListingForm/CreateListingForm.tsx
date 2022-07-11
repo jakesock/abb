@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { CreateListingMutation, CreateListingMutationVariables } from "../../lib/graphql/generated";
 import { CREATE_LISTING_MUTATION } from "../../lib/graphql/mutations";
 import { toErrorMap } from "../../lib/utils";
+import { CheckboxInput } from "../CheckboxInput";
 import { ChipInput } from "../ChipInput/ChipInput";
 import { FormInput } from "../FormInput";
 import { ImageInput } from "../ImageInput";
@@ -29,6 +30,10 @@ export const CreateListingForm: React.FC = () => {
         numberOfGuests: 1,
         numberOfBeds: 1,
         category: "",
+        isPetFriendly: false,
+        hasSecurityCamera: false,
+        hasWeapons: false,
+        hasDangerousAnimals: false,
         latitude: 1.234_567,
         longitude: -1.234_567,
         amenities: [],
@@ -152,6 +157,18 @@ export const CreateListingForm: React.FC = () => {
               placeholder="Enter Amenities"
               setFieldValue={setFieldValue}
             />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="isPetFriendly" label="Property is pet friendly" />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="hasSecurityCamera" label="Property has security camera(s)" />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="hasWeapons" label="Property has weapons" />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="hasDangerousAnimals" label="Property has dangerous animals" />
           </Box>
           <Button
             type="submit"

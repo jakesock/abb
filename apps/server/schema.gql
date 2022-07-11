@@ -18,6 +18,10 @@ input CreateListingInput {
   amenities: [String!]!
   category: String!
   description: String!
+  hasDangerousAnimals: Boolean!
+  hasSecurityCamera: Boolean!
+  hasWeapons: Boolean!
+  isPetFriendly: Boolean!
   latitude: Float!
   longitude: Float!
   numberOfBeds: Int!
@@ -37,9 +41,13 @@ type Listing {
   category: String!
   createdAt: String!
   description: String!
+  hasDangerousAnimals: Boolean!
+  hasSecurityCamera: Boolean!
+  hasWeapons: Boolean!
   host: User!
   hostId: String!
   id: String!
+  isPetFriendly: Boolean!
   latitude: Float!
   longitude: Float!
   numberOfBeds: Int!
@@ -111,7 +119,11 @@ input UpdateListingInput {
   amenities: [String!]
   category: String
   description: String
+  hasDangerousAnimals: Boolean
+  hasSecurityCamera: Boolean
+  hasWeapons: Boolean
   id: String!
+  isPetFriendly: Boolean
   latitude: Float
   longitude: Float
   newPhoto: Upload
