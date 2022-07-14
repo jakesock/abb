@@ -46,6 +46,9 @@ export const CreateListingForm: React.FC = () => {
 
         const response = await createListing({
           variables: { createListingInput: values },
+          update: (cache) => {
+            cache.evict({ fieldName: "getListings:{}" });
+          },
         });
 
         const graphqlError = response.errors;
