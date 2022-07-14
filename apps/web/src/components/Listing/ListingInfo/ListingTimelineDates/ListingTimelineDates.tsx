@@ -11,7 +11,7 @@ export const ListingTimelineDates: React.FC<IListingTimelineDatesProps> = ({
   updatedAt,
 }) => {
   const formattedCreatedAt = format(Number(createdAt), "MMMM do, yyyy");
-  const formattedUpdatedAt = formatDistance(Date.now(), Number(updatedAt), {
+  const formattedUpdatedAt = formatDistance(Number(updatedAt), Date.now(), {
     addSuffix: true,
     includeSeconds: true,
   });

@@ -2,6 +2,10 @@ import {
   LISTING_AMENITY_ARRAY_MIN,
   LISTING_AMENITY_VALUE_MAX,
   LISTING_AMENITY_VALUE_MIN,
+  LISTING_BATHROOMS_MAX,
+  LISTING_BATHROOMS_MIN,
+  LISTING_BEDROOMS_MAX,
+  LISTING_BEDROOMS_MIN,
   LISTING_BEDS_MAX,
   LISTING_BEDS_MIN,
   LISTING_CATEGORY_MAX,
@@ -36,6 +40,16 @@ const bedsErrorMessages = {
   tooLarge: `Number of beds must be at most ${LISTING_BEDS_MAX}`,
 };
 
+const bedroomsErrorMessages = {
+  tooLittle: `Number of bedrooms must be at least ${LISTING_BEDROOMS_MIN}`,
+  tooLarge: `Number of bedrooms must be at most ${LISTING_BEDROOMS_MAX}`,
+};
+
+const bathroomsErrorMessages = {
+  tooLittle: `Number of bathrooms must be at least ${LISTING_BATHROOMS_MIN}`,
+  tooLarge: `Number of bathrooms must be at most ${LISTING_BATHROOMS_MAX}`,
+};
+
 const categoryErrorMessages = {
   tooLong: `Too long! Maximum of ${LISTING_CATEGORY_MAX} characters in length`,
 };
@@ -61,6 +75,12 @@ export const listingErrorMessages = {
   },
   beds: {
     ...bedsErrorMessages,
+  },
+  bedrooms: {
+    ...bedroomsErrorMessages,
+  },
+  bathrooms: {
+    ...bathroomsErrorMessages,
   },
   category: {
     ...categoryErrorMessages,

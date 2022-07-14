@@ -27,6 +27,15 @@ export class CreateListingInput implements Partial<Listing> {
   @Field(() => Int)
   numberOfBeds!: number;
 
+  @Field(() => Int)
+  numberOfBedrooms!: number;
+
+  @Field(() => Float)
+  numberOfBathrooms!: number;
+
+  @Field(() => Boolean)
+  hasPrivateBathrooms!: boolean;
+
   @Field()
   category!: string;
 

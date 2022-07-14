@@ -50,7 +50,10 @@ export const ListingListItem: React.FC<IListingListItemProps> = ({ listing }) =>
             textTransform="uppercase"
             ml="2"
           >
-            {listing.numberOfGuests} guests &bull; {listing.numberOfBeds} beds
+            {listing.numberOfGuests} {listing.numberOfGuests > 1 ? "guests" : "guest"} &bull;{" "}
+            {listing.numberOfBeds} {listing.numberOfBedrooms > 1 ? "beds" : "bed"} &bull;{" "}
+            {listing.numberOfBedrooms} {listing.numberOfBedrooms > 1 ? "rooms" : "room"} &bull;{" "}
+            {listing.numberOfBathrooms} {listing.numberOfBathrooms > 1 ? "baths" : "bath"}
           </Text>
         </Flex>
 

@@ -6,6 +6,8 @@ interface IListingCategoryProps {
   host: string;
   numGuests: number;
   numBeds: number;
+  numBedrooms: number;
+  numBathrooms: number;
   pricePerNight: number;
 }
 
@@ -14,6 +16,8 @@ export const ListingCategory: React.FC<IListingCategoryProps> = ({
   host,
   numGuests,
   numBeds,
+  numBedrooms,
+  numBathrooms,
   pricePerNight,
 }) => (
   <Flex mt={4} justify="space-between" align="center">
@@ -23,7 +27,9 @@ export const ListingCategory: React.FC<IListingCategoryProps> = ({
       </Text>
       <Text fontSize="sm" fontWeight="bold" color="gray.500" textTransform="uppercase" mt={1}>
         {numGuests} {numGuests > 1 ? "guests" : "guest"} &bull; {numBeds}{" "}
-        {numBeds > 1 ? "beds" : "bed"}
+        {numBeds > 1 ? "beds" : "bed"} &bull; {numBedrooms}{" "}
+        {numBedrooms > 1 ? "bedrooms" : "bedroom"} &bull; {numBathrooms}{" "}
+        {numBathrooms > 1 ? "bathrooms" : "bathroom"}
       </Text>
     </Box>
     <Flex

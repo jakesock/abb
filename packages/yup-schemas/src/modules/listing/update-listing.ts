@@ -5,6 +5,10 @@ import {
   LISTING_AMENITY_ARRAY_MIN,
   LISTING_AMENITY_VALUE_MAX,
   LISTING_AMENITY_VALUE_MIN,
+  LISTING_BATHROOMS_MAX,
+  LISTING_BATHROOMS_MIN,
+  LISTING_BEDROOMS_MAX,
+  LISTING_BEDROOMS_MIN,
   LISTING_BEDS_MAX,
   LISTING_BEDS_MIN,
   LISTING_CATEGORY_MAX,
@@ -36,6 +40,15 @@ export const updateListingSchema = Yup.object().shape({
     .min(LISTING_BEDS_MIN, message.listing.beds.tooLittle)
     .max(LISTING_BEDS_MAX, message.listing.beds.tooLarge)
     .optional(),
+  numberOfBedrooms: Yup.number()
+    .min(LISTING_BEDROOMS_MIN, message.listing.bedrooms.tooLittle)
+    .max(LISTING_BEDROOMS_MAX, message.listing.bedrooms.tooLarge)
+    .optional(),
+  numberOfBathrooms: Yup.number()
+    .min(LISTING_BATHROOMS_MIN, message.listing.bathrooms.tooLittle)
+    .max(LISTING_BATHROOMS_MAX, message.listing.bathrooms.tooLarge)
+    .optional(),
+  hasPrivateBathrooms: Yup.boolean().optional(),
   category: Yup.string().max(LISTING_CATEGORY_MAX, message.listing.category.tooLong).optional(),
   isPetFriendly: Yup.boolean().optional(),
   hasSecurityCamera: Yup.boolean().optional(),

@@ -11,6 +11,12 @@ export const LISTING_GUESTS_MAX = 16;
 export const LISTING_BEDS_MIN = 1;
 export const LISTING_BEDS_MAX = 50;
 
+export const LISTING_BEDROOMS_MIN = 1;
+export const LISTING_BEDROOMS_MAX = 50;
+
+export const LISTING_BATHROOMS_MIN = 1;
+export const LISTING_BATHROOMS_MAX = 50;
+
 export const LISTING_CATEGORY_MAX = 100;
 
 export const LISTING_AMENITY_VALUE_MIN = 2;

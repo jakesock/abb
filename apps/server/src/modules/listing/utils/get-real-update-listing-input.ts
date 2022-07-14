@@ -26,6 +26,13 @@ export function getRealUpdateListingInput(
     numberOfBeds: updateListingInput.numberOfBeds
       ? updateListingInput.numberOfBeds
       : listing.numberOfBeds,
+    numberOfBedrooms: updateListingInput.numberOfBedrooms
+      ? updateListingInput.numberOfBedrooms
+      : listing.numberOfBedrooms,
+    numberOfBathrooms: updateListingInput.numberOfBathrooms
+      ? updateListingInput.numberOfBathrooms
+      : listing.numberOfBathrooms,
+    hasPrivateBathrooms: !!updateListingInput.hasPrivateBathrooms,
     category: updateListingInput.category ? updateListingInput.category : listing.category,
     isPetFriendly: !!updateListingInput.isPetFriendly,
     hasSecurityCamera: !!updateListingInput.hasSecurityCamera,

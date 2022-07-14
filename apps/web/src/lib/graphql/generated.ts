@@ -32,11 +32,14 @@ export type CreateListingInput = {
   category: Scalars["String"];
   description: Scalars["String"];
   hasDangerousAnimals: Scalars["Boolean"];
+  hasPrivateBathrooms: Scalars["Boolean"];
   hasSecurityCamera: Scalars["Boolean"];
   hasWeapons: Scalars["Boolean"];
   isPetFriendly: Scalars["Boolean"];
   latitude: Scalars["Float"];
   longitude: Scalars["Float"];
+  numberOfBathrooms: Scalars["Float"];
+  numberOfBedrooms: Scalars["Int"];
   numberOfBeds: Scalars["Int"];
   numberOfGuests: Scalars["Int"];
   photo: Scalars["Upload"];
@@ -57,6 +60,7 @@ export type Listing = {
   createdAt: Scalars["String"];
   description: Scalars["String"];
   hasDangerousAnimals: Scalars["Boolean"];
+  hasPrivateBathrooms: Scalars["Boolean"];
   hasSecurityCamera: Scalars["Boolean"];
   hasWeapons: Scalars["Boolean"];
   host: User;
@@ -65,6 +69,8 @@ export type Listing = {
   isPetFriendly: Scalars["Boolean"];
   latitude: Scalars["Float"];
   longitude: Scalars["Float"];
+  numberOfBathrooms: Scalars["Float"];
+  numberOfBedrooms: Scalars["Int"];
   numberOfBeds: Scalars["Int"];
   numberOfGuests: Scalars["Int"];
   pictureUrl?: Maybe<Scalars["String"]>;
@@ -188,6 +194,7 @@ export type UpdateListingInput = {
   category?: InputMaybe<Scalars["String"]>;
   description?: InputMaybe<Scalars["String"]>;
   hasDangerousAnimals?: InputMaybe<Scalars["Boolean"]>;
+  hasPrivateBathrooms?: InputMaybe<Scalars["Boolean"]>;
   hasSecurityCamera?: InputMaybe<Scalars["Boolean"]>;
   hasWeapons?: InputMaybe<Scalars["Boolean"]>;
   id: Scalars["String"];
@@ -195,6 +202,8 @@ export type UpdateListingInput = {
   latitude?: InputMaybe<Scalars["Float"]>;
   longitude?: InputMaybe<Scalars["Float"]>;
   newPhoto?: InputMaybe<Scalars["Upload"]>;
+  numberOfBathrooms?: InputMaybe<Scalars["Float"]>;
+  numberOfBedrooms?: InputMaybe<Scalars["Int"]>;
   numberOfBeds?: InputMaybe<Scalars["Int"]>;
   numberOfGuests?: InputMaybe<Scalars["Int"]>;
   pricePerNight?: InputMaybe<Scalars["Int"]>;
@@ -232,6 +241,9 @@ export type RegularListingFormResponseFragment = {
     pricePerNight: number;
     numberOfGuests: number;
     numberOfBeds: number;
+    numberOfBedrooms: number;
+    numberOfBathrooms: number;
+    hasPrivateBathrooms: boolean;
     category: string;
     isPetFriendly: boolean;
     hasSecurityCamera: boolean;
@@ -257,6 +269,9 @@ export type RegularListingFragment = {
   pricePerNight: number;
   numberOfGuests: number;
   numberOfBeds: number;
+  numberOfBedrooms: number;
+  numberOfBathrooms: number;
+  hasPrivateBathrooms: boolean;
   category: string;
   isPetFriendly: boolean;
   hasSecurityCamera: boolean;
@@ -314,6 +329,9 @@ export type CreateListingMutation = {
       pricePerNight: number;
       numberOfGuests: number;
       numberOfBeds: number;
+      numberOfBedrooms: number;
+      numberOfBathrooms: number;
+      hasPrivateBathrooms: boolean;
       category: string;
       isPetFriendly: boolean;
       hasSecurityCamera: boolean;
@@ -354,6 +372,9 @@ export type UpdateListingMutation = {
       pricePerNight: number;
       numberOfGuests: number;
       numberOfBeds: number;
+      numberOfBedrooms: number;
+      numberOfBathrooms: number;
+      hasPrivateBathrooms: boolean;
       category: string;
       isPetFriendly: boolean;
       hasSecurityCamera: boolean;
@@ -518,6 +539,9 @@ export type GetListingQuery = {
     pricePerNight: number;
     numberOfGuests: number;
     numberOfBeds: number;
+    numberOfBedrooms: number;
+    numberOfBathrooms: number;
+    hasPrivateBathrooms: boolean;
     category: string;
     isPetFriendly: boolean;
     hasSecurityCamera: boolean;
@@ -552,6 +576,9 @@ export type GetListingsQuery = {
       pricePerNight: number;
       numberOfGuests: number;
       numberOfBeds: number;
+      numberOfBedrooms: number;
+      numberOfBathrooms: number;
+      hasPrivateBathrooms: boolean;
       category: string;
       isPetFriendly: boolean;
       hasSecurityCamera: boolean;
@@ -601,6 +628,9 @@ export const RegularListingFragmentDoc = {
           { kind: "Field", name: { kind: "Name", value: "pricePerNight" } },
           { kind: "Field", name: { kind: "Name", value: "numberOfGuests" } },
           { kind: "Field", name: { kind: "Name", value: "numberOfBeds" } },
+          { kind: "Field", name: { kind: "Name", value: "numberOfBedrooms" } },
+          { kind: "Field", name: { kind: "Name", value: "numberOfBathrooms" } },
+          { kind: "Field", name: { kind: "Name", value: "hasPrivateBathrooms" } },
           { kind: "Field", name: { kind: "Name", value: "category" } },
           { kind: "Field", name: { kind: "Name", value: "isPetFriendly" } },
           { kind: "Field", name: { kind: "Name", value: "hasSecurityCamera" } },

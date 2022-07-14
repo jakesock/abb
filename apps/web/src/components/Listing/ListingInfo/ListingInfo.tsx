@@ -17,6 +17,9 @@ export const ListingInfo: React.FC<IListingInfoProps> = ({
     pricePerNight,
     numberOfGuests,
     numberOfBeds,
+    numberOfBedrooms,
+    numberOfBathrooms,
+    hasPrivateBathrooms,
     description,
     isPetFriendly,
     hasWeapons,
@@ -34,11 +37,14 @@ export const ListingInfo: React.FC<IListingInfoProps> = ({
       pricePerNight={pricePerNight}
       numGuests={numberOfGuests}
       numBeds={numberOfBeds}
+      numBedrooms={numberOfBedrooms}
+      numBathrooms={numberOfBathrooms}
     />
     <Divider mt={4} />
     <ListingDescription
       description={description}
       isPetFriendly={isPetFriendly}
+      hasPrivateBathrooms={hasPrivateBathrooms}
       hasWeapons={hasWeapons}
       hasDangerousAnimals={hasDangerousAnimals}
       hasSecurityCamera={hasSecurityCamera}

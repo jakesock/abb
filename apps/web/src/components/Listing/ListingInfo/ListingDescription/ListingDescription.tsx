@@ -3,6 +3,7 @@ import { Box, Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
 interface IListingDescriptionProps {
   description: string;
   isPetFriendly: boolean;
+  hasPrivateBathrooms: boolean;
   hasSecurityCamera: boolean;
   hasDangerousAnimals: boolean;
   hasWeapons: boolean;
@@ -11,6 +12,7 @@ interface IListingDescriptionProps {
 export const ListingDescription: React.FC<IListingDescriptionProps> = ({
   description,
   isPetFriendly,
+  hasPrivateBathrooms,
   hasSecurityCamera,
   hasDangerousAnimals,
   hasWeapons,
@@ -21,6 +23,9 @@ export const ListingDescription: React.FC<IListingDescriptionProps> = ({
     <Box mt={4}>
       <Text color={!isPetFriendly ? "red.500" : undefined} fontWeight="bold">
         This property is {!isPetFriendly && "NOT"} pet friendly!
+      </Text>
+      <Text color={!hasPrivateBathrooms ? "red.500" : undefined} fontWeight="bold" mt={2}>
+        This property {hasPrivateBathrooms ? "has" : "DOES NOT have"} private bathrooms!
       </Text>
       {hasSecurityCamera || hasDangerousAnimals || hasWeapons ? (
         <Box mt={2}>

@@ -39,6 +39,9 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
         pricePerNight: listing.pricePerNight || 75,
         numberOfGuests: listing.numberOfGuests || 1,
         numberOfBeds: listing.numberOfBeds || 1,
+        numberOfBedrooms: listing.numberOfBedrooms || 1,
+        numberOfBathrooms: listing.numberOfBathrooms || 1,
+        hasPrivateBathrooms: !!listing.hasPrivateBathrooms,
         category: listing.category || "",
         isPetFriendly: !!listing.isPetFriendly,
         hasSecurityCamera: !!listing.hasSecurityCamera,
@@ -58,8 +61,11 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
               title: values.title || undefined,
               description: values.description || undefined,
               pricePerNight: values.pricePerNight || undefined,
-              numberOfBeds: values.numberOfBeds || undefined,
               numberOfGuests: values.numberOfGuests || undefined,
+              numberOfBeds: values.numberOfBeds || undefined,
+              numberOfBedrooms: values.numberOfBedrooms || undefined,
+              numberOfBathrooms: values.numberOfBathrooms || undefined,
+              hasPrivateBathrooms: !!values.hasPrivateBathrooms,
               category: values.category || undefined,
               isPetFriendly: !!values.isPetFriendly,
               hasSecurityCamera: !!values.hasSecurityCamera,
@@ -147,7 +153,7 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
               name="pricePerNight"
               label="Price Per Night"
               placeholder="Price Per Night"
-              min={0}
+              min={10}
               step={5}
               setFieldValue={setFieldValue}
             />
@@ -173,6 +179,31 @@ export const UpdateListingForm: React.FC<IUpdateListingFormProps> = ({ listing }
               step={1}
               setFieldValue={setFieldValue}
             />
+          </Box>
+          <Box mt={4}>
+            <NumberInput
+              name="numberOfBedrooms"
+              label="Number of Bedrooms"
+              placeholder="Number of Bedrooms"
+              min={1}
+              max={50}
+              step={1}
+              setFieldValue={setFieldValue}
+            />
+          </Box>
+          <Box mt={4}>
+            <NumberInput
+              name="numberOfBathrooms"
+              label="Number of Bathrooms"
+              placeholder="Number of Bathrooms"
+              min={1}
+              max={50}
+              step={0.5}
+              setFieldValue={setFieldValue}
+            />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="hasPrivateBathrooms" label="Property has private bathrooms" />
           </Box>
           <Box mt={4}>
             <FormInput name="category" label="Category" placeholder="Category" />

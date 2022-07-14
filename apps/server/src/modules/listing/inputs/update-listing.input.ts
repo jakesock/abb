@@ -30,6 +30,15 @@ export class UpdateListingInput implements Partial<Listing> {
   @Field(() => Int, { nullable: true })
   numberOfBeds?: number;
 
+  @Field(() => Int, { nullable: true })
+  numberOfBedrooms?: number;
+
+  @Field(() => Float, { nullable: true })
+  numberOfBathrooms?: number;
+
+  @Field(() => Boolean, { nullable: true })
+  hasPrivateBathrooms?: boolean;
+
   @Field(() => String, { nullable: true })
   category?: string;
 

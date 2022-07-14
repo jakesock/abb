@@ -8,6 +8,9 @@ export const REGULAR_LISTING_FRAGMENT = gql`
     pricePerNight
     numberOfGuests
     numberOfBeds
+    numberOfBedrooms
+    numberOfBathrooms
+    hasPrivateBathrooms
     category
     isPetFriendly
     hasSecurityCamera

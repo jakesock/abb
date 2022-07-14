@@ -29,6 +29,9 @@ export const CreateListingForm: React.FC = () => {
         pricePerNight: 75,
         numberOfGuests: 1,
         numberOfBeds: 1,
+        numberOfBedrooms: 1,
+        numberOfBathrooms: 1,
+        hasPrivateBathrooms: false,
         category: "",
         isPetFriendly: false,
         hasSecurityCamera: false,
@@ -129,6 +132,31 @@ export const CreateListingForm: React.FC = () => {
               step={1}
               setFieldValue={setFieldValue}
             />
+          </Box>
+          <Box mt={4}>
+            <NumberInput
+              name="numberOfBedrooms"
+              label="Number of Bedrooms"
+              placeholder="Number of Bedrooms"
+              min={1}
+              max={50}
+              step={1}
+              setFieldValue={setFieldValue}
+            />
+          </Box>
+          <Box mt={4}>
+            <NumberInput
+              name="numberOfBathrooms"
+              label="Number of Bathrooms"
+              placeholder="Number of Bathrooms"
+              min={1}
+              max={50}
+              step={0.5}
+              setFieldValue={setFieldValue}
+            />
+          </Box>
+          <Box mt={4}>
+            <CheckboxInput name="hasPrivateBathrooms" label="Property has private bathrooms" />
           </Box>
           <Box mt={4}>
             <FormInput name="category" label="Category" placeholder="Category" />

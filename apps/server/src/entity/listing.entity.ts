@@ -32,8 +32,19 @@ export class Listing extends BaseEntity {
   numberOfBeds!: number;
 
   // TODO: Number of bedrooms (int)
+  @Field(() => Int)
+  @Column({ type: "int", name: "number_of_bedrooms" })
+  numberOfBedrooms!: number;
+
   // TODO: Number of bathrooms (float)
+  @Field(() => Float)
+  @Column({ type: "float", name: "number_of_bathrooms" })
+  numberOfBathrooms!: number;
+
   // TODO: hasPrivateBathrooms (boolean)
+  @Field(() => Boolean)
+  @Column({ type: "boolean", name: "has_private_bathrooms" })
+  hasPrivateBathrooms!: boolean;
 
   // TODO: Change to space kind, enum
   @Field(() => String)
