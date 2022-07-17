@@ -1,4 +1,4 @@
-import { capitalizeFirstLetter } from "../utils";
+import { capitalizeFirstLetter } from "@abb/utils";
 
 export const commonErrorMessages = {
   required: "Required",

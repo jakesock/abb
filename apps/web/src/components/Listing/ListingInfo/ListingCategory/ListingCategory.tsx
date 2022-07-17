@@ -1,5 +1,5 @@
+import { formatMoney } from "@abb/utils";
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { formatMoney } from "../../../../lib/utils";
 
 interface IListingCategoryProps {
   category: string;
@@ -43,7 +43,7 @@ export const ListingCategory: React.FC<IListingCategoryProps> = ({
     >
       <Box>
         <Text fontSize="lg" display="inline-block" fontWeight="bold">
-          {formatMoney(pricePerNight, "USD").split(".")[0]}
+          {formatMoney(pricePerNight, "USD", "en-US").split(".")[0]}
         </Text>{" "}
         <Text fontSize="lg" display="inline-block">
           per night

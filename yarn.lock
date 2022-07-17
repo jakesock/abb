@@ -114,12 +114,30 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@abb/utils@workspace:*, @abb/utils@workspace:packages/utils":
+  version: 0.0.0-use.local
+  resolution: "@abb/utils@workspace:packages/utils"
+  dependencies:
+    "@abb/config": "workspace:*"
+    "@abb/tsconfig": "workspace:*"
+    "@types/jest": ^27.5.1
+    "@types/node": ^17.0.34
+    eslint: ^8.15.0
+    jest: ^28.1.0
+    prettier: ^2.6.2
+    rimraf: ^3.0.2
+    ts-jest: ^28.0.2
+    typescript: ^4.6.4
+  languageName: unknown
+  linkType: soft
+
 "@abb/web@workspace:apps/web":
   version: 0.0.0-use.local
   resolution: "@abb/web@workspace:apps/web"
   dependencies:
     "@abb/config": "workspace:*"
     "@abb/tsconfig": "workspace:*"
+    "@abb/utils": "workspace:*"
     "@abb/yup-schemas": "workspace:*"
     "@apollo/client": ^3.6.8
     "@apollo/link-error": ^2.0.0-beta.3
@@ -162,6 +180,7 @@ __metadata:
   dependencies:
     "@abb/config": "workspace:*"
     "@abb/tsconfig": "workspace:*"
+    "@abb/utils": "workspace:*"
     "@types/jest": ^27.5.1
     "@types/node": ^17.0.34
     eslint: ^8.15.0

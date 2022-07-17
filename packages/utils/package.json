@@ -1,7 +1,7 @@
 {
-  "name": "@abb/yup-schemas",
+  "name": "@abb/utils",
   "version": "1.0.0",
-  "description": "Yup schemas for abb",
+  "description": "Utils for abb",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "license": "MIT",
@@ -9,16 +9,12 @@
     "build": "rimraf ./dist && tsc",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "format": "prettier --write .",
-    "test": "echo \"\n@abb/yup-schemas:\n\" && jest --passWithNoTests",
+    "test": "echo \"\n@abb/utils:\n\" && jest --passWithNoTests",
     "test:watch": "jest --watch",
     "check:format": "prettier --check .",
     "check:lint": "eslint .",
     "check:types": "tsc --pretty --noEmit",
     "check:all": "yarn run check:format && yarn run check:lint && yarn check:types"
-  },
-  "dependencies": {
-    "@abb/utils": "workspace:*",
-    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@abb/config": "workspace:*",

@@ -1,5 +1,5 @@
+import { halfArray } from "@abb/utils";
 import { Box, Heading, ListItem, Stack, UnorderedList } from "@chakra-ui/react";
-import { halfArray } from "../../../../lib/utils";
 
 interface IListingAmenitiesProps {
   listingId: string;

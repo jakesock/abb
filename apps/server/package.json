@@ -7,7 +7,7 @@
   "scripts": {
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=development nodemon --delay 500ms dist/index.js",
-    "test": "NODE_ENV=test yarn run db:setup-test && jest --detectOpenHandles --runInBand",
+    "test": "NODE_ENV=test echo \"\n@abb/server:\n\" && yarn run db:setup-test && jest --detectOpenHandles --runInBand",
     "test:watch": "NODE_ENV=test yarn run db:setup-test && jest --watch",
     "build": "yarn clean && tsc && yarn copy:all",
     "build:watch": "yarn clean && concurrently \"tsc -w\" \"yarn copy:all\"",

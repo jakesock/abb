@@ -1,7 +1,7 @@
+import { formatMoney } from "@abb/utils";
 import { Badge, Box, Flex, Image, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { RegularListingFragment } from "../../../lib/graphql/generated";
-import { formatMoney } from "../../../lib/utils";
 
 interface IListingListItemProps {
   listing: RegularListingFragment;
@@ -62,7 +62,7 @@ export const ListingListItem: React.FC<IListingListItemProps> = ({ listing }) =>
         </Text>
 
         <Text>
-          {formatMoney(listing.pricePerNight * 7, "USD").split(".")[0]}
+          {formatMoney(listing.pricePerNight * 7, "USD", "en-US").split(".")[0]}
           <Text as="span" color="gray.600">
             {" "}
             per week
